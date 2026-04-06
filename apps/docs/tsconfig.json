@@ -1,0 +1,4 @@
+{
+  "extends": "@kusitms.com/tsconfig/react-app.json",
+  "include": [".storybook", "src"]
+}

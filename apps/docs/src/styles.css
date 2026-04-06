@@ -1,0 +1,31 @@
+@import "tailwindcss";
+@import "@kusitms.com/tokens/themes.css";
+
+@source "../../../packages/ui/src";
+@source "../../../packages/icons/src";
+@source "./";
+
+@theme inline {
+  --font-sans: var(--font-sans);
+
+  --color-brand-50: var(--color-brand-50);
+  --color-brand-100: var(--color-brand-100);
+  --color-brand-500: var(--color-brand-500);
+  --color-brand-600: var(--color-brand-600);
+  --color-brand-700: var(--color-brand-700);
+  --color-brand-900: var(--color-brand-900);
+
+  --color-neutral-0: var(--color-neutral-0);
+  --color-neutral-50: var(--color-neutral-50);
+  --color-neutral-100: var(--color-neutral-100);
+  --color-neutral-300: var(--color-neutral-300);
+  --color-neutral-500: var(--color-neutral-500);
+  --color-neutral-700: var(--color-neutral-700);
+  --color-neutral-950: var(--color-neutral-950);
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-neutral-50);
+  color: var(--color-neutral-950);
+}

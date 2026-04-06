@@ -1,0 +1,31 @@
+{
+  "name": "makers-design-system",
+  "private": true,
+  "packageManager": "pnpm@10.28.1",
+  "scripts": {
+    "build": "turbo run build",
+    "check": "turbo run check",
+    "changeset": "changeset",
+    "dev": "turbo run dev --filter=@kusitms.com/design-system-docs",
+    "format": "biome format . --write",
+    "lint": "turbo run lint",
+    "prepare": "husky",
+    "release": "pnpm build && changeset publish",
+    "test": "turbo run test",
+    "version-packages": "changeset version",
+    "typecheck": "turbo run typecheck"
+  },
+  "lint-staged": {
+    "*": "pnpm exec biome check --write --files-ignore-unknown=true --no-errors-on-unmatched"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.10",
+    "@changesets/changelog-git": "0.2.1",
+    "@changesets/cli": "2.30.0",
+    "@vitest/coverage-v8": "^4.1.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "turbo": "2.9.3",
+    "vitest": "^4.1.2"
+  }
+}

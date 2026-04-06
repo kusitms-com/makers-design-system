@@ -1,0 +1,15 @@
+node_modules
+pnpm-debug.log*
+
+.turbo
+.pnpm-store
+
+dist
+coverage
+*.tsbuildinfo
+
+storybook-static
+.storybook-cache
+vite.config.ts.timestamp-*
+
+.DS_Store

@@ -1,0 +1,8 @@
+{
+  "extends": "@kusitms.com/tsconfig/react-library.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "types": ["react", "vitest/globals"]
+  },
+  "include": ["src", "tsup.config.ts", "vitest.config.ts"]
+}

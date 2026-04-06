@@ -1,0 +1,7 @@
+{
+  "extends": "@kusitms.com/tsconfig/react-library.json",
+  "compilerOptions": {
+    "rootDir": "."
+  },
+  "include": ["src", "tsup.config.ts"]
+}

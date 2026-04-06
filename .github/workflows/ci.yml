@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint and typecheck
+        run: pnpm check
+
+      - name: Run tests
+        run: pnpm test
+
+      - name: Publish coverage summary
+        run: |
+          node -e "const fs=require('node:fs'); const summary=JSON.parse(fs.readFileSync('packages/ui/coverage/coverage-summary.json','utf8')).total; fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, ['## Coverage', '', '| Metric | Coverage | Threshold |', '| --- | ---: | ---: |', `| Lines | ${summary.lines.pct}% | 80% |`, `| Statements | ${summary.statements.pct}% | 80% |`, `| Functions | ${summary.functions.pct}% | 80% |`, `| Branches | ${summary.branches.pct}% | 70% |`].join('\n'));"
+
+      - name: Upload coverage artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-coverage
+          path: packages/ui/coverage
+
+      - name: Build
+        run: pnpm build

@@ -1,0 +1,23 @@
+{
+  "name": "@kusitms.com/tokens",
+  "version": "0.0.0",
+  "private": false,
+  "type": "module",
+  "exports": {
+    "./tokens": "./src/tokens.json",
+    "./themes.css": "./src/themes.css"
+  },
+  "files": [
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "node -e \"console.log('tokens: no build step')\"",
+    "check": "pnpm lint && pnpm typecheck",
+    "lint": "biome check src",
+    "typecheck": "node -e \"console.log('tokens: no typecheck step')\""
+  }
+}

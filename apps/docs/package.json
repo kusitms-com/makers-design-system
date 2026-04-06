@@ -1,0 +1,35 @@
+{
+  "name": "@kusitms.com/design-system-docs",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "storybook build",
+    "check": "pnpm lint && pnpm typecheck",
+    "dev": "storybook dev -p 6006",
+    "lint": "biome check .storybook src",
+    "typecheck": "tsc --project tsconfig.json"
+  },
+  "dependencies": {
+    "@kusitms.com/icons": "workspace:*",
+    "@kusitms.com/tokens": "workspace:*",
+    "@kusitms.com/ui": "workspace:*",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@kusitms.com/tsconfig": "workspace:*",
+    "@storybook/addon-a11y": "10.3.4",
+    "@storybook/addon-docs": "10.3.4",
+    "@storybook/addon-onboarding": "10.3.4",
+    "@storybook/react-vite": "10.3.4",
+    "@tailwindcss/vite": "4.2.2",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.1",
+    "storybook": "10.3.4",
+    "tailwindcss": "4.2.2",
+    "typescript": "6.0.2",
+    "vite": "8.0.3"
+  }
+}
