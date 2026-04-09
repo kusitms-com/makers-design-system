@@ -16,6 +16,7 @@
   },
   "scripts": {
     "build": "node -e \"console.log('tokens: no build step')\"",
+    "convert": "node scripts/convert-tokens.mjs",
     "check": "pnpm lint && pnpm typecheck",
     "lint": "biome check src",
     "typecheck": "node -e \"console.log('tokens: no typecheck step')\""

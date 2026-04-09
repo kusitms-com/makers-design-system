@@ -1,0 +1,44 @@
+name: Sync Design Tokens
+
+on:
+  push:
+    branches:
+      - design
+    paths:
+      - "packages/tokens/src/raw-tokens.json"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Convert tokens
+        run: pnpm --filter @kusitms.com/tokens convert
+
+      - name: Create PR
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: chore/sync-tokens
+          title: "chore: sync design tokens from Figma"
+          body: |
+            Tokens Studio에서 자동으로 동기화된 디자인 토큰입니다.
+
+            변경된 파일:
+            - `packages/tokens/src/tokens.json`
+            - `packages/tokens/src/themes.css`
+          commit-message: "chore: sync design tokens from Figma"
+          delete-branch: true
