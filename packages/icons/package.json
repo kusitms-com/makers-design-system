@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@kusitms.com/tsconfig": "workspace:*",
+    "@svgr/cli": "8.1.0",
     "@types/react": "19.2.14",
     "react": "19.2.4",
     "tsup": "8.5.1",
@@ -32,6 +33,7 @@
   },
   "scripts": {
     "build": "tsup",
+    "build:icons": "rm -rf src/generated && svgr --out-dir src/generated src/raw",
     "check": "pnpm lint && pnpm typecheck",
     "lint": "biome check src tsup.config.ts",
     "typecheck": "tsc --project tsconfig.json"
