@@ -1,0 +1,8 @@
+{
+  "template": "./svgr-template.cjs",
+  "jsxRuntime": "automatic",
+  "typescript": true,
+  "svgProps": {
+    "aria-hidden": "true"
+  }
+}

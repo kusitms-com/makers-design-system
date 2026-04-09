@@ -32,8 +32,8 @@
     "typescript": "6.0.2"
   },
   "scripts": {
-    "build": "tsup",
-    "build:icons": "rm -rf src/generated && svgr --out-dir src/generated src/raw",
+    "build": "pnpm build:icons && tsup",
+    "build:icons": "rm -rf src/generated && svgr --out-dir src/generated src/raw && biome check --write src/generated",
     "check": "pnpm lint && pnpm typecheck",
     "lint": "biome check src tsup.config.ts",
     "typecheck": "tsc --project tsconfig.json"

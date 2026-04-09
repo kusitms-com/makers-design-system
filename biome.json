@@ -3,7 +3,6 @@
   "files": {
     "experimentalScannerIgnores": [
       "**/dist/**",
-      "**/src/generated/**",
       "**/storybook-static/**",
       ".turbo/**",
       "node_modules/**"
