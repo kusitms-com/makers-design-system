@@ -36,6 +36,6 @@
     "build:icons": "rm -rf src/generated && svgr --out-dir src/generated src/raw && node scripts/strip-svg-prefix.mjs && biome check --write src/generated",
     "check": "pnpm build:icons && pnpm lint && pnpm typecheck",
     "lint": "biome check src scripts tsup.config.ts",
-    "typecheck": "tsc --project tsconfig.json"
+    "typecheck": "pnpm build:icons && tsc --project tsconfig.json"
   }
 }
