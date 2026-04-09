@@ -1,6 +1,7 @@
 {
   "jsxRuntime": "automatic",
   "typescript": true,
+  "icon": true,
   "svgProps": {
     "aria-hidden": "true"
   }
