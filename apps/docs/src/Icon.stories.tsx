@@ -6,12 +6,10 @@ type IconProps = SVGProps<SVGSVGElement> & { color?: string }
 
 const meta = {
   title: "Icons",
-  component: Icons.ArrowRightIcon,
   tags: ["autodocs"],
   argTypes: {
     width: { control: "text", description: "너비" },
     height: { control: "text", description: "높이" },
-    className: { control: "text", description: "CSS 클래스" },
     color: { control: "color", description: "색상" },
   },
   args: {
@@ -21,15 +19,17 @@ const meta = {
 } satisfies Meta<IconProps>
 
 export default meta
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<Meta<IconProps>>
 
-const makeStory = (
-  Icon: React.ComponentType<SVGProps<SVGSVGElement>>,
-): Story => ({
-  render: ({ color, ...args }) => <Icon style={{ color }} {...args} />,
-})
-
-export const ArrowRight: Story = makeStory(Icons.ArrowRightIcon)
-export const Check: Story = makeStory(Icons.CheckIcon)
-export const Home: Story = makeStory(Icons.HomeIcon)
-export const Kusitms: Story = makeStory(Icons.KusitmsIcon)
+export const Gallery: Story = {
+  render: ({ color, ...args }) => (
+    <div className="flex flex-wrap gap-6">
+      {Object.entries(Icons).map(([name, Icon]) => (
+        <div key={name} className="flex flex-col items-center gap-2">
+          <Icon style={{ color }} {...args} />
+          <span className="text-xs">{name}</span>
+        </div>
+      ))}
+    </div>
+  ),
+}
