@@ -5,7 +5,12 @@ import { fileURLToPath } from "node:url"
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const srcDir = path.resolve(__dirname, "../src")
 
-const raw = JSON.parse(fs.readFileSync(`${srcDir}/raw-tokens.json`, "utf-8"))
+const rawTokensPath = `${srcDir}/raw-tokens.json`
+if (!fs.existsSync(rawTokensPath)) {
+  console.log("raw-tokens.json 없음 — 변환 건너뜀")
+  process.exit(0)
+}
+const raw = JSON.parse(fs.readFileSync(rawTokensPath, "utf-8"))
 
 // CSS 변수명 생성
 function toCssVarName(parts) {
