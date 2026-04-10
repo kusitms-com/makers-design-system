@@ -39,6 +39,7 @@ jobs:
 
             변경된 파일:
             - `packages/tokens/src/tokens.json`
+            - `packages/tokens/src/index.css`
             - `packages/tokens/src/themes.css`
           commit-message: "chore: sync design tokens from Figma"
           delete-branch: true
