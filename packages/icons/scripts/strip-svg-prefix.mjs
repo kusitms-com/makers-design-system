@@ -10,11 +10,3 @@ for (const file of files.filter((f) => f.endsWith(".tsx"))) {
   content = content.replace(/\bSvg([A-Z]\w+)/g, "$1")
   await writeFile(filePath, content)
 }
-
-const indexPath = join(dir, "index.ts")
-let indexContent = await readFile(indexPath, "utf8")
-indexContent = indexContent.replace(
-  /from "(\.[^"]+)(?<!\.js)"/g,
-  'from "$1.js"',
-)
-await writeFile(indexPath, indexContent)

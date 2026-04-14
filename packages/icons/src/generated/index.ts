@@ -1,3 +1,3 @@
-export { default as ArrowRightIcon } from "./ArrowRightIcon.js"
-export { default as CheckIcon } from "./CheckIcon.js"
-export { default as HomeIcon } from "./HomeIcon.js"
+export { default as ArrowRightIcon } from "./ArrowRightIcon"
+export { default as CheckIcon } from "./CheckIcon"
+export { default as HomeIcon } from "./HomeIcon"
