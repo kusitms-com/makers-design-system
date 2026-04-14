@@ -12,12 +12,13 @@ if (!fs.existsSync(rawTokensPath)) {
 }
 const raw = JSON.parse(fs.readFileSync(rawTokensPath, "utf-8"))
 
-// CSS 변수명 생성
+// CSS 변수명 생성 (camelCase → kebab-case 단어 경계 유지)
 function toCssVarName(parts) {
   return (
     "--" +
     parts
       .join("-")
+      .replace(/([a-z])([A-Z])/g, "$1-$2")
       .replace(/[^a-zA-Z0-9_]+/g, "-")
       .toLowerCase()
   )
