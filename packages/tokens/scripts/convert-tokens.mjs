@@ -42,18 +42,34 @@ function flattenSet(obj, prefix = [], inheritedType = null) {
   return result
 }
 
-// Atomic 토큰 수집 (참조 resolve에 사용)
-const atomicKey = Object.keys(raw).find((k) => k.startsWith("Atomic"))
-const atomicFlat = atomicKey ? flattenSet(raw[atomicKey]) : {}
+// 참조 resolve용으로 전체 토큰을 수집
+const allFlat = {}
+for (const setTokens of Object.values(raw)) {
+  if (setTokens && typeof setTokens === "object") {
+    for (const [key, entry] of Object.entries(flattenSet(setTokens))) {
+      const isRef =
+        typeof entry.value === "string" && entry.value.startsWith("{")
+      if (!isRef) allFlat[key] = entry
+    }
+  }
+}
 
-// {green.60} 같은 참조를 실제 값으로 resolve
-function resolveRef(value) {
+// {green.60} 같은 참조를 재귀적으로 resolve
+function resolveRef(value, visited = new Set()) {
   if (typeof value !== "string") return value
   const match = value.match(/^\{(.+)\}$/)
   if (!match) return value
-  const resolved = atomicFlat[match[1]]?.value
-  if (resolved == null) console.warn(`미해결 참조: ${value}`)
-  return resolved ?? value
+  const key = match[1]
+  if (visited.has(key)) {
+    console.warn(`순환 참조 감지: ${value}`)
+    return value
+  }
+  const resolved = allFlat[key]?.value
+  if (resolved == null) {
+    console.warn(`미해결 참조: ${value}`)
+    return value
+  }
+  return resolveRef(resolved, new Set([...visited, key]))
 }
 
 // $type → Tailwind @theme 네임스페이스 prefix 매핑
@@ -69,23 +85,23 @@ const tailwindPrefix = {
   letterSpacing: "--tracking-",
 }
 
-// raw 전체를 한 번만 순회해서 cssVars 수집
+// raw 전체를 순회해서 cssVars 수집 (global 제외)
+// dotKey: 원래 토큰 경로 (tokens.json 생성에 사용)
 const cssVars = {}
 for (const [setName, setTokens] of Object.entries(raw)) {
   if (!setTokens || typeof setTokens !== "object") continue
   if (setName === "global") continue
   for (const [key, { value, type }] of Object.entries(flattenSet(setTokens))) {
     const cssName = toCssVarName(key.split("."))
-    cssVars[cssName] = { value: resolveRef(value), type }
+    cssVars[cssName] = { value: resolveRef(value), type, dotKey: key }
   }
 }
 
-// 1. src/tokens.json
+// 1. src/tokens.json — dotKey 기준으로 중첩 구조 생성 (CSS 변수명 역산 없음)
 function buildNested(cssVars) {
   const result = {}
-  for (const [cssName, { value }] of Object.entries(cssVars)) {
-    // "--brand-primary" → ["brand", "primary"]
-    const parts = cssName.slice(2).split("-")
+  for (const [, { value, dotKey }] of Object.entries(cssVars)) {
+    const parts = dotKey.split(".")
     let cur = result
     for (let i = 0; i < parts.length - 1; i++) {
       cur[parts[i]] ??= {}
@@ -115,9 +131,7 @@ console.log("src/index.css 생성 완료")
 // 3. src/themes.css — @theme inline (Tailwind 전용)
 const themeLines = Object.entries(cssVars)
   .filter(([, { type }]) => type != null && tailwindPrefix[type] != null)
-  .map(
-    ([k, { type }]) => `  ${k.replace("--", tailwindPrefix[type])}: var(${k});`,
-  )
+  .map(([k, { type }]) => `  ${tailwindPrefix[type]}${k.slice(2)}: var(${k});`)
 
 fs.writeFileSync(
   `${srcDir}/themes.css`,
