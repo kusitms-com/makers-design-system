@@ -5,6 +5,7 @@
   "type": "module",
   "exports": {
     "./tokens": "./src/tokens.json",
+    "./index.css": "./src/index.css",
     "./themes.css": "./src/themes.css"
   },
   "files": [
@@ -15,7 +16,9 @@
     "provenance": true
   },
   "scripts": {
-    "build": "node -e \"console.log('tokens: no build step')\"",
+    "build": "node scripts/convert-tokens.mjs",
+    "convert": "node scripts/convert-tokens.mjs",
+    "prepublishOnly": "node scripts/convert-tokens.mjs",
     "check": "pnpm lint && pnpm typecheck",
     "lint": "biome check src",
     "typecheck": "node -e \"console.log('tokens: no typecheck step')\""
