@@ -31,6 +31,9 @@ jobs:
       - name: Convert tokens
         run: pnpm --filter @kusitms.com/tokens convert
 
+      - name: Format tokens
+        run: pnpm --filter @kusitms.com/tokens exec biome format --write src/raw-tokens.json
+
       - name: Create PR
         uses: peter-evans/create-pull-request@v7
         with:
