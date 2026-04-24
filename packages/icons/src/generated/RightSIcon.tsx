@@ -11,7 +11,7 @@ const RightSIcon = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      fill="#777982"
+      fill="currentColor"
       fillRule="evenodd"
       d="M6.935 4.435a.8.8 0 0 1 1.13 0l5 5a.8.8 0 0 1 0 1.13l-5 5a.8.8 0 1 1-1.13-1.13L11.369 10 6.935 5.565a.8.8 0 0 1 0-1.13"
       clipRule="evenodd"
