@@ -33,7 +33,7 @@
   },
   "scripts": {
     "build": "pnpm build:icons && tsup",
-    "build:icons": "rm -rf src/generated && svgr --out-dir src/generated src/raw/icon src/raw/static && node scripts/strip-svg-prefix.mjs && node scripts/convert-icon-colors.mjs && biome check --write src/generated",
+    "build:icons": "rm -rf src/generated && svgr --no-index --out-dir src/generated src/raw/icon src/raw/static && node scripts/strip-svg-prefix.mjs && node scripts/convert-icon-colors.mjs && node scripts/generate-index.mjs && biome check --write src/generated",
     "check": "pnpm build:icons && pnpm lint && pnpm typecheck",
     "lint": "biome check src scripts tsup.config.ts",
     "typecheck": "pnpm build:icons && tsc --project tsconfig.json"

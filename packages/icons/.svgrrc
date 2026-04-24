@@ -1,0 +1,5 @@
+{
+  "dimensions": true,
+  "typescript": true,
+  "svgProps": { "aria-hidden": true }
+}

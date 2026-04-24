@@ -1,13 +1,13 @@
 import type { SVGProps } from "react"
+import * as React from "react"
 
 const TrophyGraphic = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="1em"
-    height="1em"
+    width={56}
+    height={58}
     fill="none"
-    viewBox="0 0 56 58"
-    aria-hidden="true"
+    aria-hidden={true}
     {...props}
   >
     <path

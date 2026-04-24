@@ -1,13 +1,13 @@
 import type { SVGProps } from "react"
+import * as React from "react"
 
 const Favicon32 = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="1em"
-    height="1em"
+    width={32}
+    height={32}
     fill="none"
-    viewBox="0 0 32 32"
-    aria-hidden="true"
+    aria-hidden={true}
     {...props}
   >
     <g clipPath="url(#favicon_32_svg__a)">
