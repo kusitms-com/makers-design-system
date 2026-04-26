@@ -1,0 +1,336 @@
+@font-face {
+  font-family: "Pretendard Variable";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/PretendardVariable.woff2") format("woff2");
+}
+
+@theme {
+  --font-sans:
+    "Pretendard Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  /* =========================
+    PC/Display
+  ========================= */
+  /* PC/Display/64-b */
+  --text-pc-64b: 64px;
+  --text-pc-64b--line-height: 84px;
+  --text-pc-64b--letter-spacing: -0.02em;
+  --text-pc-64b--font-weight: 700;
+
+  /* PC/Display/64-sb */
+  --text-pc-64sb: 64px;
+  --text-pc-64sb--line-height: 84px;
+  --text-pc-64sb--letter-spacing: -0.02em;
+  --text-pc-64sb--font-weight: 600;
+
+  /* PC/Display/48-b */
+  --text-pc-48b: 48px;
+  --text-pc-48b--line-height: 62px;
+  --text-pc-48b--letter-spacing: -0.018em;
+  --text-pc-48b--font-weight: 700;
+
+  /* PC/Display/48-sb */
+  --text-pc-48sb: 48px;
+  --text-pc-48sb--line-height: 62px;
+  --text-pc-48sb--letter-spacing: -0.018em;
+  --text-pc-48sb--font-weight: 600;
+
+  /* PC/Display/40-b */
+  --text-pc-40b: 40px;
+  --text-pc-40b--line-height: 52px;
+  --text-pc-40b--letter-spacing: -0.016em;
+  --text-pc-40b--font-weight: 700;
+
+  /* PC/Display/40-sb */
+  --text-pc-40sb: 40px;
+  --text-pc-40sb--line-height: 52px;
+  --text-pc-40sb--letter-spacing: -0.016em;
+  --text-pc-40sb--font-weight: 600;
+
+  /* =========================
+    PC/Title
+  ========================= */
+  /* PC/Title/36-b */
+  --text-pc-36b: 36px;
+  --text-pc-36b--line-height: 48px;
+  --text-pc-36b--letter-spacing: -0.014em;
+  --text-pc-36b--font-weight: 700;
+
+  /* PC/Title/36-sb */
+  --text-pc-36sb: 36px;
+  --text-pc-36sb--line-height: 48px;
+  --text-pc-36sb--letter-spacing: -0.014em;
+  --text-pc-36sb--font-weight: 600;
+
+  /* PC/Title/36-m */
+  --text-pc-36m: 36px;
+  --text-pc-36m--line-height: 48px;
+  --text-pc-36m--letter-spacing: -0.014em;
+  --text-pc-36m--font-weight: 500;
+
+  /* PC/Title/32-b */
+  --text-pc-32b: 32px;
+  --text-pc-32b--line-height: 42px;
+  --text-pc-32b--letter-spacing: -0.012em;
+  --text-pc-32b--font-weight: 700;
+
+  /* PC/Title/32-sb */
+  --text-pc-32sb: 32px;
+  --text-pc-32sb--line-height: 42px;
+  --text-pc-32sb--letter-spacing: -0.012em;
+  --text-pc-32sb--font-weight: 600;
+
+  /* PC/Title/32-m */
+  --text-pc-32m: 32px;
+  --text-pc-32m--line-height: 42px;
+  --text-pc-32m--letter-spacing: -0.012em;
+  --text-pc-32m--font-weight: 500;
+
+  /* PC/Title/30-b */
+  --text-pc-30b: 30px;
+  --text-pc-30b--line-height: 40px;
+  --text-pc-30b--letter-spacing: -0.012em;
+  --text-pc-30b--font-weight: 700;
+
+  /* PC/Title/30-m */
+  --text-pc-30m: 30px;
+  --text-pc-30m--line-height: 40px;
+  --text-pc-30m--letter-spacing: -0.012em;
+  --text-pc-30m--font-weight: 500;
+
+  /* =========================
+    Mobile/Display
+  ========================= */
+  /* Mobile/Display/40-b */
+  --text-mobile-40b: 40px;
+  --text-mobile-40b--line-height: 52px;
+  --text-mobile-40b--letter-spacing: -0.014em;
+  --text-mobile-40b--font-weight: 700;
+
+  /* Mobile/Display/40-sb */
+  --text-mobile-40sb: 40px;
+  --text-mobile-40sb--line-height: 52px;
+  --text-mobile-40sb--letter-spacing: -0.014em;
+  --text-mobile-40sb--font-weight: 600;
+
+  /* Mobile/Display/32-b */
+  --text-mobile-32b: 32px;
+  --text-mobile-32b--line-height: 42px;
+  --text-mobile-32b--letter-spacing: -0.012em;
+  --text-mobile-32b--font-weight: 700;
+
+  /* Mobile/Display/32-sb */
+  --text-mobile-32sb: 32px;
+  --text-mobile-32sb--line-height: 42px;
+  --text-mobile-32sb--letter-spacing: -0.012em;
+  --text-mobile-32sb--font-weight: 600;
+
+  /* =========================
+    Mobile/Title
+  ========================= */
+  /* Mobile/Title/28-b */
+  --text-mobile-28b: 28px;
+  --text-mobile-28b--line-height: 38px;
+  --text-mobile-28b--letter-spacing: -0.01em;
+  --text-mobile-28b--font-weight: 700;
+
+  /* Mobile/Title/28-sb */
+  --text-mobile-28sb: 28px;
+  --text-mobile-28sb--line-height: 38px;
+  --text-mobile-28sb--letter-spacing: -0.01em;
+  --text-mobile-28sb--font-weight: 600;
+
+  /* Mobile/Title/24-b */
+  --text-mobile-24b: 24px;
+  --text-mobile-24b--line-height: 34px;
+  --text-mobile-24b--letter-spacing: -0.008em;
+  --text-mobile-24b--font-weight: 700;
+
+  /* Mobile/Title/24-sb */
+  --text-mobile-24sb: 24px;
+  --text-mobile-24sb--line-height: 34px;
+  --text-mobile-24sb--letter-spacing: -0.008em;
+  --text-mobile-24sb--font-weight: 600;
+
+  /* =========================
+    Common/Headline
+  ========================= */
+  /* Common/Headline/24-b */
+  --text-headline-24b: 24px;
+  --text-headline-24b--line-height: 36px;
+  --text-headline-24b--letter-spacing: -0.008em;
+  --text-headline-24b--font-weight: 700;
+
+  /* Common/Headline/24-sb */
+  --text-headline-24sb: 24px;
+  --text-headline-24sb--line-height: 36px;
+  --text-headline-24sb--letter-spacing: -0.008em;
+  --text-headline-24sb--font-weight: 600;
+
+  /* Common/Headline/24-m */
+  --text-headline-24m: 24px;
+  --text-headline-24m--line-height: 36px;
+  --text-headline-24m--letter-spacing: -0.008em;
+  --text-headline-24m--font-weight: 500;
+
+  /* Common/Headline/24-r */
+  --text-headline-24r: 24px;
+  --text-headline-24r--line-height: 36px;
+  --text-headline-24r--letter-spacing: -0.008em;
+  --text-headline-24r--font-weight: 400;
+
+  /* Common/Headline/20-b */
+  --text-headline-20b: 20px;
+  --text-headline-20b--line-height: 32px;
+  --text-headline-20b--letter-spacing: -0.008em;
+  --text-headline-20b--font-weight: 700;
+
+  /* Common/Headline/20-sb */
+  --text-headline-20sb: 20px;
+  --text-headline-20sb--line-height: 32px;
+  --text-headline-20sb--letter-spacing: -0.008em;
+  --text-headline-20sb--font-weight: 600;
+
+  /* Common/Headline/20-m */
+  --text-headline-20m: 20px;
+  --text-headline-20m--line-height: 32px;
+  --text-headline-20m--letter-spacing: -0.008em;
+  --text-headline-20m--font-weight: 500;
+
+  /* Common/Headline/20-r */
+  --text-headline-20r: 20px;
+  --text-headline-20r--line-height: 32px;
+  --text-headline-20r--letter-spacing: -0.008em;
+  --text-headline-20r--font-weight: 400;
+
+  /* =========================
+    Common/Body
+  ========================= */
+  /* Common/Body/18-b */
+  --text-body-18b: 18px;
+  --text-body-18b--line-height: 26px;
+  --text-body-18b--letter-spacing: -0.005em;
+  --text-body-18b--font-weight: 700;
+
+  /* Common/Body/18-sb */
+  --text-body-18sb: 18px;
+  --text-body-18sb--line-height: 26px;
+  --text-body-18sb--letter-spacing: -0.005em;
+  --text-body-18sb--font-weight: 600;
+
+  /* Common/Body/18-m */
+  --text-body-18m: 18px;
+  --text-body-18m--line-height: 26px;
+  --text-body-18m--letter-spacing: -0.005em;
+  --text-body-18m--font-weight: 500;
+
+  /* Common/Body/18-r */
+  --text-body-18r: 18px;
+  --text-body-18r--line-height: 26px;
+  --text-body-18r--letter-spacing: -0.005em;
+  --text-body-18r--font-weight: 400;
+
+  /* Common/Body/16-b */
+  --text-body-16b: 16px;
+  --text-body-16b--line-height: 24px;
+  --text-body-16b--letter-spacing: -0.0025em;
+  --text-body-16b--font-weight: 700;
+
+  /* Common/Body/16-sb */
+  --text-body-16sb: 16px;
+  --text-body-16sb--line-height: 24px;
+  --text-body-16sb--letter-spacing: -0.0025em;
+  --text-body-16sb--font-weight: 600;
+
+  /* Common/Body/16-m */
+  --text-body-16m: 16px;
+  --text-body-16m--line-height: 24px;
+  --text-body-16m--letter-spacing: -0.0025em;
+  --text-body-16m--font-weight: 500;
+
+  /* Common/Body/16-r */
+  --text-body-16r: 16px;
+  --text-body-16r--line-height: 24px;
+  --text-body-16r--letter-spacing: -0.0025em;
+  --text-body-16r--font-weight: 400;
+
+  /* =========================
+    Common/Label
+  ========================= */
+  /* Common/Label/14-b */
+  --text-label-14b: 14px;
+  --text-label-14b--line-height: 20px;
+  --text-label-14b--letter-spacing: 0.0125em;
+  --text-label-14b--font-weight: 700;
+
+  /* Common/Label/14-sb */
+  --text-label-14sb: 14px;
+  --text-label-14sb--line-height: 20px;
+  --text-label-14sb--letter-spacing: 0.0125em;
+  --text-label-14sb--font-weight: 600;
+
+  /* Common/Label/14-m */
+  --text-label-14m: 14px;
+  --text-label-14m--line-height: 20px;
+  --text-label-14m--letter-spacing: 0.0125em;
+  --text-label-14m--font-weight: 500;
+
+  /* Common/Label/14-r */
+  --text-label-14r: 14px;
+  --text-label-14r--line-height: 20px;
+  --text-label-14r--letter-spacing: 0.0125em;
+  --text-label-14r--font-weight: 400;
+
+  /* Common/Label/13-b */
+  --text-label-13b: 13px;
+  --text-label-13b--line-height: 18px;
+  --text-label-13b--letter-spacing: 0.012em;
+  --text-label-13b--font-weight: 700;
+
+  /* Common/Label/13-sb */
+  --text-label-13sb: 13px;
+  --text-label-13sb--line-height: 18px;
+  --text-label-13sb--letter-spacing: 0.012em;
+  --text-label-13sb--font-weight: 600;
+
+  /* Common/Label/13-m */
+  --text-label-13m: 13px;
+  --text-label-13m--line-height: 18px;
+  --text-label-13m--letter-spacing: 0.012em;
+  --text-label-13m--font-weight: 500;
+
+  /* Common/Label/13-r */
+  --text-label-13r: 13px;
+  --text-label-13r--line-height: 18px;
+  --text-label-13r--letter-spacing: 0.012em;
+  --text-label-13r--font-weight: 400;
+
+  /* =========================
+    Common/Caption
+  ========================= */
+  /* Common/Caption/12-sb */
+  --text-caption-12sb: 12px;
+  --text-caption-12sb--line-height: 18px;
+  --text-caption-12sb--letter-spacing: 0.014em;
+  --text-caption-12sb--font-weight: 600;
+
+  /* Common/Caption/12-r */
+  --text-caption-12r: 12px;
+  --text-caption-12r--line-height: 18px;
+  --text-caption-12r--letter-spacing: 0.014em;
+  --text-caption-12r--font-weight: 400;
+
+  /* Common/Caption/11-sb */
+  --text-caption-11sb: 11px;
+  --text-caption-11sb--line-height: 16px;
+  --text-caption-11sb--letter-spacing: 0.015em;
+  --text-caption-11sb--font-weight: 600;
+
+  /* Common/Caption/11-r */
+  --text-caption-11r: 11px;
+  --text-caption-11r--line-height: 16px;
+  --text-caption-11r--letter-spacing: 0.015em;
+  --text-caption-11r--font-weight: 400;
+}
