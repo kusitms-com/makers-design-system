@@ -6,7 +6,8 @@
   "exports": {
     "./tokens": "./src/tokens.json",
     "./index.css": "./src/index.css",
-    "./themes.css": "./src/themes.css"
+    "./themes.css": "./src/themes.css",
+    "./typography.css": "./src/typography.css"
   },
   "files": [
     "src"
