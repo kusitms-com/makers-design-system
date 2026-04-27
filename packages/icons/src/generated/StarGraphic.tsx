@@ -1,5 +1,4 @@
 import type { SVGProps } from "react"
-import * as React from "react"
 
 const StarGraphic = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -7,7 +6,8 @@ const StarGraphic = (props: SVGProps<SVGSVGElement>) => (
     width={31}
     height={31}
     fill="none"
-    aria-hidden={true}
+    viewBox="0 0 31 31"
+    aria-hidden="true"
     {...props}
   >
     <path

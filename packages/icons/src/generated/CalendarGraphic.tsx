@@ -1,5 +1,4 @@
 import type { SVGProps } from "react"
-import * as React from "react"
 
 const CalendarGraphic = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -7,7 +6,8 @@ const CalendarGraphic = (props: SVGProps<SVGSVGElement>) => (
     width={58}
     height={58}
     fill="none"
-    aria-hidden={true}
+    viewBox="0 0 58 58"
+    aria-hidden="true"
     {...props}
   >
     <path

@@ -1,5 +1,4 @@
 import type { SVGProps } from "react"
-import * as React from "react"
 
 const HomeIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -7,7 +6,8 @@ const HomeIcon = (props: SVGProps<SVGSVGElement>) => (
     width={20}
     height={20}
     fill="none"
-    aria-hidden={true}
+    viewBox="0 0 20 20"
+    aria-hidden="true"
     {...props}
   >
     <path

@@ -1,5 +1,4 @@
 import type { SVGProps } from "react"
-import * as React from "react"
 
 const ToggleOpenXsIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -7,7 +6,8 @@ const ToggleOpenXsIcon = (props: SVGProps<SVGSVGElement>) => (
     width={18}
     height={18}
     fill="none"
-    aria-hidden={true}
+    viewBox="0 0 18 18"
+    aria-hidden="true"
     {...props}
   >
     <path

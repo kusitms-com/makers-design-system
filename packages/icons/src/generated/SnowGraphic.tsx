@@ -1,5 +1,4 @@
 import type { SVGProps } from "react"
-import * as React from "react"
 
 const SnowGraphic = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -7,10 +6,11 @@ const SnowGraphic = (props: SVGProps<SVGSVGElement>) => (
     width={50}
     height={52}
     fill="none"
-    aria-hidden={true}
+    viewBox="0 0 50 52"
+    aria-hidden="true"
     {...props}
   >
-    <g filter="url(#snow_graphic_svg__a)">
+    <g filter="url(#filter0_d_248_1969)">
       <path
         fill="#3E5EFA"
         d="m26.102 22.48 9.06-5.232 1.455 2.52-9.073 5.237 9.087 5.247-1.454 2.519-9.075-5.24v10.487h-2.908v-10.5l-9.109 5.259-1.454-2.519 9.097-5.254-9.082-5.243 1.454-2.518 9.094 5.25V12h2.908z"
@@ -18,7 +18,7 @@ const SnowGraphic = (props: SVGProps<SVGSVGElement>) => (
     </g>
     <defs>
       <filter
-        id="snow_graphic_svg__a"
+        id="filter0_d_248_1969"
         width={49.262}
         height={51.281}
         x={0}

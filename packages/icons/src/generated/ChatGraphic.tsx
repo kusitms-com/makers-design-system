@@ -1,5 +1,4 @@
 import type { SVGProps } from "react"
-import * as React from "react"
 
 const ChatGraphic = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -7,7 +6,8 @@ const ChatGraphic = (props: SVGProps<SVGSVGElement>) => (
     width={50}
     height={50}
     fill="none"
-    aria-hidden={true}
+    viewBox="0 0 50 50"
+    aria-hidden="true"
     {...props}
   >
     <path

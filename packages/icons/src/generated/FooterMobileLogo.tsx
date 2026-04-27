@@ -1,5 +1,4 @@
 import type { SVGProps } from "react"
-import * as React from "react"
 
 const FooterMobileLogo = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -7,7 +6,8 @@ const FooterMobileLogo = (props: SVGProps<SVGSVGElement>) => (
     width={87}
     height={24}
     fill="none"
-    aria-hidden={true}
+    viewBox="0 0 87 24"
+    aria-hidden="true"
     {...props}
   >
     <path

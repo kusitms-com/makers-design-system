@@ -1,5 +1,4 @@
 import type { SVGProps } from "react"
-import * as React from "react"
 
 const FooterDesktopLogo = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -7,7 +6,8 @@ const FooterDesktopLogo = (props: SVGProps<SVGSVGElement>) => (
     width={132}
     height={35}
     fill="none"
-    aria-hidden={true}
+    viewBox="0 0 132 35"
+    aria-hidden="true"
     {...props}
   >
     <path

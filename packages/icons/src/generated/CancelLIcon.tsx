@@ -1,5 +1,4 @@
 import type { SVGProps } from "react"
-import * as React from "react"
 
 const CancelLIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -7,7 +6,8 @@ const CancelLIcon = (props: SVGProps<SVGSVGElement>) => (
     width={32}
     height={32}
     fill="none"
-    aria-hidden={true}
+    viewBox="0 0 32 32"
+    aria-hidden="true"
     {...props}
   >
     <path
