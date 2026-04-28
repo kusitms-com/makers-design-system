@@ -2,6 +2,7 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react"
 import { afterEach, describe, expect, it, vi } from "vitest"
 
 import { Button } from "./Button"
+import { ScrollTopButton } from "./ScrollTopButton"
 
 afterEach(() => {
   cleanup()
@@ -56,6 +57,55 @@ describe("Button", () => {
   it("클릭 핸들러가 호출된다", () => {
     const onClick = vi.fn()
     render(<Button onClick={onClick}>텍스트</Button>)
+    fireEvent.click(screen.getByRole("button"))
+    expect(onClick).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe("ScrollTopButton", () => {
+  it("aria-label이 적용된다", () => {
+    render(<ScrollTopButton />)
+    expect(
+      screen.getByRole("button", { name: "맨 위로 이동" }),
+    ).toBeInTheDocument()
+  })
+
+  it("type=button이 기본값이다", () => {
+    render(<ScrollTopButton />)
+    expect(screen.getByRole("button")).toHaveAttribute("type", "button")
+  })
+
+  it("desktop 사이즈 클래스가 적용된다", () => {
+    render(<ScrollTopButton size="desktop" />)
+    expect(screen.getByRole("button").className).toContain("size-12")
+    expect(screen.getByRole("button")).toHaveClass(
+      "active:bg-interaction-pressed",
+    )
+    expect(screen.getByRole("button").querySelector("svg")).toHaveAttribute(
+      "viewBox",
+      "0 0 48 48",
+    )
+  })
+
+  it("mobile 사이즈 클래스가 적용된다", () => {
+    render(<ScrollTopButton size="mobile" />)
+    expect(screen.getByRole("button").className).toContain("size-10")
+    expect(screen.getByRole("button").querySelector("svg")).toHaveAttribute(
+      "viewBox",
+      "0 0 40 40",
+    )
+  })
+
+  it("pressed 상태 스타일 클래스가 적용된다", () => {
+    render(<ScrollTopButton />)
+    expect(screen.getByRole("button")).toHaveClass(
+      "active:bg-interaction-pressed",
+    )
+  })
+
+  it("클릭 핸들러가 호출된다", () => {
+    const onClick = vi.fn()
+    render(<ScrollTopButton onClick={onClick} />)
     fireEvent.click(screen.getByRole("button"))
     expect(onClick).toHaveBeenCalledTimes(1)
   })
