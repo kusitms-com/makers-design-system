@@ -22,14 +22,12 @@ describe("Button", () => {
 
   it("desktop 사이즈 클래스가 적용된다", () => {
     render(<Button size="desktop">텍스트</Button>)
-    expect(screen.getByRole("button").className).toContain("pl-8")
-    expect(screen.getByRole("button").className).toContain("pr-6")
+    expect(screen.getByRole("button").className).toContain("px-6")
   })
 
   it("mobile 사이즈 클래스가 적용된다", () => {
     render(<Button size="mobile">텍스트</Button>)
-    expect(screen.getByRole("button").className).toContain("pl-5")
-    expect(screen.getByRole("button").className).toContain("pr-3")
+    expect(screen.getByRole("button").className).toContain("px-3")
   })
 
   it("ArrowRightIcon이 항상 렌더링된다", () => {
@@ -37,10 +35,31 @@ describe("Button", () => {
     expect(screen.getByRole("button").querySelector("svg")).toBeInTheDocument()
   })
 
+  it("showIcon=false일 때 아이콘이 렌더링되지 않는다", () => {
+    render(<Button showIcon={false}>텍스트</Button>)
+    expect(
+      screen.getByRole("button").querySelector("svg"),
+    ).not.toBeInTheDocument()
+  })
+
+  it("아이콘이 있을 때 텍스트에 ml-2가 적용된다", () => {
+    render(<Button>텍스트</Button>)
+    expect(
+      screen.getByRole("button").querySelector("span:last-of-type"),
+    ).toHaveClass("ml-2")
+  })
+
+  it("아이콘이 없을 때 텍스트에 ml-2가 적용되지 않는다", () => {
+    render(<Button showIcon={false}>텍스트</Button>)
+    expect(screen.getByRole("button").querySelector("span")).not.toHaveClass(
+      "ml-2",
+    )
+  })
+
   it("disabled 상태에서는 hover 오버레이가 렌더링되지 않는다", () => {
     render(<Button disabled>텍스트</Button>)
     expect(
-      screen.getByRole("button").querySelector("span"),
+      screen.getByRole("button").querySelector(".pointer-events-none"),
     ).not.toBeInTheDocument()
   })
 

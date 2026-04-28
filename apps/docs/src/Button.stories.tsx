@@ -14,6 +14,9 @@ const meta = {
       control: { type: "select" },
       options: ["desktop", "mobile"],
     },
+    showIcon: {
+      control: { type: "boolean" },
+    },
   },
 } satisfies Meta<typeof Button>
 
