@@ -42,5 +42,8 @@
     "lint": "biome check src tsup.config.ts vitest.config.ts",
     "test": "vitest run --coverage",
     "typecheck": "tsc --project tsconfig.json"
+  },
+  "dependencies": {
+    "@kusitms.com/icons": "workspace:*"
   }
 }

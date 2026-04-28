@@ -1,4 +1,10 @@
 {
   "extends": "@kusitms.com/tsconfig/react-app.json",
+  "compilerOptions": {
+    "paths": {
+      "@kusitms.com/icons": ["../../packages/icons/src/generated/index.ts"],
+      "@kusitms.com/ui": ["../../packages/ui/src/index.ts"]
+    }
+  },
   "include": [".storybook", "src"]
 }
