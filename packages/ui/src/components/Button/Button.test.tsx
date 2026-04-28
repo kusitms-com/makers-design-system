@@ -2,6 +2,7 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react"
 import { afterEach, describe, expect, it, vi } from "vitest"
 
 import { Button } from "./Button"
+import { PageNavButton } from "./PageNavButton"
 import { ScrollTopButton } from "./ScrollTopButton"
 
 afterEach(() => {
@@ -106,6 +107,59 @@ describe("ScrollTopButton", () => {
   it("클릭 핸들러가 호출된다", () => {
     const onClick = vi.fn()
     render(<ScrollTopButton onClick={onClick} />)
+    fireEvent.click(screen.getByRole("button"))
+    expect(onClick).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe("PageNavButton", () => {
+  it("direction에 따라 aria-label이 적용된다", () => {
+    render(<PageNavButton direction="next" />)
+    expect(
+      screen.getByRole("button", { name: "다음 페이지로 이동" }),
+    ).toBeInTheDocument()
+  })
+
+  it("type=button이 기본값이다", () => {
+    render(<PageNavButton />)
+    expect(screen.getByRole("button")).toHaveAttribute("type", "button")
+  })
+
+  it("desktop 사이즈와 light 컬러 클래스가 적용된다", () => {
+    render(<PageNavButton size="desktop" color="light" />)
+    expect(screen.getByRole("button")).toHaveClass("size-13")
+    expect(screen.getByRole("button")).toHaveClass("bg-fill-transparent-white")
+    expect(screen.getByRole("button").querySelector("span")).toHaveClass(
+      "group-active:bg-interaction-pressed",
+    )
+    expect(screen.getByRole("button").querySelector("svg")).toHaveAttribute(
+      "viewBox",
+      "0 0 52 52",
+    )
+  })
+
+  it("mobile 사이즈와 dark 컬러 클래스가 적용된다", () => {
+    render(<PageNavButton size="mobile" color="dark" />)
+    expect(screen.getByRole("button")).toHaveClass("size-9")
+    expect(screen.getByRole("button")).toHaveClass("bg-fill-transparent-black")
+    expect(screen.getByRole("button").querySelector("svg")).toHaveAttribute(
+      "viewBox",
+      "0 0 52 52",
+    )
+    expect(screen.getByRole("button").querySelector("path")).toHaveAttribute(
+      "stroke-width",
+      "2.8",
+    )
+  })
+
+  it("prev direction일 때 회전 클래스가 적용된다", () => {
+    render(<PageNavButton direction="prev" />)
+    expect(screen.getByRole("button")).toHaveClass("rotate-180")
+  })
+
+  it("클릭 핸들러가 호출된다", () => {
+    const onClick = vi.fn()
+    render(<PageNavButton onClick={onClick} />)
     fireEvent.click(screen.getByRole("button"))
     expect(onClick).toHaveBeenCalledTimes(1)
   })
