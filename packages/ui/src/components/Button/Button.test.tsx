@@ -2,6 +2,7 @@ import { cleanup, fireEvent, render, screen } from "@testing-library/react"
 import { afterEach, describe, expect, it, vi } from "vitest"
 
 import { Button } from "./Button"
+import { NavigationButton } from "./NavigationButton"
 import { PageNavButton } from "./PageNavButton"
 import { ScrollTopButton } from "./ScrollTopButton"
 
@@ -179,6 +180,51 @@ describe("PageNavButton", () => {
   it("클릭 핸들러가 호출된다", () => {
     const onClick = vi.fn()
     render(<PageNavButton onClick={onClick} />)
+    fireEvent.click(screen.getByRole("button"))
+    expect(onClick).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe("NavigationButton", () => {
+  const icon = <div data-testid="nav-icon">icon</div>
+
+  it("type=button이 기본값이다", () => {
+    render(<NavigationButton>Behance</NavigationButton>)
+    expect(screen.getByRole("button")).toHaveAttribute("type", "button")
+  })
+
+  it("텍스트를 렌더링한다", () => {
+    render(<NavigationButton>Behance</NavigationButton>)
+    expect(screen.getByRole("button", { name: /Behance/ })).toBeInTheDocument()
+  })
+
+  it("icon이 있으면 아이콘이 렌더링된다", () => {
+    render(<NavigationButton icon={icon}>Behance</NavigationButton>)
+    expect(screen.getByTestId("nav-icon")).toBeInTheDocument()
+  })
+
+  it("icon이 없으면 아이콘이 렌더링되지 않는다", () => {
+    render(<NavigationButton>Behance</NavigationButton>)
+    expect(screen.queryByTestId("nav-icon")).not.toBeInTheDocument()
+  })
+
+  it("showArrow=false이면 오른쪽 화살표가 렌더링되지 않는다", () => {
+    render(<NavigationButton showArrow={false}>Behance</NavigationButton>)
+    expect(
+      screen.getByRole("button").querySelector("svg"),
+    ).not.toBeInTheDocument()
+  })
+
+  it("hover 스타일 클래스가 적용된다", () => {
+    render(<NavigationButton>Behance</NavigationButton>)
+    expect(
+      screen.getByRole("button").querySelector(".pointer-events-none"),
+    ).toHaveClass("group-hover:bg-interaction-hover-inverse")
+  })
+
+  it("클릭 핸들러가 호출된다", () => {
+    const onClick = vi.fn()
+    render(<NavigationButton onClick={onClick}>Behance</NavigationButton>)
     fireEvent.click(screen.getByRole("button"))
     expect(onClick).toHaveBeenCalledTimes(1)
   })

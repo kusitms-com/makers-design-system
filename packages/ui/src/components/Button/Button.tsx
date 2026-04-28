@@ -28,7 +28,7 @@ export function Button({
       type="button"
       disabled={disabled}
       className={cn(
-        "group relative overflow-hidden inline-flex items-center justify-between rounded-[48px] transition-colors",
+        "group relative overflow-hidden inline-flex items-center justify-between rounded-[48px] transition-colors cursor-pointer",
         size === "desktop"
           ? "py-2 px-6 gap-2 text-base"
           : "py-2 px-3 gap-1 text-sm",
