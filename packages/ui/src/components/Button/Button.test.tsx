@@ -57,6 +57,16 @@ describe("Button", () => {
     )
   })
 
+  it("showIcon=true일 때 justify-between이 적용된다", () => {
+    render(<Button>텍스트</Button>)
+    expect(screen.getByRole("button")).toHaveClass("justify-between")
+  })
+
+  it("showIcon=false일 때 justify-center가 적용된다", () => {
+    render(<Button showIcon={false}>텍스트</Button>)
+    expect(screen.getByRole("button")).toHaveClass("justify-center")
+  })
+
   it("disabled 상태에서는 hover 오버레이가 렌더링되지 않는다", () => {
     render(<Button disabled>텍스트</Button>)
     expect(
