@@ -7,7 +7,6 @@
 @source "../../../packages/icons/src";
 
 body {
-  font-family: var(--font-sans);
   background: var(--fill-normal);
   color: var(--label-normal);
 }

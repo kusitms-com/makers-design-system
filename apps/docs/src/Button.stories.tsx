@@ -26,7 +26,7 @@ export const Secondary: Story = {
 export const WithIcon: Story = {
   render: (args) => (
     <Button {...args}>
-      <span className="mr-2 text-label-14b">Continue</span>
+      <span className="mr-2">Continue</span>
       <ArrowRightIcon className="size-4" />
     </Button>
   ),
