@@ -71,23 +71,6 @@ export const DefaultWithoutDescription: Story = {
   },
 }
 
-export const DefaultWithCustomDescription: Story = {
-  name: "Default · description으로 다양한 정보 표시",
-  render: () => (
-    <div className="flex flex-col gap-3">
-      <Label type="default" description="손아현, 손아현">
-        기획
-      </Label>
-      <Label type="default" description="마감 11/30">
-        디자인
-      </Label>
-      <Label type="default" description="진행중 · 70%">
-        개발
-      </Label>
-    </div>
-  ),
-}
-
 export const AllVariants: Story = {
   render: () => (
     <div className="flex flex-col gap-6">
