@@ -1,12 +1,12 @@
 import type { SVGProps } from "react"
 
-const ArrowRightIcon = (props: SVGProps<SVGSVGElement>) => (
+const ToggleCloseMIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width={20}
-    height={20}
+    width={24}
+    height={24}
     fill="none"
-    viewBox="0 0 20 20"
+    viewBox="0 0 24 24"
     aria-hidden="true"
     {...props}
   >
@@ -14,9 +14,9 @@ const ArrowRightIcon = (props: SVGProps<SVGSVGElement>) => (
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth={1.5}
-      d="M4.167 10h11.666M10 4.167 15.833 10 10 15.833"
+      strokeWidth={2.42}
+      d="m20 16-8-8-8 8"
     />
   </svg>
 )
-export default ArrowRightIcon
+export default ToggleCloseMIcon
