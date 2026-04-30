@@ -1,6 +1,6 @@
 import type { SVGProps } from "react"
 
-const ArrowRightIcon = (props: SVGProps<SVGSVGElement>) => (
+const ToggleOpenSIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={20}
@@ -14,9 +14,9 @@ const ArrowRightIcon = (props: SVGProps<SVGSVGElement>) => (
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth={1.5}
-      d="M4.167 10h11.666M10 4.167 15.833 10 10 15.833"
+      strokeWidth={2}
+      d="m16 7-6 6-6-6"
     />
   </svg>
 )
-export default ArrowRightIcon
+export default ToggleOpenSIcon
