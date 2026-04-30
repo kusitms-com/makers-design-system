@@ -44,6 +44,7 @@
     "typecheck": "tsc --project tsconfig.json"
   },
   "dependencies": {
-    "@kusitms.com/icons": "workspace:*"
+    "@kusitms.com/icons": "workspace:*",
+    "@radix-ui/react-accordion": "^1.2.12"
   }
 }
