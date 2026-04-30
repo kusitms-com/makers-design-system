@@ -6,7 +6,21 @@
 @source "../../../packages/ui/src";
 @source "../../../packages/icons/src";
 
+@font-face {
+  font-family: "Pretendard Variable";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/PretendardVariable.woff2") format("woff2");
+}
+
+@theme {
+  --font-sans:
+    "Pretendard Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
 body {
+  font-family: var(--font-sans);
   background: var(--fill-normal);
   color: var(--label-normal);
 }
