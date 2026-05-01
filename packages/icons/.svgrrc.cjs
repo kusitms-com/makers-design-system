@@ -11,7 +11,8 @@ const indexTemplate = (filePaths) => {
 module.exports = {
   jsxRuntime: "automatic",
   typescript: true,
-  icon: true,
+  dimensions: true,
+  icon: false,
   expandProps: "end",
   svgProps: {
     "aria-hidden": "true",
@@ -20,6 +21,19 @@ module.exports = {
     "#000": "currentColor",
     "#000000": "currentColor",
     black: "currentColor",
+  },
+  svgoConfig: {
+    plugins: [
+      {
+        name: "preset-default",
+        params: {
+          overrides: {
+            removeViewBox: false,
+            cleanupIds: false,
+          },
+        },
+      },
+    ],
   },
   indexTemplate,
 }
