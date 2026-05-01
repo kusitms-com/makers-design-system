@@ -60,18 +60,16 @@ export const DesktopDefault: Story = {
     size: "desktop",
   },
   render: (args) => (
-    <div className="w-[1200px]">
-      <Accordion {...args}>
-        {FAQ_ITEMS.map((item) => (
-          <Accordion.Item
-            key={item.value}
-            value={item.value}
-            question={item.question}
-            answer={item.answer}
-          />
-        ))}
-      </Accordion>
-    </div>
+    <Accordion {...args}>
+      {FAQ_ITEMS.map((item) => (
+        <Accordion.Item
+          key={item.value}
+          value={item.value}
+          question={item.question}
+          answer={item.answer}
+        />
+      ))}
+    </Accordion>
   ),
 }
 
@@ -82,18 +80,16 @@ export const DesktopOpen: Story = {
     defaultValue: "q1",
   },
   render: (args) => (
-    <div className="w-[1200px]">
-      <Accordion {...args}>
-        {FAQ_ITEMS.map((item) => (
-          <Accordion.Item
-            key={item.value}
-            value={item.value}
-            question={item.question}
-            answer={item.answer}
-          />
-        ))}
-      </Accordion>
-    </div>
+    <Accordion {...args}>
+      {FAQ_ITEMS.map((item) => (
+        <Accordion.Item
+          key={item.value}
+          value={item.value}
+          question={item.question}
+          answer={item.answer}
+        />
+      ))}
+    </Accordion>
   ),
 }
 
@@ -105,18 +101,16 @@ export const DesktopMultiple: Story = {
     defaultValue: ["q1", "q2"],
   },
   render: (args) => (
-    <div className="w-[1200px]">
-      <Accordion {...args}>
-        {FAQ_ITEMS.map((item) => (
-          <Accordion.Item
-            key={item.value}
-            value={item.value}
-            question={item.question}
-            answer={item.answer}
-          />
-        ))}
-      </Accordion>
-    </div>
+    <Accordion {...args}>
+      {FAQ_ITEMS.map((item) => (
+        <Accordion.Item
+          key={item.value}
+          value={item.value}
+          question={item.question}
+          answer={item.answer}
+        />
+      ))}
+    </Accordion>
   ),
 }
 
@@ -128,18 +122,16 @@ export const MobileDefault: Story = {
     size: "mobile",
   },
   render: (args) => (
-    <div className="w-[288px]">
-      <Accordion {...args}>
-        {FAQ_ITEMS.map((item) => (
-          <Accordion.Item
-            key={item.value}
-            value={item.value}
-            question={item.question}
-            answer={item.answer}
-          />
-        ))}
-      </Accordion>
-    </div>
+    <Accordion {...args}>
+      {FAQ_ITEMS.map((item) => (
+        <Accordion.Item
+          key={item.value}
+          value={item.value}
+          question={item.question}
+          answer={item.answer}
+        />
+      ))}
+    </Accordion>
   ),
 }
 
@@ -150,18 +142,16 @@ export const MobileOpen: Story = {
     defaultValue: "q1",
   },
   render: (args) => (
-    <div className="w-[288px]">
-      <Accordion {...args}>
-        {FAQ_ITEMS.map((item) => (
-          <Accordion.Item
-            key={item.value}
-            value={item.value}
-            question={item.question}
-            answer={item.answer}
-          />
-        ))}
-      </Accordion>
-    </div>
+    <Accordion {...args}>
+      {FAQ_ITEMS.map((item) => (
+        <Accordion.Item
+          key={item.value}
+          value={item.value}
+          question={item.question}
+          answer={item.answer}
+        />
+      ))}
+    </Accordion>
   ),
 }
 
@@ -173,58 +163,50 @@ export const AllStates: Story = {
     <div className="flex flex-col gap-12">
       <section>
         <p className="mb-4 text-xs text-gray-400">Desktop — 닫힘</p>
-        <div className="w-[1200px]">
-          <Accordion type="single" collapsible size="desktop">
-            <Accordion.Item
-              value="q1"
-              question="정기 커리큘럼에 불참하면 어떻게 되나요?"
-              answer="정기 커리큘럼에 불참하면 정관에 따라 벌점이 부과돼요."
-            />
-          </Accordion>
-        </div>
+        <Accordion type="single" collapsible size="desktop">
+          <Accordion.Item
+            value="q1"
+            question="정기 커리큘럼에 불참하면 어떻게 되나요?"
+            answer="정기 커리큘럼에 불참하면 정관에 따라 벌점이 부과돼요."
+          />
+        </Accordion>
       </section>
 
       <section>
         <p className="mb-4 text-xs text-gray-400">Desktop — 열림</p>
-        <div className="w-[1200px]">
-          <Accordion type="single" collapsible size="desktop" defaultValue="q1">
-            <Accordion.Item
-              value="q1"
-              question="정기 커리큘럼에 불참하면 어떻게 되나요?"
-              answer={
-                "정기 커리큘럼에 불참하면 정관에 따라 벌점이 부과돼요. 최대 벌점을 초과하면 수료를 못하게 될 수 있어요.\n정기 커리큘럼에는 최대한 참여해야 수료에 지장이 없어요."
-              }
-            />
-          </Accordion>
-        </div>
+        <Accordion type="single" collapsible size="desktop" defaultValue="q1">
+          <Accordion.Item
+            value="q1"
+            question="정기 커리큘럼에 불참하면 어떻게 되나요?"
+            answer={
+              "정기 커리큘럼에 불참하면 정관에 따라 벌점이 부과돼요. 최대 벌점을 초과하면 수료를 못하게 될 수 있어요.\n정기 커리큘럼에는 최대한 참여해야 수료에 지장이 없어요."
+            }
+          />
+        </Accordion>
       </section>
 
       <section>
         <p className="mb-4 text-xs text-gray-400">Mobile — 닫힘</p>
-        <div className="w-[288px]">
-          <Accordion type="single" collapsible size="mobile">
-            <Accordion.Item
-              value="q1"
-              question="정기 커리큘럼에 불참하면 어떻게 되나요?"
-              answer="정기 커리큘럼에 불참하면 정관에 따라 벌점이 부과돼요."
-            />
-          </Accordion>
-        </div>
+        <Accordion type="single" collapsible size="mobile">
+          <Accordion.Item
+            value="q1"
+            question="정기 커리큘럼에 불참하면 어떻게 되나요?"
+            answer="정기 커리큘럼에 불참하면 정관에 따라 벌점이 부과돼요."
+          />
+        </Accordion>
       </section>
 
       <section>
         <p className="mb-4 text-xs text-gray-400">Mobile — 열림</p>
-        <div className="w-[288px]">
-          <Accordion type="single" collapsible size="mobile" defaultValue="q1">
-            <Accordion.Item
-              value="q1"
-              question="정기 커리큘럼에 불참하면 어떻게 되나요?"
-              answer={
-                "정기 커리큘럼에 불참하면 정관에 따라 벌점이 부과돼요. 최대 벌점을 초과하면 수료를 못하게 될 수 있어요.\n정기 커리큘럼에는 최대한 참여해야 수료에 지장이 없어요."
-              }
-            />
-          </Accordion>
-        </div>
+        <Accordion type="single" collapsible size="mobile" defaultValue="q1">
+          <Accordion.Item
+            value="q1"
+            question="정기 커리큘럼에 불참하면 어떻게 되나요?"
+            answer={
+              "정기 커리큘럼에 불참하면 정관에 따라 벌점이 부과돼요. 최대 벌점을 초과하면 수료를 못하게 될 수 있어요.\n정기 커리큘럼에는 최대한 참여해야 수료에 지장이 없어요."
+            }
+          />
+        </Accordion>
       </section>
     </div>
   ),

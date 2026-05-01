@@ -70,8 +70,8 @@ function AccordionRoot({
     <AccordionSizeContext.Provider value={size}>
       <RadixAccordion.Root
         className={cn(
-          "flex w-full flex-col",
-          size === "desktop" ? "gap-3" : "gap-2",
+          "flex flex-col",
+          size === "desktop" ? "w-300 gap-3" : "w-72 gap-2",
           className,
         )}
         {...(props as RadixRootProps)}
