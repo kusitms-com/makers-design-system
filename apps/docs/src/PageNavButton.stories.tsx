@@ -6,15 +6,10 @@ const meta = {
   component: PageNavButton,
   tags: ["autodocs"],
   args: {
-    size: "desktop",
     color: "light",
     direction: "next",
   },
   argTypes: {
-    size: {
-      control: { type: "select" },
-      options: ["desktop", "mobile"],
-    },
     color: {
       control: { type: "select" },
       options: ["light", "dark"],

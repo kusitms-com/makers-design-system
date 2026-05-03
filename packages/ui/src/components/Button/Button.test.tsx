@@ -153,30 +153,46 @@ describe("PageNavButton", () => {
     expect(screen.getByRole("button")).toHaveAttribute("type", "button")
   })
 
-  it("desktop 사이즈와 light 컬러 클래스가 적용된다", () => {
-    render(<PageNavButton size="desktop" color="light" />)
-    expect(screen.getByRole("button")).toHaveClass("size-13")
-    expect(screen.getByRole("button")).toHaveClass("bg-fill-transparent-white")
-    expect(screen.getByRole("button").querySelector("span")).toHaveClass(
-      "group-active:bg-interaction-pressed",
-    )
-    expect(screen.getByRole("button").querySelector("svg")).toHaveAttribute(
-      "viewBox",
-      "0 0 52 52",
-    )
+  it("모바일 기본 사이즈 클래스가 적용된다", () => {
+    render(<PageNavButton />)
+    expect(screen.getByRole("button").className).toContain("size-9")
   })
 
-  it("mobile 사이즈와 dark 컬러 클래스가 적용된다", () => {
-    render(<PageNavButton size="mobile" color="dark" />)
-    expect(screen.getByRole("button")).toHaveClass("size-9")
+  it("desktop 사이즈 breakpoint 클래스가 적용된다", () => {
+    render(<PageNavButton />)
+    expect(screen.getByRole("button").className).toContain("lg:size-13")
+  })
+
+  it("light 컬러 클래스가 적용된다", () => {
+    render(<PageNavButton color="light" />)
+    expect(screen.getByRole("button")).toHaveClass("bg-fill-transparent-white")
+  })
+
+  it("dark 컬러 클래스가 적용된다", () => {
+    render(<PageNavButton color="dark" />)
     expect(screen.getByRole("button")).toHaveClass("bg-fill-transparent-black")
-    expect(screen.getByRole("button").querySelector("svg")).toHaveAttribute(
-      "viewBox",
-      "0 0 52 52",
-    )
-    expect(screen.getByRole("button").querySelector("path")).toHaveAttribute(
-      "stroke-width",
-      "2.8",
+    expect(screen.getByRole("button")).toHaveClass("text-static-white")
+  })
+
+  it("light 컬러 클래스가 적용된다", () => {
+    render(<PageNavButton color="light" />)
+    expect(screen.getByRole("button")).toHaveClass("bg-fill-transparent-white")
+    expect(screen.getByRole("button")).toHaveClass("text-static-white")
+  })
+
+  it("아이콘이 렌더링된다", () => {
+    render(<PageNavButton />)
+    const svg = screen.getByRole("button").querySelector("svg")
+    expect(svg).toBeInTheDocument()
+    expect(svg).toHaveAttribute("viewBox", "0 0 20 20")
+    expect(svg?.getAttribute("class")).toContain("size-7")
+    expect(svg?.getAttribute("class")).toContain("lg:size-10")
+  })
+
+  it("pressed 오버레이 클래스가 적용된다", () => {
+    render(<PageNavButton />)
+    expect(screen.getByRole("button").querySelector("span")).toHaveClass(
+      "group-active:bg-interaction-pressed",
     )
   })
 
