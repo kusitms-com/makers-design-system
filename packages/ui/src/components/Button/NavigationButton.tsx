@@ -1,3 +1,4 @@
+import { RightSIcon } from "@kusitms.com/icons"
 import type { ButtonHTMLAttributes, PropsWithChildren, ReactNode } from "react"
 
 export type NavigationButtonProps = PropsWithChildren<
@@ -34,24 +35,19 @@ export function NavigationButton({
           {icon}
         </span>
       ) : null}
-      <span className="relative z-10 flex-1 text-left text-base font-medium leading-6 tracking-[-0.04px]">
+      <span
+        className={cn(
+          "relative z-10 flex-1 text-left text-body-16m",
+          !showArrow && "pr-1",
+        )}
+      >
         {children}
       </span>
       {showArrow ? (
-        <svg
+        <RightSIcon
           aria-hidden="true"
-          viewBox="0 0 20 20"
-          fill="none"
           className="relative z-10 size-5 shrink-0 text-label-alternative"
-        >
-          <path
-            d="M7 4L13 10L7 16"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+        />
       ) : null}
     </button>
   )

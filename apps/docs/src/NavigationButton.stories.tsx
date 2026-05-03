@@ -31,8 +31,23 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
 
-export const WithoutIcon: Story = {
-  args: {
-    icon: undefined,
-  },
+export const AllStates: Story = {
+  render: () => (
+    <div className="flex flex-col gap-3 items-start">
+      <div className="flex flex-col gap-1">
+        <span className="text-xs text-gray-400">With Icon</span>
+        <NavigationButton icon={<BehanceBadge />}>Behance</NavigationButton>
+      </div>
+      <div className="flex flex-col gap-1">
+        <span className="text-xs text-gray-400">Without Icon</span>
+        <NavigationButton>Behance</NavigationButton>
+      </div>
+      <div className="flex flex-col gap-1">
+        <span className="text-xs text-gray-400">Without Arrow</span>
+        <NavigationButton icon={<BehanceBadge />} showArrow={false}>
+          Behance
+        </NavigationButton>
+      </div>
+    </div>
+  ),
 }
