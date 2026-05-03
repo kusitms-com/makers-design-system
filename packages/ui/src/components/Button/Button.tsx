@@ -36,7 +36,7 @@ export function Button({
       {!disabled && (
         <span className="pointer-events-none absolute inset-0 bg-white/0 transition-colors group-hover:bg-white/25 group-active:bg-black/8" />
       )}
-      <span className="pl-2">{children}</span>
+      <span className={showIcon ? "pl-2" : undefined}>{children}</span>
       {showIcon && (
         <>
           <ArrowRightIcon
