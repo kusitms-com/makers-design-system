@@ -26,19 +26,15 @@ describe("Label", () => {
       expect(screen.getByText("기획").className).toContain("rounded-[4px]")
     })
 
-    it("size에 관계없이 동일한 폰트 크기(text-sm)가 적용된다", () => {
-      render(
-        <>
-          <Label type="brand" size="desktop">
-            데스크탑
-          </Label>
-          <Label type="brand" size="mobile">
-            모바일
-          </Label>
-        </>,
-      )
-      expect(screen.getByText("데스크탑").className).toContain("text-sm")
-      expect(screen.getByText("모바일").className).toContain("text-sm")
+    it("text-label-14sb 타이포그라피 클래스가 적용된다", () => {
+      render(<Label type="brand">기획</Label>)
+      expect(screen.getByText("기획").className).toContain("text-label-14sb")
+    })
+
+    it("desktop 고정 크기 breakpoint 클래스가 적용된다", () => {
+      render(<Label type="brand">기획</Label>)
+      expect(screen.getByText("기획").className).toContain("lg:w-16")
+      expect(screen.getByText("기획").className).toContain("lg:h-8")
     })
   })
 
@@ -50,27 +46,23 @@ describe("Label", () => {
       expect(el.className).toContain("text-label-alternative")
     })
 
-    it("rounded-[6px] 모양이 적용된다", () => {
+    it("rounded-md 모양이 적용된다", () => {
       render(<Label type="secondary">텍스트</Label>)
-      expect(screen.getByText("텍스트").className).toContain("rounded-[6px]")
+      expect(screen.getByText("텍스트").className).toContain("rounded-md")
     })
 
-    it("desktop 사이즈일 때 text-sm이 적용된다", () => {
-      render(
-        <Label type="secondary" size="desktop">
-          텍스트
-        </Label>,
+    it("모바일 타이포그라피 클래스가 적용된다", () => {
+      render(<Label type="secondary">텍스트</Label>)
+      expect(screen.getByText("텍스트").className).toContain(
+        "text-caption-12sb",
       )
-      expect(screen.getByText("텍스트").className).toContain("text-sm")
     })
 
-    it("mobile 사이즈일 때 text-xs가 적용된다", () => {
-      render(
-        <Label type="secondary" size="mobile">
-          활동명
-        </Label>,
+    it("desktop 타이포그라피 breakpoint 클래스가 적용된다", () => {
+      render(<Label type="secondary">텍스트</Label>)
+      expect(screen.getByText("텍스트").className).toContain(
+        "lg:text-label-14sb",
       )
-      expect(screen.getByText("활동명").className).toContain("text-xs")
     })
   })
 
@@ -123,11 +115,11 @@ describe("Label", () => {
       expect(el.className).toContain("text-label-normal")
     })
 
-    it("라벨 박스에 고정 크기(w-20, h-[30px])가 적용된다", () => {
+    it("라벨 박스에 고정 크기(w-20, h-7.5)가 적용된다", () => {
       render(<Label type="default">기획</Label>)
       const el = screen.getByText("기획")
       expect(el.className).toContain("w-20")
-      expect(el.className).toContain("h-[30px]")
+      expect(el.className).toContain("h-7.5")
     })
 
     it("description에 label-alternative 색상이 적용된다", () => {
@@ -148,9 +140,11 @@ describe("Label", () => {
       expect(screen.getByText("기획").className).toContain("bg-fill-primary")
     })
 
-    it("size 기본값은 desktop이다 (secondary 기준 text-sm 적용)", () => {
+    it("type 기본값은 brand이다 (secondary 기준 text-caption-12sb 적용)", () => {
       render(<Label type="secondary">텍스트</Label>)
-      expect(screen.getByText("텍스트").className).toContain("text-sm")
+      expect(screen.getByText("텍스트").className).toContain(
+        "text-caption-12sb",
+      )
     })
   })
 

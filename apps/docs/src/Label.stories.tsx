@@ -8,16 +8,11 @@ const meta = {
   args: {
     children: "기획",
     type: "brand",
-    size: "desktop",
   },
   argTypes: {
     type: {
       control: { type: "select" },
       options: ["brand", "secondary", "default"],
-    },
-    size: {
-      control: { type: "select" },
-      options: ["desktop", "mobile"],
     },
     description: {
       control: { type: "text" },
@@ -33,73 +28,20 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Brand: Story = {
-  args: {
-    type: "brand",
-    children: "기획",
-  },
-}
-
-export const SecondaryDesktop: Story = {
-  args: {
-    type: "secondary",
-    size: "desktop",
-    children: "텍스트",
-  },
-}
-
-export const SecondaryMobile: Story = {
-  args: {
-    type: "secondary",
-    size: "mobile",
-    children: "활동명",
-  },
-}
-
-export const Default: Story = {
-  args: {
-    type: "default",
-    children: "기획",
-    description: "손아현, 손아현",
-  },
-}
-
-export const DefaultWithoutDescription: Story = {
-  args: {
-    type: "default",
-    children: "기획",
-  },
-}
+export const Default: Story = {}
 
 export const AllVariants: Story = {
   render: () => (
-    <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-6 items-start">
+      <div className="flex flex-col gap-1">
         <span className="text-xs text-gray-400">Brand</span>
-        <div className="flex items-center gap-3">
-          <Label type="brand">기획</Label>
-        </div>
+        <Label type="brand">기획</Label>
       </div>
-
-      <div className="flex flex-col gap-2">
-        <span className="text-xs text-gray-400">Secondary · Desktop</span>
-        <div className="flex items-center gap-3">
-          <Label type="secondary" size="desktop">
-            텍스트
-          </Label>
-        </div>
+      <div className="flex flex-col gap-1">
+        <span className="text-xs text-gray-400">Secondary (반응형)</span>
+        <Label type="secondary">텍스트</Label>
       </div>
-
-      <div className="flex flex-col gap-2">
-        <span className="text-xs text-gray-400">Secondary · Mobile</span>
-        <div className="flex items-center gap-3">
-          <Label type="secondary" size="mobile">
-            활동명
-          </Label>
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-1">
         <span className="text-xs text-gray-400">
           Default · with description
         </span>
@@ -107,8 +49,7 @@ export const AllVariants: Story = {
           기획
         </Label>
       </div>
-
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-1">
         <span className="text-xs text-gray-400">Default · 단독</span>
         <Label type="default">기획</Label>
       </div>

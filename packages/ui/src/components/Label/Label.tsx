@@ -1,12 +1,10 @@
 import type { HTMLAttributes, PropsWithChildren, ReactNode } from "react"
 
 type LabelType = "brand" | "secondary" | "default"
-type LabelSize = "desktop" | "mobile"
 
 export type LabelProps = PropsWithChildren<
   HTMLAttributes<HTMLSpanElement> & {
     type?: LabelType
-    size?: LabelSize
     /**
      * type="default"일 때 라벨 박스 옆에 함께 표시되는 보조 텍스트.
      * 다른 type에서는 무시된다.
@@ -20,22 +18,20 @@ function cn(...values: Array<string | undefined | false>) {
   return values.filter(Boolean).join(" ")
 }
 
-const TEXT_BASE = "font-semibold leading-5 tracking-[0.175px] whitespace-nowrap"
-const TEXT_CAPTION =
-  "font-semibold leading-[18px] tracking-[0.168px] whitespace-nowrap"
-
-function getChipClasses(type: LabelType, size: LabelSize) {
+function getChipClasses(type: LabelType) {
   const base = "inline-flex items-center justify-center rounded-[4px] px-4 py-1"
 
   switch (type) {
     case "brand":
-      // brand는 desktop/mobile 디자인이 동일
-      return cn(base, "bg-fill-primary text-brand-primary text-sm", TEXT_BASE)
+      return cn(
+        base,
+        "bg-fill-primary text-brand-primary text-label-14sb whitespace-nowrap lg:w-16 lg:h-8",
+      )
     case "secondary":
       return cn(
-        "inline-flex items-center justify-center rounded-[6px] px-3 py-1",
+        "inline-flex items-center justify-center rounded-md px-3 py-1",
         "bg-fill-netural text-label-alternative",
-        size === "mobile" ? `text-xs ${TEXT_CAPTION}` : `text-sm ${TEXT_BASE}`,
+        "text-caption-12sb lg:text-label-14sb whitespace-nowrap",
       )
     default:
       return undefined
@@ -46,31 +42,25 @@ export function Label({
   children,
   className,
   type = "brand",
-  size = "desktop",
   description,
   ...props
 }: LabelProps) {
   if (type === "default") {
     return (
       <span
-        className={cn("inline-flex items-center gap-2.5", className)}
+        className={cn("inline-flex self-start items-center gap-2.5", className)}
         {...props}
       >
         <span
           className={cn(
-            "inline-flex h-[30px] w-20 items-center justify-center rounded-[4px] bg-fill-netural",
-            "text-label-normal text-sm",
-            TEXT_BASE,
+            "inline-flex h-7.5 w-20 items-center justify-center rounded-sm bg-fill-netural",
+            "text-label-normal text-label-14sb whitespace-nowrap",
           )}
         >
           {children}
         </span>
         {description != null && (
-          <span
-            className={cn(
-              "text-label-alternative text-sm font-medium leading-5 tracking-[0.175px] whitespace-nowrap",
-            )}
-          >
+          <span className="text-label-alternative text-label-14m whitespace-nowrap">
             {description}
           </span>
         )}
@@ -79,7 +69,10 @@ export function Label({
   }
 
   return (
-    <span className={cn(getChipClasses(type, size), className)} {...props}>
+    <span
+      className={cn(getChipClasses(type), "self-start", className)}
+      {...props}
+    >
       {children}
     </span>
   )
