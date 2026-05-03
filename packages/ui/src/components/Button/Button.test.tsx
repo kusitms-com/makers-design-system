@@ -21,19 +21,45 @@ describe("Button", () => {
     expect(screen.getByRole("button")).toHaveAttribute("type", "button")
   })
 
-  it("desktop 사이즈 클래스가 적용된다", () => {
-    render(<Button size="desktop">텍스트</Button>)
-    expect(screen.getByRole("button").className).toContain("px-6")
+  it("justify-center가 적용된다", () => {
+    render(<Button>텍스트</Button>)
+    expect(screen.getByRole("button")).toHaveClass("justify-center")
   })
 
-  it("mobile 사이즈 클래스가 적용된다", () => {
-    render(<Button size="mobile">텍스트</Button>)
+  it("모바일 기본 패딩 클래스가 적용된다", () => {
+    render(<Button>텍스트</Button>)
     expect(screen.getByRole("button").className).toContain("px-3")
   })
 
-  it("아이콘이 항상 렌더링된다", () => {
+  it("desktop 패딩 breakpoint 클래스가 적용된다", () => {
     render(<Button>텍스트</Button>)
-    expect(screen.getByRole("button").querySelector("svg")).toBeInTheDocument()
+    expect(screen.getByRole("button").className).toContain("lg:px-6")
+  })
+
+  it("기본 상태에서 모바일 타이포그라피 클래스가 적용된다", () => {
+    render(<Button>텍스트</Button>)
+    expect(screen.getByRole("button").className).toContain("text-label-14m")
+  })
+
+  it("기본 상태에서 desktop 타이포그라피 breakpoint 클래스가 적용된다", () => {
+    render(<Button>텍스트</Button>)
+    expect(screen.getByRole("button").className).toContain("lg:text-body-18sb")
+  })
+
+  it("disabled 상태에서 모바일 타이포그라피 클래스가 적용된다", () => {
+    render(<Button disabled>텍스트</Button>)
+    expect(screen.getByRole("button").className).toContain("text-label-14r")
+  })
+
+  it("disabled 상태에서 desktop 타이포그라피 breakpoint 클래스가 적용된다", () => {
+    render(<Button disabled>텍스트</Button>)
+    expect(screen.getByRole("button").className).toContain("lg:text-body-18m")
+  })
+
+  it("아이콘이 렌더링된다", () => {
+    render(<Button>텍스트</Button>)
+    const svgs = screen.getByRole("button").querySelectorAll("svg")
+    expect(svgs.length).toBe(2)
   })
 
   it("showIcon=false일 때 아이콘이 렌더링되지 않는다", () => {
@@ -41,70 +67,6 @@ describe("Button", () => {
     expect(
       screen.getByRole("button").querySelector("svg"),
     ).not.toBeInTheDocument()
-  })
-
-  it("항상 justify-center가 적용된다", () => {
-    render(<Button>텍스트</Button>)
-    expect(screen.getByRole("button")).toHaveClass("justify-center")
-  })
-
-  it("showIcon=false일 때도 justify-center가 적용된다", () => {
-    render(<Button showIcon={false}>텍스트</Button>)
-    expect(screen.getByRole("button")).toHaveClass("justify-center")
-  })
-
-  it("desktop에서 text-body-18sb 클래스가 적용된다", () => {
-    render(<Button size="desktop">텍스트</Button>)
-    expect(screen.getByRole("button").className).toContain("text-body-18sb")
-  })
-
-  it("mobile에서 text-label-14m 클래스가 적용된다", () => {
-    render(<Button size="mobile">텍스트</Button>)
-    expect(screen.getByRole("button").className).toContain("text-label-14m")
-  })
-
-  it("desktop 기본 상태에서 text-body-18sb가 적용된다", () => {
-    render(<Button size="desktop">텍스트</Button>)
-    expect(screen.getByRole("button").className).toContain("text-body-18sb")
-  })
-
-  it("desktop disabled 상태에서 text-body-18m이 적용된다", () => {
-    render(
-      <Button size="desktop" disabled>
-        텍스트
-      </Button>,
-    )
-    expect(screen.getByRole("button").className).toContain("text-body-18m")
-  })
-
-  it("mobile 기본 상태에서 text-label-14m이 적용된다", () => {
-    render(<Button size="mobile">텍스트</Button>)
-    expect(screen.getByRole("button").className).toContain("text-label-14m")
-  })
-
-  it("mobile disabled 상태에서 text-label-14r이 적용된다", () => {
-    render(
-      <Button size="mobile" disabled>
-        텍스트
-      </Button>,
-    )
-    expect(screen.getByRole("button").className).toContain("text-label-14r")
-  })
-
-  it("desktop에서 24×24 viewBox 아이콘이 렌더링된다", () => {
-    render(<Button size="desktop">텍스트</Button>)
-    expect(screen.getByRole("button").querySelector("svg")).toHaveAttribute(
-      "viewBox",
-      "0 0 24 24",
-    )
-  })
-
-  it("mobile에서 20×20 viewBox 아이콘이 렌더링된다", () => {
-    render(<Button size="mobile">텍스트</Button>)
-    expect(screen.getByRole("button").querySelector("svg")).toHaveAttribute(
-      "viewBox",
-      "0 0 20 20",
-    )
   })
 
   it("disabled 상태에서는 hover 오버레이가 렌더링되지 않는다", () => {
@@ -146,24 +108,20 @@ describe("ScrollTopButton", () => {
     expect(screen.getByRole("button")).toHaveAttribute("type", "button")
   })
 
-  it("desktop 사이즈 클래스가 적용된다", () => {
-    render(<ScrollTopButton size="desktop" />)
-    expect(screen.getByRole("button").className).toContain("size-12")
-    expect(screen.getByRole("button")).toHaveClass(
-      "active:bg-interaction-pressed",
-    )
-    expect(screen.getByRole("button").querySelector("svg")).toHaveAttribute(
-      "viewBox",
-      "0 0 48 48",
-    )
+  it("모바일 기본 사이즈 클래스가 적용된다", () => {
+    render(<ScrollTopButton />)
+    expect(screen.getByRole("button").className).toContain("size-10")
   })
 
-  it("mobile 사이즈 클래스가 적용된다", () => {
-    render(<ScrollTopButton size="mobile" />)
-    expect(screen.getByRole("button").className).toContain("size-10")
-    expect(screen.getByRole("button").querySelector("svg")).toHaveAttribute(
-      "viewBox",
-      "0 0 40 40",
+  it("desktop 사이즈 breakpoint 클래스가 적용된다", () => {
+    render(<ScrollTopButton />)
+    expect(screen.getByRole("button").className).toContain("lg:size-12")
+  })
+
+  it("아이콘에 -rotate-90이 적용된다", () => {
+    render(<ScrollTopButton />)
+    expect(screen.getByRole("button").querySelector("svg")).toHaveClass(
+      "-rotate-90",
     )
   })
 

@@ -84,12 +84,12 @@ export function EmailInput({
         {...inputProps}
       />
       <Button
-        size={size}
         showIcon={false}
         disabled={!canSubmit}
         onClick={handleSubmit}
         className={cn(
           "shrink-0",
+          size === "desktop" ? "px-6 gap-2" : "px-3 gap-1",
           // EmailInput 컨텍스트의 폰트 스펙 override
           size === "desktop"
             ? "text-lg leading-[26px] tracking-[-0.09px]"
