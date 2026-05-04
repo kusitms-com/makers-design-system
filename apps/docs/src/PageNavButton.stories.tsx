@@ -19,15 +19,6 @@ const meta = {
       options: ["next", "prev"],
     },
   },
-  parameters: {
-    backgrounds: {
-      default: "canvas-dark",
-      values: [
-        { name: "canvas-dark", value: "#0F1115" },
-        { name: "canvas-light", value: "#F7F7F8" },
-      ],
-    },
-  },
 } satisfies Meta<typeof PageNavButton>
 
 export default meta
@@ -39,10 +30,5 @@ export const Default: Story = {}
 export const Dark: Story = {
   args: {
     color: "dark",
-  },
-  parameters: {
-    backgrounds: {
-      default: "canvas-light",
-    },
   },
 }
