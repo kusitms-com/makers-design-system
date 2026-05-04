@@ -1,4 +1,4 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react"
+import { cleanup, render, screen } from "@testing-library/react"
 import { afterEach, describe, expect, it } from "vitest"
 
 import { Dropdown } from "./Dropdown"
@@ -36,8 +36,7 @@ describe("Dropdown", () => {
 
     it("chevron SVG가 렌더링된다", () => {
       render(<Dropdown options={OPTIONS} />)
-      const trigger = getTrigger()
-      expect(trigger.querySelector("svg")).toBeInTheDocument()
+      expect(getTrigger().querySelector("svg")).toBeInTheDocument()
     })
 
     it("aria-label이 placeholder로 설정된다", () => {
@@ -58,40 +57,45 @@ describe("Dropdown", () => {
     })
   })
 
-  describe("size 분기", () => {
-    it("기본 size는 desktop이다", () => {
+  describe("반응형 클래스", () => {
+    it("모바일 기본 패딩 클래스가 적용된다", () => {
       render(<Dropdown options={OPTIONS} />)
       const trigger = getTrigger()
-      expect(trigger.className).toContain("py-[10px]")
-      expect(trigger.className).toContain("pl-5")
-    })
-
-    it("size=desktop일 때 desktop 패딩이 적용된다", () => {
-      render(<Dropdown options={OPTIONS} size="desktop" />)
-      const trigger = getTrigger()
-      expect(trigger.className).toContain("py-[10px]")
-      expect(trigger.className).toContain("pl-5")
-      expect(trigger.className).toContain("pr-4")
-    })
-
-    it("size=mobile일 때 mobile 패딩이 적용된다", () => {
-      render(<Dropdown options={OPTIONS} size="mobile" />)
-      const trigger = getTrigger()
-      expect(trigger.className).toContain("py-[6px]")
+      expect(trigger.className).toContain("py-1.5")
       expect(trigger.className).toContain("pl-3")
       expect(trigger.className).toContain("pr-2")
     })
 
-    it("size=desktop일 때 chevron이 size-5이다", () => {
-      render(<Dropdown options={OPTIONS} size="desktop" />)
-      const svg = getTrigger().querySelector("svg")
-      expect(svg?.getAttribute("class")).toContain("size-5")
+    it("desktop 패딩 breakpoint 클래스가 적용된다", () => {
+      render(<Dropdown options={OPTIONS} />)
+      const trigger = getTrigger()
+      expect(trigger.className).toContain("lg:py-2.5")
+      expect(trigger.className).toContain("lg:pl-5")
+      expect(trigger.className).toContain("lg:pr-4")
     })
 
-    it("size=mobile일 때 chevron이 size-4이다", () => {
-      render(<Dropdown options={OPTIONS} size="mobile" />)
-      const svg = getTrigger().querySelector("svg")
-      expect(svg?.getAttribute("class")).toContain("size-4")
+    it("모바일 타이포그라피 클래스가 적용된다", () => {
+      render(<Dropdown options={OPTIONS} />)
+      expect(getTrigger().className).toContain("text-label-14sb")
+    })
+
+    it("desktop 타이포그라피 breakpoint 클래스가 적용된다", () => {
+      render(<Dropdown options={OPTIONS} />)
+      expect(getTrigger().className).toContain("lg:text-body-18sb")
+    })
+
+    it("모바일 chevron 크기 클래스가 적용된다", () => {
+      render(<Dropdown options={OPTIONS} />)
+      expect(
+        getTrigger().querySelector("svg")?.getAttribute("class"),
+      ).toContain("size-4")
+    })
+
+    it("desktop chevron 크기 breakpoint 클래스가 적용된다", () => {
+      render(<Dropdown options={OPTIONS} />)
+      expect(
+        getTrigger().querySelector("svg")?.getAttribute("class"),
+      ).toContain("lg:size-5")
     })
   })
 
@@ -107,7 +111,7 @@ describe("Dropdown", () => {
       render(<Dropdown options={OPTIONS} />)
       const trigger = getTrigger()
       expect(trigger.className).toContain("border")
-      expect(trigger.className).toContain("rounded-[8px]")
+      expect(trigger.className).toContain("rounded-md")
     })
 
     it("trigger에 bg-fill-normal 클래스가 적용된다", () => {
