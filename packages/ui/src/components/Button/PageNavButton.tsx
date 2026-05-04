@@ -38,7 +38,7 @@ export function PageNavButton({
       {...props}
     >
       <span className="pointer-events-none absolute inset-0 rounded-full bg-transparent transition-colors group-active:bg-interaction-pressed" />
-      <RightSIcon className="relative z-10 size-7 lg:size-10" />
+      <RightSIcon className="relative z-10 size-7 lg:size-10 translate-x-px" />
     </button>
   )
 }
