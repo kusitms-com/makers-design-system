@@ -5,10 +5,6 @@ type LabelType = "brand" | "secondary" | "default"
 export type LabelProps = PropsWithChildren<
   HTMLAttributes<HTMLSpanElement> & {
     type?: LabelType
-    /**
-     * type="default"일 때 라벨 박스 옆에 함께 표시되는 보조 텍스트.
-     * 다른 type에서는 무시된다.
-     */
     description?: ReactNode
     className?: string
   }

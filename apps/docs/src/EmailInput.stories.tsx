@@ -1,5 +1,6 @@
 import { EmailInput } from "@kusitms.com/ui"
 import type { Meta, StoryObj } from "@storybook/react-vite"
+import { useState } from "react"
 
 const meta = {
   title: "EmailInput/Default",
@@ -8,18 +9,13 @@ const meta = {
   args: {
     value: "",
     onChange: () => {},
-    size: "desktop",
     buttonLabel: "알림 받기",
     placeholder: "텍스트를 입력하세요",
-    isSubmitEnabled: undefined,
   },
   argTypes: {
-    size: {
-      control: { type: "select" },
-      options: ["desktop", "mobile"],
-    },
+    value: { table: { disable: true } },
+    onChange: { table: { disable: true } },
     disabled: { control: { type: "boolean" } },
-    isSubmitEnabled: { control: { type: "boolean" } },
     buttonLabel: { control: { type: "text" } },
     placeholder: { control: { type: "text" } },
   },
@@ -29,38 +25,16 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const DesktopDefault: Story = {
-  args: {
-    size: "desktop",
-    value: "",
-  },
-}
-
-export const DesktopTyping: Story = {
-  args: {
-    size: "desktop",
-    value: "hello@example.com",
-  },
-}
-
-export const MobileDefault: Story = {
-  args: {
-    size: "mobile",
-    value: "",
-  },
-}
-
-export const MobileTyping: Story = {
-  args: {
-    size: "mobile",
-    value: "hello@example.com",
-  },
-}
-
-export const Disabled: Story = {
-  args: {
-    size: "desktop",
-    value: "hello@example.com",
-    disabled: true,
+export const Default: Story = {
+  render: (args) => {
+    const [value, setValue] = useState("")
+    return (
+      <EmailInput
+        {...args}
+        value={value}
+        onChange={setValue}
+        onSubmit={(v) => alert(`제출: ${v}`)}
+      />
+    )
   },
 }

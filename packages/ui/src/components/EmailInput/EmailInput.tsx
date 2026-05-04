@@ -6,8 +6,6 @@ import type {
 
 import { Button } from "../Button/Button"
 
-type EmailInputSize = "desktop" | "mobile"
-
 export type EmailInputProps = Omit<
   InputHTMLAttributes<HTMLInputElement>,
   "value" | "onChange" | "size" | "type"
@@ -15,8 +13,7 @@ export type EmailInputProps = Omit<
   value: string
   onChange: (value: string) => void
   onSubmit?: (value: string) => void
-  isSubmitEnabled?: boolean
-  size?: EmailInputSize
+  validate?: (value: string) => boolean
   buttonLabel?: string
   buttonProps?: Omit<
     ButtonHTMLAttributes<HTMLButtonElement>,
@@ -33,8 +30,7 @@ export function EmailInput({
   value,
   onChange,
   onSubmit,
-  isSubmitEnabled,
-  size = "desktop",
+  validate,
   buttonLabel = "알림 받기",
   buttonProps,
   disabled,
@@ -42,7 +38,7 @@ export function EmailInput({
   placeholder = "텍스트를 입력하세요",
   ...inputProps
 }: EmailInputProps) {
-  const canSubmit = !disabled && (isSubmitEnabled ?? value.length > 0)
+  const canSubmit = !disabled && (validate ? validate(value) : value.length > 0)
 
   const handleSubmit = () => {
     if (!canSubmit) return
@@ -60,9 +56,8 @@ export function EmailInput({
     <div
       className={cn(
         "flex items-center rounded-full bg-fill-netural",
-        size === "desktop"
-          ? "w-[652px] gap-2 py-3 pl-7 pr-5"
-          : "w-[288px] gap-1 py-2 pl-5 pr-2.5",
+        "w-[288px] gap-1 py-2 pl-5 pr-2.5",
+        "lg:w-[652px] lg:gap-2 lg:py-3 lg:pl-7 lg:pr-5",
         className,
       )}
     >
@@ -77,9 +72,7 @@ export function EmailInput({
           "min-w-0 flex-1 bg-transparent outline-none",
           "text-label-strong placeholder:text-label-alternative",
           "disabled:cursor-not-allowed",
-          size === "desktop"
-            ? "text-xl font-medium leading-8 tracking-[-0.16px]"
-            : "text-base font-medium leading-6 tracking-[-0.04px]",
+          "text-body-16m lg:text-headline-20m",
         )}
         {...inputProps}
       />
@@ -87,21 +80,7 @@ export function EmailInput({
         showIcon={false}
         disabled={!canSubmit}
         onClick={handleSubmit}
-        className={cn(
-          "shrink-0",
-          size === "desktop" ? "px-6 gap-2" : "px-3 gap-1",
-          // EmailInput 컨텍스트의 폰트 스펙 override
-          size === "desktop"
-            ? "text-lg leading-[26px] tracking-[-0.09px]"
-            : "text-sm leading-5 tracking-[0.175px]",
-          canSubmit
-            ? size === "desktop"
-              ? "font-semibold"
-              : "font-medium"
-            : size === "desktop"
-              ? "font-medium"
-              : "font-normal",
-        )}
+        className="shrink-0"
         {...buttonProps}
       >
         {buttonLabel}
