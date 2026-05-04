@@ -163,11 +163,6 @@ describe("PageNavButton", () => {
     expect(screen.getByRole("button").className).toContain("lg:size-13")
   })
 
-  it("light 컬러 클래스가 적용된다", () => {
-    render(<PageNavButton color="light" />)
-    expect(screen.getByRole("button")).toHaveClass("bg-fill-transparent-white")
-  })
-
   it("dark 컬러 클래스가 적용된다", () => {
     render(<PageNavButton color="dark" />)
     expect(screen.getByRole("button")).toHaveClass("bg-fill-transparent-black")

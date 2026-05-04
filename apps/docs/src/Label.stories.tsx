@@ -38,7 +38,7 @@ export const AllVariants: Story = {
         <Label type="brand">기획</Label>
       </div>
       <div className="flex flex-col gap-1">
-        <span className="text-xs text-gray-400">Secondary (반응형)</span>
+        <span className="text-xs text-gray-400">Secondary</span>
         <Label type="secondary">텍스트</Label>
       </div>
       <div className="flex flex-col gap-1">

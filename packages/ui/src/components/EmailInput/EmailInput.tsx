@@ -35,7 +35,7 @@ export function EmailInput({
   buttonProps,
   disabled,
   className,
-  placeholder = "텍스트를 입력하세요",
+  placeholder = "이메일을 입력하세요",
   ...inputProps
 }: EmailInputProps) {
   const canSubmit = !disabled && (validate ? validate(value) : value.length > 0)
@@ -56,8 +56,8 @@ export function EmailInput({
     <div
       className={cn(
         "flex items-center rounded-full bg-fill-netural",
-        "w-[288px] gap-1 py-2 pl-5 pr-2.5",
-        "lg:w-[652px] lg:gap-2 lg:py-3 lg:pl-7 lg:pr-5",
+        "w-full gap-1 py-2 pl-5 pr-2.5 min-w-72",
+        "lg:w-163 lg:gap-2 lg:py-3 lg:pl-7 lg:pr-5",
         className,
       )}
     >

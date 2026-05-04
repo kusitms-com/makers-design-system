@@ -96,6 +96,7 @@ function AccordionItem({
             </span>
           </span>
           <ToggleOpenSIcon
+            aria-hidden
             className={cn(
               "shrink-0 text-label-normal transition-transform duration-200",
               "size-5 lg:size-6",

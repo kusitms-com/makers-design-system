@@ -22,7 +22,7 @@ export function ScrollTopButton({ className, ...props }: ScrollTopButtonProps) {
       )}
       {...props}
     >
-      <ArrowRightIcon className="-rotate-90 size-5 lg:size-6" />
+      <ArrowRightIcon aria-hidden className="-rotate-90 size-5 lg:size-6" />
     </button>
   )
 }

@@ -88,14 +88,13 @@ describe("Label", () => {
     })
 
     it("description이 빈 문자열이면 보조 텍스트가 렌더링되지 않는다", () => {
-      render(
+      const { container } = render(
         <Label type="default" description="">
           기획
         </Label>,
       )
-      // 빈 문자열은 falsy이지만 description != null이라 렌더됨
-      // 의도적으로 비어있는 경우도 표시하려면 빈 span이 생성되는지 확인
       expect(screen.getByText("기획")).toBeInTheDocument()
+      expect(container.querySelectorAll("span")).toHaveLength(2)
     })
 
     it("description으로 ReactNode(JSX)를 전달할 수 있다", () => {
@@ -138,13 +137,6 @@ describe("Label", () => {
     it("type 기본값은 brand이다", () => {
       render(<Label>기획</Label>)
       expect(screen.getByText("기획").className).toContain("bg-fill-primary")
-    })
-
-    it("type 기본값은 brand이다 (secondary 기준 text-caption-12sb 적용)", () => {
-      render(<Label type="secondary">텍스트</Label>)
-      expect(screen.getByText("텍스트").className).toContain(
-        "text-caption-12sb",
-      )
     })
   })
 

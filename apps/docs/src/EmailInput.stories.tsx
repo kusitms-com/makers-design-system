@@ -26,15 +26,20 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
+  parameters: {
+    layout: "padded",
+  },
   render: (args) => {
     const [value, setValue] = useState("")
     return (
-      <EmailInput
-        {...args}
-        value={value}
-        onChange={setValue}
-        onSubmit={(v) => alert(`제출: ${v}`)}
-      />
+      <div className="flex min-h-screen items-center justify-center">
+        <EmailInput
+          {...args}
+          value={value}
+          onChange={setValue}
+          onSubmit={(v) => alert(`제출: ${v}`)}
+        />
+      </div>
     )
   },
 }

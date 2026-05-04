@@ -14,13 +14,11 @@ function cn(...values: Array<string | undefined | false>) {
   return values.filter(Boolean).join(" ")
 }
 
-function getChipClasses(type: LabelType) {
-  const base = "inline-flex items-center justify-center rounded-[4px] px-4 py-1"
-
+function getChipClasses(type: "brand" | "secondary") {
   switch (type) {
     case "brand":
       return cn(
-        base,
+        "inline-flex items-center justify-center rounded-[4px] px-4 py-1",
         "bg-fill-primary text-brand-primary text-label-14sb whitespace-nowrap lg:w-16 lg:h-8",
       )
     case "secondary":
@@ -29,8 +27,6 @@ function getChipClasses(type: LabelType) {
         "bg-fill-netural text-label-alternative",
         "text-caption-12sb lg:text-label-14sb whitespace-nowrap",
       )
-    default:
-      return undefined
   }
 }
 
@@ -55,7 +51,7 @@ export function Label({
         >
           {children}
         </span>
-        {description != null && (
+        {description != null && description !== "" && (
           <span className="text-label-alternative text-label-14m whitespace-nowrap">
             {description}
           </span>

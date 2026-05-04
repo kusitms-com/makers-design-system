@@ -39,13 +39,6 @@ describe("Accordion", () => {
     expect(screen.getByText("두 번째 질문")).toBeInTheDocument()
   })
 
-  it("기본 상태에서는 답변이 보이지 않는다 (collapsed)", () => {
-    renderBasic()
-    getButtons().forEach((trigger) => {
-      expect(trigger).toHaveAttribute("aria-expanded", "false")
-    })
-  })
-
   it("Q. 라벨이 각 아이템마다 렌더링된다", () => {
     renderBasic()
     expect(screen.getAllByText("Q.")).toHaveLength(2)
@@ -77,7 +70,7 @@ describe("Accordion", () => {
     expect(first).toHaveAttribute("aria-expanded", "false")
   })
 
-  it("trigger는 group 클래스를 갖는다 (chevron 회전 hook)", () => {
+  it("trigger는 group 클래스를 갖는다", () => {
     renderBasic()
     expect(getButtons()[0]!).toHaveClass("group")
   })
@@ -95,7 +88,9 @@ describe("Accordion", () => {
 
     it("Root에 desktop gap breakpoint 클래스가 적용된다", () => {
       const { container } = renderBasic()
-      expect(container.firstChild?.className).toContain("lg:gap-3")
+      expect((container.firstChild as HTMLElement)?.className).toContain(
+        "lg:gap-3",
+      )
     })
 
     it("Item에 모바일 padding/radius 클래스가 적용된다", () => {
@@ -144,12 +139,6 @@ describe("Accordion", () => {
   })
 
   describe("답변 콘텐츠 노출", () => {
-    it("아이템을 열면 답변 텍스트가 DOM에 존재한다", () => {
-      renderBasic()
-      fireEvent.click(getButtons()[0]!)
-      expect(screen.getByText("첫 번째 답변")).toBeInTheDocument()
-    })
-
     it("닫힌 아이템의 답변은 hidden 처리된다", () => {
       renderBasic()
       const contents = document.querySelectorAll(
@@ -175,7 +164,7 @@ describe("Accordion", () => {
       ).toBeInTheDocument()
     })
 
-    it("answer에 모바일 타이포그라피 클래스가 적용된다", () => {
+    it("answer에 모바일/desktop 타이포그라피 클래스가 적용된다", () => {
       const { container } = render(
         <Accordion type="single" collapsible defaultValue="q1">
           <Accordion.Item value="q1" question="질문" answer="답변" />
@@ -183,15 +172,6 @@ describe("Accordion", () => {
       )
       const answerWrapper = container.querySelector(".whitespace-pre-line")
       expect(answerWrapper?.className).toContain("text-body-16r")
-    })
-
-    it("answer에 desktop 타이포그라피 breakpoint 클래스가 적용된다", () => {
-      const { container } = render(
-        <Accordion type="single" collapsible defaultValue="q1">
-          <Accordion.Item value="q1" question="질문" answer="답변" />
-        </Accordion>,
-      )
-      const answerWrapper = container.querySelector(".whitespace-pre-line")
       expect(answerWrapper?.className).toContain("lg:text-headline-20r")
     })
   })

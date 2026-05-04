@@ -8,6 +8,12 @@ afterEach(() => {
   cleanup()
 })
 
+const PLACEHOLDER = "이메일을 입력하세요"
+
+function getInput() {
+  return screen.getByPlaceholderText(PLACEHOLDER)
+}
+
 function ControlledEmailInput(
   props: Partial<React.ComponentProps<typeof EmailInput>>,
 ) {
@@ -16,17 +22,14 @@ function ControlledEmailInput(
 }
 
 describe("EmailInput", () => {
-  it("placeholder 기본값이 '텍스트를 입력하세요'이다", () => {
+  it("placeholder 기본값이 '이메일을 입력하세요'이다", () => {
     render(<EmailInput value="" onChange={() => {}} />)
-    expect(
-      screen.getByPlaceholderText("텍스트를 입력하세요"),
-    ).toBeInTheDocument()
+    expect(getInput()).toBeInTheDocument()
   })
 
   it("type=email인 input이 렌더링된다", () => {
     render(<EmailInput value="" onChange={() => {}} />)
-    const input = screen.getByPlaceholderText("텍스트를 입력하세요")
-    expect(input).toHaveAttribute("type", "email")
+    expect(getInput()).toHaveAttribute("type", "email")
   })
 
   it("buttonLabel 기본값이 '알림 받기'이다", () => {
@@ -39,9 +42,7 @@ describe("EmailInput", () => {
   it("값을 입력하면 onChange가 호출된다", () => {
     const onChange = vi.fn()
     render(<EmailInput value="" onChange={onChange} />)
-    fireEvent.change(screen.getByPlaceholderText("텍스트를 입력하세요"), {
-      target: { value: "a@b.com" },
-    })
+    fireEvent.change(getInput(), { target: { value: "a@b.com" } })
     expect(onChange).toHaveBeenCalledWith("a@b.com")
   })
 
@@ -74,6 +75,30 @@ describe("EmailInput", () => {
     })
   })
 
+  describe("validate prop", () => {
+    it("validate가 false를 반환하면 value가 있어도 버튼이 비활성화된다", () => {
+      render(
+        <EmailInput
+          value="invalid"
+          onChange={() => {}}
+          validate={(v) => v.includes("@")}
+        />,
+      )
+      expect(screen.getByRole("button")).toBeDisabled()
+    })
+
+    it("validate가 true를 반환하면 버튼이 활성화된다", () => {
+      render(
+        <EmailInput
+          value="a@b.com"
+          onChange={() => {}}
+          validate={(v) => v.includes("@")}
+        />,
+      )
+      expect(screen.getByRole("button")).not.toBeDisabled()
+    })
+  })
+
   describe("onSubmit 호출", () => {
     it("버튼 클릭 시 호출된다", () => {
       const onSubmit = vi.fn()
@@ -89,18 +114,14 @@ describe("EmailInput", () => {
       render(
         <EmailInput value="a@b.com" onChange={() => {}} onSubmit={onSubmit} />,
       )
-      fireEvent.keyDown(screen.getByPlaceholderText("텍스트를 입력하세요"), {
-        key: "Enter",
-      })
+      fireEvent.keyDown(getInput(), { key: "Enter" })
       expect(onSubmit).toHaveBeenCalledWith("a@b.com")
     })
 
     it("value가 비어있을 때 Enter를 눌러도 호출되지 않는다", () => {
       const onSubmit = vi.fn()
       render(<EmailInput value="" onChange={() => {}} onSubmit={onSubmit} />)
-      fireEvent.keyDown(screen.getByPlaceholderText("텍스트를 입력하세요"), {
-        key: "Enter",
-      })
+      fireEvent.keyDown(getInput(), { key: "Enter" })
       expect(onSubmit).not.toHaveBeenCalled()
     })
 
@@ -120,28 +141,18 @@ describe("EmailInput", () => {
   })
 
   describe("반응형 클래스", () => {
-    it("모바일 기본 컨테이너 너비 클래스가 적용된다", () => {
+    it("모바일/desktop 컨테이너 너비 클래스가 적용된다", () => {
       const { container } = render(<EmailInput value="" onChange={() => {}} />)
-      expect(container.firstChild).toHaveClass("w-[288px]")
+      expect(container.firstChild).toHaveClass("w-full")
+      expect((container.firstChild as HTMLElement)?.className).toContain(
+        "lg:w-163",
+      )
     })
 
-    it("desktop 컨테이너 너비 breakpoint 클래스가 적용된다", () => {
-      const { container } = render(<EmailInput value="" onChange={() => {}} />)
-      expect(container.firstChild?.className).toContain("lg:w-[652px]")
-    })
-
-    it("input에 모바일 타이포그라피 클래스가 적용된다", () => {
+    it("input에 모바일/desktop 타이포그라피 클래스가 적용된다", () => {
       render(<EmailInput value="" onChange={() => {}} />)
-      expect(
-        screen.getByPlaceholderText("텍스트를 입력하세요").className,
-      ).toContain("text-body-16m")
-    })
-
-    it("input에 desktop 타이포그라피 breakpoint 클래스가 적용된다", () => {
-      render(<EmailInput value="" onChange={() => {}} />)
-      expect(
-        screen.getByPlaceholderText("텍스트를 입력하세요").className,
-      ).toContain("lg:text-headline-20m")
+      expect(getInput().className).toContain("text-body-16m")
+      expect(getInput().className).toContain("lg:text-headline-20m")
     })
 
     it("활성 상태에서 버튼에 text-label-14m 클래스가 적용된다", () => {
@@ -163,9 +174,8 @@ describe("EmailInput", () => {
   describe("controlled 동작", () => {
     it("외부 state로 값이 동기화된다", () => {
       render(<ControlledEmailInput />)
-      const input = screen.getByPlaceholderText("텍스트를 입력하세요")
-      fireEvent.change(input, { target: { value: "hello@x.com" } })
-      expect(input).toHaveValue("hello@x.com")
+      fireEvent.change(getInput(), { target: { value: "hello@x.com" } })
+      expect(getInput()).toHaveValue("hello@x.com")
     })
   })
 
@@ -200,9 +210,8 @@ describe("EmailInput", () => {
           autoComplete="email"
         />,
       )
-      const input = screen.getByPlaceholderText("텍스트를 입력하세요")
-      expect(input).toHaveAttribute("name", "email")
-      expect(input).toHaveAttribute("autocomplete", "email")
+      expect(getInput()).toHaveAttribute("name", "email")
+      expect(getInput()).toHaveAttribute("autocomplete", "email")
     })
   })
 })

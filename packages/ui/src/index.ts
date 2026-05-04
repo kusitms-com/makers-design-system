@@ -1,7 +1,6 @@
 export * from "./components/Accordion/Accordion"
 export * from "./components/BottomGradient"
 export * from "./components/Button/Button"
-export * from "./components/Button/Button"
 export * from "./components/Button/NavigationButton"
 export * from "./components/Button/PageNavButton"
 export * from "./components/Button/ScrollTopButton"

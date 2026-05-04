@@ -58,51 +58,28 @@ describe("Dropdown", () => {
   })
 
   describe("반응형 클래스", () => {
-    it("모바일 기본 패딩 클래스가 적용된다", () => {
+    it("모바일/desktop 패딩 클래스가 적용된다", () => {
       render(<Dropdown options={OPTIONS} />)
       const trigger = getTrigger()
       expect(trigger.className).toContain("py-1.5")
       expect(trigger.className).toContain("pl-3")
       expect(trigger.className).toContain("pr-2")
-    })
-
-    it("desktop 패딩 breakpoint 클래스가 적용된다", () => {
-      render(<Dropdown options={OPTIONS} />)
-      const trigger = getTrigger()
       expect(trigger.className).toContain("lg:py-2.5")
       expect(trigger.className).toContain("lg:pl-5")
       expect(trigger.className).toContain("lg:pr-4")
     })
 
-    it("모바일 타이포그라피 클래스가 적용된다", () => {
+    it("모바일/desktop 타이포그라피 클래스가 적용된다", () => {
       render(<Dropdown options={OPTIONS} />)
       expect(getTrigger().className).toContain("text-label-14sb")
-    })
-
-    it("desktop 타이포그라피 breakpoint 클래스가 적용된다", () => {
-      render(<Dropdown options={OPTIONS} />)
       expect(getTrigger().className).toContain("lg:text-body-18sb")
     })
 
-    it("모바일 chevron 크기 클래스가 적용된다", () => {
+    it("모바일/desktop chevron 크기 클래스가 적용된다", () => {
       render(<Dropdown options={OPTIONS} />)
-      expect(
-        getTrigger().querySelector("svg")?.getAttribute("class"),
-      ).toContain("size-4")
-    })
-
-    it("desktop chevron 크기 breakpoint 클래스가 적용된다", () => {
-      render(<Dropdown options={OPTIONS} />)
-      expect(
-        getTrigger().querySelector("svg")?.getAttribute("class"),
-      ).toContain("lg:size-5")
-    })
-  })
-
-  describe("className prop", () => {
-    it("trigger에 커스텀 className이 적용된다", () => {
-      render(<Dropdown options={OPTIONS} className="custom-trigger" />)
-      expect(getTrigger()).toHaveClass("custom-trigger")
+      const svgClass = getTrigger().querySelector("svg")?.getAttribute("class")
+      expect(svgClass).toContain("size-4")
+      expect(svgClass).toContain("lg:size-5")
     })
   })
 
@@ -119,15 +96,22 @@ describe("Dropdown", () => {
       expect(getTrigger().className).toContain("bg-fill-normal")
     })
 
-    it("trigger에 group 클래스가 적용된다 (chevron 회전 hook)", () => {
+    it("trigger에 group 클래스가 적용된다", () => {
       render(<Dropdown options={OPTIONS} />)
       expect(getTrigger()).toHaveClass("group")
     })
 
     it("chevron SVG에 aria-hidden이 설정된다", () => {
       render(<Dropdown options={OPTIONS} />)
-      const svg = getTrigger().querySelector("svg")
-      expect(svg).toHaveAttribute("aria-hidden", "true")
+      expect(getTrigger().querySelector("svg")).toHaveAttribute(
+        "aria-hidden",
+        "true",
+      )
+    })
+
+    it("trigger에 커스텀 className이 적용된다", () => {
+      render(<Dropdown options={OPTIONS} className="custom-trigger" />)
+      expect(getTrigger()).toHaveClass("custom-trigger")
     })
   })
 
