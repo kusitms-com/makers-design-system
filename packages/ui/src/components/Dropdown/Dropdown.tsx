@@ -84,7 +84,7 @@ export function Dropdown({
                   "flex cursor-pointer items-center rounded-md outline-none select-none",
                   "text-label-alternative text-label-14m lg:text-body-18m",
                   "p-2 lg:px-3 lg:py-2",
-                  "data-[state=checked]:text-brand-primary data-[state=checked]:text-body-18sb",
+                  "data-[state=checked]:text-brand-primary data-[state=checked]:text-body-14sb lg:data-[state=checked]:text-body-18sb",
                   "data-[highlighted]:bg-fill-netural data-[highlighted]:outline-none",
                 )}
               >
