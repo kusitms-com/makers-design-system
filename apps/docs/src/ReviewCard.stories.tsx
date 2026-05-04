@@ -9,7 +9,7 @@ const meta = {
   },
   component: ReviewCard,
   tags: ["autodocs"],
-  title: "Components/Card/ReviewCard",
+  title: "Card/ReviewCard",
 } satisfies Meta<typeof ReviewCard>
 
 export default meta

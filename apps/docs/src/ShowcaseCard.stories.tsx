@@ -13,7 +13,7 @@ const meta = {
   },
   component: ShowcaseCard,
   tags: ["autodocs"],
-  title: "Components/Card/ShowcaseCard",
+  title: "Card/ShowcaseCard",
 } satisfies Meta<typeof ShowcaseCard>
 
 export default meta
