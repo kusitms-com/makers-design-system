@@ -11,7 +11,7 @@ export function ReviewCard({ name, part, body }: ReviewCardProps) {
         {name}
       </p>
       <p className="text-label-14sb text-brand-primary pb-3">{part}</p>
-      <p className="text-label-14m text-label-neutral">{body}</p>
+      <p className="text-label-14m text-label-netural">{body}</p>
     </div>
   )
 }

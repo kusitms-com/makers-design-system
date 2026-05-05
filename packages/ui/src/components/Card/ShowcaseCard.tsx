@@ -38,7 +38,7 @@ export function ShowcaseCard({
             </div>
           )}
         </div>
-        <p className="text-label-neutral text-body-16b mb-0.5 lg:text-headline-20b">
+        <p className="text-label-netural text-body-16b mb-0.5 lg:text-headline-20b">
           {name}
         </p>
         <div className="h-10 lg:h-13 overflow-hidden shrink-0">
