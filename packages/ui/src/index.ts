@@ -1,3 +1,4 @@
+export * from "./components/Blog/Blog"
 export * from "./components/BottomGradient"
 export * from "./components/Button"
 export * from "./components/Card/RecruitmentCard"
