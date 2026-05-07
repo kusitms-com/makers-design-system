@@ -39,6 +39,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: chore/sync-tokens
+          base: main
           title: "chore: sync design tokens from Figma"
           body: |
             Tokens Studio에서 자동으로 동기화된 디자인 토큰입니다.
