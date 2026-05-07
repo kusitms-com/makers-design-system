@@ -5,8 +5,14 @@ import {
   LinkIcon,
 } from "@kusitms.com/icons"
 import { useEffect } from "react"
+import { BottomGradient } from "../BottomGradient"
 import { NavigationButton } from "../Button/NavigationButton"
+import { PageNavButton } from "../Button/PageNavButton"
 import { Label } from "../Label/Label"
+
+function cn(...values: Array<string | undefined | false>) {
+  return values.filter(Boolean).join(" ")
+}
 
 export type ModalTeamRole = {
   role: string
@@ -24,6 +30,8 @@ export type ModalLink = {
 export type ModalProps = {
   isOpen: boolean
   onClose: () => void
+  onPrev?: () => void
+  onNext?: () => void
   name: string
   th: number
   type: "WEB" | "APP"
@@ -46,6 +54,8 @@ function ModalLinkIcon({ type }: { type: ModalLinkType }) {
 export function Modal({
   isOpen,
   onClose,
+  onPrev,
+  onNext,
   name,
   th,
   type,
@@ -82,95 +92,147 @@ export function Modal({
       aria-label={name}
     >
       <div
-        className="fixed inset-0 bg-effect-dimmer/52"
+        className="fixed inset-0 bg-effect-dimmer"
         onClick={onClose}
         aria-hidden="true"
       />
       <div className="flex min-h-full items-start lg:items-center justify-center">
-        <div className="relative flex w-83.75 lg:w-156 max-h-144 lg:max-h-231.5 flex-col rounded-2xl bg-fill-normal overflow-hidden">
-          <div className="shrink-0 border-b-2 border-line-alternative p-4 lg:pl-7 lg:pr-8 lg:py-6">
-            <button
-              type="button"
-              aria-label="닫기"
-              onClick={onClose}
-              className="flex items-center justify-center text-label-alternative cursor-pointer"
-            >
-              <CancelMIcon aria-hidden className="size-5 lg:size-8" />
-            </button>
-          </div>
-          <div className="flex-1 min-h-0 overflow-y-auto px-5 py-4 lg:px-8 lg:py-5">
-            <div className="flex items-center gap-3 flex-wrap">
-              <p className="text-headline-20b lg:text-pc-30b text-label-normal">
-                {name}
-              </p>
-              <div className="flex flex-row gap-1.5 lg:gap-2">
-                <Label type="brand">{th}기</Label>
-                <Label type="brand">{type}</Label>
-              </div>
-            </div>
-            <div className="pt-4 lg:pt-5 pb-6 lg:pb-5">
-              <div className="w-full overflow-hidden rounded-xl border border-line-neutral bg-fill-alternative aspect-video">
-                <img
-                  src={imageUrl}
-                  alt={name}
-                  className="block h-full w-full object-cover"
+        <div className="flex flex-col items-center">
+          <div className="flex items-center">
+            {(onPrev || onNext) && (
+              <div className="hidden lg:flex mr-5">
+                <PageNavButton
+                  direction="prev"
+                  color="light"
+                  onClick={onPrev}
+                  className={!onPrev ? "invisible pointer-events-none" : ""}
                 />
               </div>
-            </div>
-            <div className="flex flex-col gap-5 lg:gap-8">
-              <div className="flex flex-col gap-1 lg:gap-2">
-                <p className="text-body-16b lg:text-body-18b text-label-netural">
-                  프로젝트 설명
-                </p>
-                <p className="text-label-light text-body-16r lg:text-body-16m lg:text-label-alternative">
-                  {description}
-                </p>
+            )}
+            <div className="relative flex w-83.75 lg:w-156 max-h-144 lg:max-h-231.5 flex-col rounded-2xl bg-fill-normal overflow-hidden">
+              <div className="shrink-0 border-b-2 border-line-alternative p-4 lg:pl-7 lg:pr-8 lg:py-6">
+                <button
+                  type="button"
+                  aria-label="닫기"
+                  onClick={onClose}
+                  className="flex items-center justify-center text-label-alternative cursor-pointer"
+                >
+                  <CancelMIcon aria-hidden className="size-5 lg:size-8" />
+                </button>
               </div>
-              {(teamRoles.length > 0 || links.length > 0) && (
-                <div className="flex flex-col gap-5 lg:flex-row lg:gap-8">
-                  {teamRoles.length > 0 && (
-                    <div className="flex flex-col gap-2 lg:gap-3 lg:flex-1">
-                      <p className="text-body-16b lg:text-body-18b text-label-netural">
-                        프로젝트 팀원
-                      </p>
-                      <div className="flex flex-col gap-1.5">
-                        {teamRoles.map(({ role, members }) => (
-                          <div key={role} className="flex items-center gap-2.5">
-                            <span className="inline-flex w-20 h-7.5 shrink-0 items-center justify-center rounded bg-fill-netural text-label-14sb text-label-normal whitespace-nowrap">
-                              {role}
-                            </span>
-                            <span className="text-label-14m text-label-alternative">
-                              {members.join(", ")}
-                            </span>
+              <div
+                className={cn(
+                  "flex-1 min-h-0 overflow-y-auto px-5 pt-3 pb-4 lg:px-8 lg:pt-5 lg:pb-8",
+                  "[&::-webkit-scrollbar]:w-0.75",
+                  "[&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-track]:rounded-[100px]",
+                  "[&::-webkit-scrollbar-thumb]:rounded-[100px] [&::-webkit-scrollbar-thumb]:bg-[rgba(23,23,26,0.75)] [&::-webkit-scrollbar-thumb]:h-16",
+                )}
+              >
+                <div className="flex items-center gap-3 flex-wrap">
+                  <p className="text-headline-20b lg:text-pc-30b text-label-normal">
+                    {name}
+                  </p>
+                  <div className="flex flex-row gap-1.5 lg:gap-2">
+                    <Label type="brand">{th}기</Label>
+                    <Label type="brand">{type}</Label>
+                  </div>
+                </div>
+                <div className="pt-4 lg:pt-5 pb-6 lg:pb-5">
+                  <div className="w-full overflow-hidden rounded-xl border border-line-neutral bg-fill-alternative aspect-video">
+                    <img
+                      src={imageUrl}
+                      alt={name}
+                      className="block h-full w-full object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-col gap-5 lg:gap-8">
+                  <div className="flex flex-col gap-1 lg:gap-2">
+                    <p className="text-body-16b lg:text-body-18b text-label-netural">
+                      프로젝트 설명
+                    </p>
+                    <p className="text-label-light text-body-16r lg:text-body-16m lg:text-label-alternative">
+                      {description}
+                    </p>
+                  </div>
+                  {(teamRoles.length > 0 || links.length > 0) && (
+                    <div className="flex flex-col gap-5 lg:flex-row lg:gap-8">
+                      {teamRoles.length > 0 && (
+                        <div className="flex flex-col gap-2 lg:gap-3 lg:flex-1">
+                          <p className="text-body-16b lg:text-body-18b text-label-netural">
+                            프로젝트 팀원
+                          </p>
+                          <div className="flex flex-col gap-1.5">
+                            {teamRoles.map(({ role, members }) => (
+                              <div
+                                key={role}
+                                className="flex items-center gap-2.5"
+                              >
+                                <Label type="default">{role}</Label>
+                                <span className="text-label-14m text-label-alternative">
+                                  {members.join(", ")}
+                                </span>
+                              </div>
+                            ))}
                           </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                  {links.length > 0 && (
-                    <div className="flex flex-col gap-2 lg:flex-1">
-                      <p className="text-body-16b lg:text-body-18b text-label-netural">
-                        링크
-                      </p>
-                      <div className="flex flex-col gap-2 items-start">
-                        {links.map(({ type: linkType, label, url }) => (
-                          <NavigationButton
-                            key={linkType}
-                            icon={<ModalLinkIcon type={linkType} />}
-                            onClick={() =>
-                              window.open(url, "_blank", "noreferrer")
-                            }
-                          >
-                            {label}
-                          </NavigationButton>
-                        ))}
-                      </div>
+                        </div>
+                      )}
+                      {links.length > 0 && (
+                        <div className="flex flex-col gap-2 lg:flex-1">
+                          <p className="text-body-16b lg:text-body-18b text-label-netural">
+                            링크
+                          </p>
+                          <div className="flex flex-col gap-2 items-start">
+                            {links.map(({ type: linkType, label, url }) => (
+                              <NavigationButton
+                                key={linkType}
+                                icon={<ModalLinkIcon type={linkType} />}
+                                onClick={() =>
+                                  window.open(url, "_blank", "noreferrer")
+                                }
+                              >
+                                {label}
+                              </NavigationButton>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
-              )}
+              </div>
+              <BottomGradient
+                height={48}
+                className="lg:left-5! lg:right-5! lg:w-auto! lg:translate-x-0!"
+              />
             </div>
+            {(onPrev || onNext) && (
+              <div className="hidden lg:flex ml-5">
+                <PageNavButton
+                  direction="next"
+                  color="light"
+                  onClick={onNext}
+                  className={!onNext ? "invisible pointer-events-none" : ""}
+                />
+              </div>
+            )}
           </div>
+          {(onPrev || onNext) && (
+            <div className="flex w-83.75 justify-between mt-4 lg:hidden">
+              <PageNavButton
+                direction="prev"
+                color="light"
+                onClick={onPrev}
+                className={!onPrev ? "invisible pointer-events-none" : ""}
+              />
+              <PageNavButton
+                direction="next"
+                color="light"
+                onClick={onNext}
+                className={!onNext ? "invisible pointer-events-none" : ""}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

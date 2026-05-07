@@ -1,4 +1,4 @@
-import { Modal, PageNavButton } from "@kusitms.com/ui"
+import { Modal } from "@kusitms.com/ui"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { useState } from "react"
 
@@ -52,11 +52,13 @@ export const Default: Story = {
     const [isOpen, setIsOpen] = useState(true)
     return (
       <div className="relative flex min-h-screen items-center justify-center bg-[#4a4a55]">
-        <div className="absolute bottom-8 left-0 right-0 flex justify-between px-6 z-40">
-          <PageNavButton direction="prev" color="light" />
-          <PageNavButton direction="next" color="light" />
-        </div>
-        <Modal {...args} isOpen={isOpen} onClose={() => setIsOpen(false)} />
+        <Modal
+          {...args}
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          onPrev={() => {}}
+          onNext={() => {}}
+        />
         {!isOpen && (
           <button
             type="button"
