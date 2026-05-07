@@ -12,6 +12,11 @@ const preview: Preview = {
       },
     },
     layout: "centered",
+    options: {
+      storySort: {
+        order: ["Theme", "Assets", "*"],
+      },
+    },
   },
 }
 
