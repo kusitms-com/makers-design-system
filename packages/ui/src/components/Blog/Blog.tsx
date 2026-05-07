@@ -1,3 +1,5 @@
+import { Label } from "../Label/Label"
+
 export type BlogProps = {
   imageUrl: string
   title: string
@@ -27,12 +29,9 @@ export function Blog({ imageUrl, title, content, labels }: BlogProps) {
         {labels.length > 0 && (
           <div className="flex flex-row flex-wrap gap-1 lg:gap-2">
             {labels.map((label) => (
-              <span
-                key={label}
-                className="inline-block rounded-md bg-fill-netural px-3 py-1 text-caption-12sb text-label-alternative lg:text-label-14sb"
-              >
+              <Label key={label} type="secondary">
                 {label}
-              </span>
+              </Label>
             ))}
           </div>
         )}
