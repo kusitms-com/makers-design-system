@@ -4,15 +4,12 @@ import {
   GithubIcon,
   LinkIcon,
 } from "@kusitms.com/icons"
-import { useEffect } from "react"
+import { type JSX, useEffect } from "react"
+import { cn } from "../../utils/cn"
 import { BottomGradient } from "../BottomGradient"
 import { NavigationButton } from "../Button/NavigationButton"
 import { PageNavButton } from "../Button/PageNavButton"
 import { Label } from "../Label/Label"
-
-function cn(...values: Array<string | undefined | false>) {
-  return values.filter(Boolean).join(" ")
-}
 
 export type ModalTeamRole = {
   role: string
@@ -41,14 +38,18 @@ export type ModalProps = {
   links?: ModalLink[]
 }
 
+const LINK_ICONS: Record<
+  ModalLinkType,
+  (props: { className: string }) => JSX.Element
+> = {
+  behance: BehanceIcon,
+  github: GithubIcon,
+  service: LinkIcon,
+}
+
 function ModalLinkIcon({ type }: { type: ModalLinkType }) {
-  if (type === "behance") {
-    return <BehanceIcon className="size-5 shrink-0" />
-  }
-  if (type === "github") {
-    return <GithubIcon className="size-5 shrink-0" />
-  }
-  return <LinkIcon className="size-5 shrink-0" />
+  const Icon = LINK_ICONS[type]
+  return <Icon className="size-5 shrink-0" />
 }
 
 export function Modal({
@@ -135,7 +136,7 @@ export function Modal({
                     <p className="text-headline-20b lg:text-pc-30b text-label-normal">
                       {name}
                     </p>
-                    <div className="flex flex-row gap-1.5 lg:gap-2">
+                    <div className="flex gap-1.5 lg:gap-2">
                       <Label type="brand">{th}기</Label>
                       <Label type="brand">{type}</Label>
                     </div>
@@ -188,7 +189,7 @@ export function Modal({
                             <div className="flex flex-col gap-2 items-start">
                               {links.map(({ type: linkType, label, url }) => (
                                 <NavigationButton
-                                  key={linkType}
+                                  key={url}
                                   icon={<ModalLinkIcon type={linkType} />}
                                   onClick={() =>
                                     window.open(url, "_blank", "noreferrer")

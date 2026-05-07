@@ -1,12 +1,9 @@
 import { ArrowRightIcon } from "@kusitms.com/icons"
 import type { ButtonHTMLAttributes } from "react"
+import { cn } from "../../utils/cn"
 
 export type ScrollTopButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   className?: string
-}
-
-function cn(...values: Array<string | undefined>) {
-  return values.filter(Boolean).join(" ")
 }
 
 export function ScrollTopButton({ className, ...props }: ScrollTopButtonProps) {
