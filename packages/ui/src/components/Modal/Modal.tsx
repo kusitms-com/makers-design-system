@@ -118,7 +118,6 @@ export function Modal({
               </div>
             </div>
             <div className="flex flex-col gap-5 lg:gap-8">
-              {/* Description */}
               <div className="flex flex-col gap-1 lg:gap-2">
                 <p className="text-body-16b lg:text-body-18b text-label-netural">
                   프로젝트 설명
@@ -129,7 +128,6 @@ export function Modal({
               </div>
               {(teamRoles.length > 0 || links.length > 0) && (
                 <div className="flex flex-col gap-5 lg:flex-row lg:gap-8">
-                  {/* Team roles */}
                   {teamRoles.length > 0 && (
                     <div className="flex flex-col gap-2 lg:gap-3 lg:flex-1">
                       <p className="text-body-16b lg:text-body-18b text-label-netural">
@@ -154,7 +152,7 @@ export function Modal({
                       <p className="text-body-16b lg:text-body-18b text-label-netural">
                         링크
                       </p>
-                      <div className="flex flex-col gap-2 w-fit">
+                      <div className="flex flex-col gap-2 items-start">
                         {links.map(({ type: linkType, label, url }) => (
                           <NavigationButton
                             key={linkType}
@@ -162,7 +160,6 @@ export function Modal({
                             onClick={() =>
                               window.open(url, "_blank", "noreferrer")
                             }
-                            className="w-full"
                           >
                             {label}
                           </NavigationButton>
