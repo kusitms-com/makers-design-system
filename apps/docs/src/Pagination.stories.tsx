@@ -23,7 +23,7 @@ const ArrowIcon = ({ direction }: { direction: "left" | "right" }) => (
     <path
       d={direction === "left" ? "M15 18L9 12L15 6" : "M9 6L15 12L9 18"}
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="1.8"
       strokeLinecap="round"
       strokeLinejoin="round"
     />
@@ -46,7 +46,7 @@ const DoubleArrowIcon = ({ direction }: { direction: "left" | "right" }) => (
           : "M6 7L11 12L6 17M13 7L18 12L13 17"
       }
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="1.8"
       strokeLinecap="round"
       strokeLinejoin="round"
     />

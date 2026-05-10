@@ -15,11 +15,11 @@ type Story = StoryObj<typeof meta>
 export const Desktop: Story = {
   render: () => (
     <Header logo={<HeaderDesktopLogo />}>
-      <HeaderNavigation>학회소개</HeaderNavigation>
-      <HeaderNavigation>프로젝트</HeaderNavigation>
-      <HeaderNavigation>32기 아카이브</HeaderNavigation>
-      <HeaderNavigation>후기</HeaderNavigation>
-      <HeaderNavigation>리크루팅</HeaderNavigation>
+      <HeaderNavigation href="#about">학회소개</HeaderNavigation>
+      <HeaderNavigation href="#projects">프로젝트</HeaderNavigation>
+      <HeaderNavigation href="#archive">32기 아카이브</HeaderNavigation>
+      <HeaderNavigation href="#review">후기</HeaderNavigation>
+      <HeaderNavigation href="#recruiting">리크루팅</HeaderNavigation>
     </Header>
   ),
 }

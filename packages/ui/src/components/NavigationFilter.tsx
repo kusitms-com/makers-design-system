@@ -2,6 +2,38 @@ import type { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from "react"
 
 type FilterDevice = "desktop" | "mobile"
 
+const filterStyles: Record<
+  FilterDevice,
+  {
+    container: string
+    item: string
+    activeItem?: string
+    inactiveItem?: string
+    text: string
+    activeText: string
+    inactiveText: string
+  }
+> = {
+  desktop: {
+    container: "justify-center gap-5",
+    item: "min-w-[120px] px-[10px] py-[10px]",
+    activeItem: "bg-[var(--fill-primary)]",
+    text: "text-[20px] leading-[32px] tracking-[-0.16px]",
+    activeText: "font-bold text-[var(--brand-primary)]",
+    inactiveText: "font-medium text-[var(--label-netural)]",
+  },
+  mobile: {
+    container:
+      "justify-start gap-1 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none]",
+    item: "py-1",
+    activeItem: "bg-[var(--fill-primary)] px-4",
+    inactiveItem: "px-3",
+    text: "text-[16px] leading-[24px] tracking-[-0.04px]",
+    activeText: "font-semibold text-[var(--brand-primary)]",
+    inactiveText: "font-medium text-[var(--label-netural)]",
+  },
+}
+
 export type FilterItemProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children?: ReactNode
   active?: boolean
@@ -19,17 +51,15 @@ export function FilterItem({
   className,
   ...props
 }: FilterItemProps) {
+  const styles = filterStyles[device]
+
   return (
     <button
+      aria-pressed={active}
       className={cn(
-        "flex items-center justify-center rounded-full whitespace-nowrap",
-        device === "desktop"
-          ? active
-            ? "bg-[var(--fill-primary)] w-[120px] p-[10px]"
-            : "w-[120px] p-[10px]"
-          : active
-            ? "bg-[var(--fill-primary)] px-4 py-1"
-            : "px-3 py-1",
+        "flex shrink-0 items-center justify-center rounded-full whitespace-nowrap",
+        styles.item,
+        active ? styles.activeItem : styles.inactiveItem,
         className,
       )}
       type="button"
@@ -38,14 +68,8 @@ export function FilterItem({
       <span
         className={cn(
           "font-['Pretendard',sans-serif]",
-          device === "desktop"
-            ? "text-[20px] leading-[32px] tracking-[-0.16px]"
-            : "text-[16px] leading-[24px] tracking-[-0.04px]",
-          active
-            ? device === "desktop"
-              ? "font-bold text-[var(--brand-primary)]"
-              : "font-semibold text-[var(--brand-primary)]"
-            : "font-medium text-[var(--label-netural)]",
+          styles.text,
+          active ? styles.activeText : styles.inactiveText,
         )}
       >
         {children}
@@ -65,13 +89,14 @@ export function NavigationFilter({
   className,
   ...props
 }: NavigationFilterProps) {
+  const styles = filterStyles[device]
+
   return (
     <div
       className={cn(
-        "flex items-center justify-center",
-        device === "desktop"
-          ? "gap-5 pb-[60px] px-[200px] w-[1024px]"
-          : "gap-1 pb-[40px]",
+        "flex w-full items-center",
+        device === "desktop" ? "flex-wrap" : undefined,
+        styles.container,
         className,
       )}
       {...props}

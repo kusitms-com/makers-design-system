@@ -1,8 +1,43 @@
-import type { HTMLAttributes, ReactNode } from "react"
+import type { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from "react"
 
 type TabSize = "m" | "s"
 
-export type NavigationTabItemProps = HTMLAttributes<HTMLDivElement> & {
+const sizeStyles: Record<
+  TabSize,
+  {
+    container: string
+    item: string
+    text: string
+    textOffset: number
+    activeText: string
+    inactiveText: string
+    underline: string
+  }
+> = {
+  m: {
+    container: "max-w-[1200px]",
+    item: "h-[124px]",
+    text: "text-[24px] leading-[36px] tracking-[-0.192px]",
+    textOffset: 19,
+    activeText: "font-semibold text-[var(--label-normal)]",
+    inactiveText: "font-medium text-[var(--label-netural)]",
+    underline: "after:h-[3px]",
+  },
+  s: {
+    container: "max-w-[1024px]",
+    item: "h-[104px]",
+    text: "text-[16px] leading-[24px] tracking-[-0.04px]",
+    textOffset: 28,
+    activeText: "font-bold text-[var(--label-normal)]",
+    inactiveText: "font-medium text-[var(--label-netural)]",
+    underline: "after:h-[2px]",
+  },
+}
+
+export type NavigationTabItemProps = Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  "type"
+> & {
   children?: ReactNode
   active?: boolean
   size?: TabSize
@@ -19,37 +54,35 @@ export function NavigationTabItem({
   className,
   ...props
 }: NavigationTabItemProps) {
+  const styles = sizeStyles[size]
+
   return (
-    <div
+    <button
       className={cn(
-        "flex flex-1 items-center justify-center px-4 min-w-0",
-        size === "m"
-          ? active
-            ? "py-6 border-b-[3px] border-[var(--brand-primary)]"
-            : "py-6 border-b-[2px] border-[var(--line-alternative)]"
-          : active
-            ? "py-3 border-b-[2px] border-[var(--brand-primary)]"
-            : "py-3 border-b border-[var(--line-alternative)]",
+        "relative flex min-w-0 flex-1 basis-0 items-center justify-center border-b border-[var(--line-alternative)] px-4",
+        styles.item,
+        active
+          ? "after:absolute after:bottom-0 after:left-0 after:w-full after:bg-[var(--brand-primary)]"
+          : undefined,
+        active ? styles.underline : undefined,
         className,
       )}
+      role="tab"
+      aria-selected={active}
+      type="button"
       {...props}
     >
       <span
         className={cn(
           "whitespace-nowrap font-['Pretendard',sans-serif]",
-          size === "m"
-            ? "text-[24px] leading-[36px] tracking-[-0.192px]"
-            : "text-[16px] leading-[24px] tracking-[-0.04px]",
-          active
-            ? size === "m"
-              ? "font-semibold text-[var(--label-normal)]"
-              : "font-bold text-[var(--label-normal)]"
-            : "font-medium text-[var(--label-light)]",
+          styles.text,
+          active ? styles.activeText : styles.inactiveText,
         )}
+        style={{ transform: `translateY(${styles.textOffset}px)` }}
       >
         {children}
       </span>
-    </div>
+    </button>
   )
 }
 
@@ -64,14 +97,17 @@ export function NavigationTab({
   className,
   ...props
 }: NavigationTabProps) {
+  const styles = sizeStyles[size]
+
   return (
     <div
       className={cn(
-        "flex items-center justify-center w-full",
-        size === "m" ? "pt-5 pb-[60px]" : "pt-5 pb-9",
-        size === "m" ? "max-w-[1200px]" : "max-w-[1024px]",
+        "mx-auto flex w-full items-stretch",
+        styles.container,
         className,
       )}
+      role="tablist"
+      aria-orientation="horizontal"
       {...props}
     >
       {children}

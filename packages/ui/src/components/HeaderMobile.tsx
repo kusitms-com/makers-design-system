@@ -12,6 +12,7 @@ export type HeaderMobileProps = HTMLAttributes<HTMLDivElement> & {
   closeIcon?: ReactNode
   isOpen?: boolean
   onToggle?: () => void
+  menuId?: string
 }
 
 function cn(...values: Array<string | undefined>) {
@@ -24,6 +25,7 @@ export function HeaderMobile({
   closeIcon,
   isOpen = false,
   onToggle,
+  menuId,
   className,
   ...props
 }: HeaderMobileProps) {
@@ -43,6 +45,9 @@ export function HeaderMobile({
         className="shrink-0 size-6 flex items-center justify-center transition-transform duration-200"
         onClick={onToggle}
         style={{ transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }}
+        aria-controls={menuId}
+        aria-expanded={isOpen}
+        aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
       >
         {isOpen ? closeIcon : menuIcon}
       </button>
@@ -66,10 +71,10 @@ export function HeaderMobileMenu({
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    if (contentRef.current) {
+    if (isOpen && contentRef.current) {
       setHeight(contentRef.current.scrollHeight)
     }
-  }, [])
+  }, [isOpen])
 
   useEffect(() => {
     if (isOpen) {
