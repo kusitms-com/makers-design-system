@@ -36,6 +36,16 @@ describe("Header navigation", () => {
       }),
     ).toHaveAttribute("aria-expanded", "true")
   })
+
+  it("does not bake desktop frame width into the header component", () => {
+    render(<Header logo={<span>Logo</span>} />)
+
+    const classes = screen.getByRole("banner").className.split(" ")
+
+    expect(classes).toContain("w-full")
+    expect(classes).not.toContain("w-[1280px]")
+    expect(classes).not.toContain("min-w-[1024px]")
+  })
 })
 
 describe("HeaderMobileMenu", () => {
@@ -60,5 +70,23 @@ describe("HeaderMobileMenu", () => {
     )
 
     expect(container.firstChild).toHaveStyle({ maxHeight: "120px" })
+  })
+
+  it("does not bake mobile frame width into the mobile header component", () => {
+    render(
+      <HeaderMobile
+        logo={<span>Logo</span>}
+        menuIcon={<span>Open</span>}
+        closeIcon={<span>Close</span>}
+      />,
+    )
+
+    const classes = screen
+      .getByRole("button")
+      .parentElement?.className.split(" ")
+
+    expect(classes).toContain("w-full")
+    expect(classes).not.toContain("w-[320px]")
+    expect(classes).not.toContain("min-w-[320px]")
   })
 })

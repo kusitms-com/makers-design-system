@@ -14,7 +14,7 @@ export function Header({ logo, children, className, ...props }: HeaderProps) {
     <header
       className={cn(
         "flex items-center justify-between",
-        "mx-auto max-w-[1440px] min-w-[1024px] w-full",
+        "w-full",
         "bg-[var(--fill-normal)] px-10 py-6",
         className,
       )}

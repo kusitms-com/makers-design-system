@@ -117,6 +117,10 @@ importers:
   packages/tsconfig: {}
 
   packages/ui:
+    dependencies:
+      '@kusitms.com/icons':
+        specifier: workspace:*
+        version: link:../icons
     devDependencies:
       '@kusitms.com/tsconfig':
         specifier: workspace:*

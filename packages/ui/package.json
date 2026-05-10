@@ -24,6 +24,9 @@
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
+  "dependencies": {
+    "@kusitms.com/icons": "workspace:*"
+  },
   "devDependencies": {
     "@kusitms.com/tsconfig": "workspace:*",
     "@testing-library/jest-dom": "^6.9.1",

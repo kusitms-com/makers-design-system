@@ -74,33 +74,37 @@ const contactIcons = (
 
 export const Desktop: Story = {
   render: () => (
-    <div className="min-w-[1024px] bg-white">
-      <Footer
-        device="desktop"
-        logo={<FooterDesktopLogo />}
-        bylawsHref="https://example.com/bylaws"
-        contactIcons={contactIcons}
-      />
+    <div className="w-full overflow-x-auto bg-white">
+      <div className="mx-auto w-[1280px]">
+        <Footer
+          device="desktop"
+          logo={<FooterDesktopLogo />}
+          bylawsHref="https://example.com/bylaws"
+          contactIcons={contactIcons}
+        />
+      </div>
     </div>
   ),
 }
 
 export const Mobile: Story = {
   render: () => (
-    <Footer
-      device="mobile"
-      logo={<FooterMobileLogo />}
-      bylawsHref="https://example.com/bylaws"
-      contactIcons={contactIcons}
-      scrollTopButton={
-        <button
-          type="button"
-          aria-label="Scroll to top"
-          className="flex items-center py-2"
-        >
-          <ScrollTopIcon className="size-10" />
-        </button>
-      }
-    />
+    <div className="w-[320px]">
+      <Footer
+        device="mobile"
+        logo={<FooterMobileLogo />}
+        bylawsHref="https://example.com/bylaws"
+        contactIcons={contactIcons}
+        scrollTopButton={
+          <button
+            type="button"
+            aria-label="Scroll to top"
+            className="flex items-center py-2"
+          >
+            <ScrollTopIcon className="size-10" />
+          </button>
+        }
+      />
+    </div>
   ),
 }

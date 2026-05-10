@@ -34,7 +34,7 @@ export function HeaderMobile({
       className={cn(
         "flex items-center justify-between",
         "bg-[var(--fill-normal)] px-4 py-5",
-        "min-w-[320px] max-w-[767px] w-full h-[69px]",
+        "h-[69px] w-full",
         className,
       )}
       {...props}
@@ -117,8 +117,8 @@ export function HeaderMobileItem({
   return (
     <div
       className={cn(
-        "flex flex-col items-center gap-3",
-        "bg-[var(--fill-netural)] px-4 py-5 w-full",
+        "flex w-full flex-col items-center gap-3",
+        "bg-[var(--fill-netural)] px-4 py-5",
         className,
       )}
       {...props}

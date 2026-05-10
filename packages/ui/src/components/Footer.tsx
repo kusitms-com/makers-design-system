@@ -55,7 +55,7 @@ export function Footer({
         className={cn("w-full bg-white px-4 pb-[60px] pt-[60px]", className)}
         {...props}
       >
-        <div className="mx-auto flex w-full max-w-[390px] flex-col items-start">
+        <div className="mx-auto flex w-full flex-col items-start">
           <div className="flex w-full items-start justify-between gap-4">
             <div className="flex min-w-0 flex-1 flex-col items-start">
               <div className="pb-4">{logo}</div>
@@ -85,13 +85,13 @@ export function Footer({
     <footer
       className={cn(
         "flex flex-col items-center justify-center",
-        "mx-auto w-full max-w-[1280px]",
+        "w-full",
         "bg-white px-10 pb-[60px]",
         className,
       )}
       {...props}
     >
-      <div className="flex w-full items-start justify-between gap-10">
+      <div className="flex w-full items-end justify-between">
         <div className="flex w-[274px] flex-col items-start">
           <div className="flex flex-col items-start pb-10 pt-[60px]">
             {logo}
@@ -99,11 +99,11 @@ export function Footer({
           <div className="flex w-full pb-3">
             {links ?? defaultBylawsLink("desktop", bylawsHref, bylawsLabel)}
           </div>
-          <p className="font-['Pretendard',sans-serif] text-[16px] font-semibold leading-[24px] tracking-[-0.04px] whitespace-pre-wrap text-[#17171a]">
+          <p className="font-['Pretendard',sans-serif] text-[16px] font-semibold leading-[24px] tracking-[-0.04px] whitespace-pre text-[#17171a]">
             {copyright}
           </p>
         </div>
-        <div className="flex w-[316px] shrink-0 flex-col items-start gap-5">
+        <div className="flex shrink-0 flex-col items-start gap-5">
           <p className="font-['Pretendard',sans-serif] text-[16px] font-semibold leading-[24px] tracking-[-0.04px] text-[#17171a]">
             Contact
           </p>

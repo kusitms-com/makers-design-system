@@ -14,22 +14,41 @@ describe("Footer", () => {
     ).toHaveAttribute("href", "/bylaws")
   })
 
-  it("keeps the desktop layout fluid instead of forcing a fixed width", () => {
+  it("does not bake frame widths into the desktop footer component", () => {
     render(<Footer logo={<span>Logo</span>} />)
 
     const classes = screen.getByRole("contentinfo").className.split(" ")
 
     expect(classes).toContain("w-full")
     expect(classes).not.toContain("w-[1280px]")
+    expect(classes).not.toContain("min-w-[1024px]")
   })
 
-  it("keeps desktop content top-aligned with a fixed contact column", () => {
+  it("aligns the desktop footer columns to the bottom edge", () => {
     const { container } = render(<Footer logo={<span>Logo</span>} />)
 
     const row = container.querySelector("footer > div")
-    const contactColumn = screen.getByText("Contact").parentElement
 
-    expect(row?.className.split(" ")).toContain("items-start")
-    expect(contactColumn?.className.split(" ")).toContain("w-[316px]")
+    expect(row?.className.split(" ")).toContain("items-end")
+  })
+
+  it("pushes the desktop contact column to the far edge", () => {
+    const { container } = render(<Footer logo={<span>Logo</span>} />)
+
+    const row = container.querySelector("footer > div")
+    const classes = row?.className.split(" ") ?? []
+
+    expect(classes).toContain("justify-between")
+    expect(classes).not.toContain("gap-[496px]")
+  })
+
+  it("does not bake mobile frame widths into the footer component", () => {
+    render(<Footer device="mobile" logo={<span>Logo</span>} />)
+
+    const classes = screen.getByRole("contentinfo").className.split(" ")
+
+    expect(classes).toContain("w-full")
+    expect(classes).not.toContain("w-[320px]")
+    expect(classes).not.toContain("min-w-[320px]")
   })
 })

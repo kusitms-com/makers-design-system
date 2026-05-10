@@ -1,4 +1,10 @@
-import type { HTMLAttributes, ReactNode, SVGProps } from "react"
+import {
+  KeyboardArrowLeftIcon,
+  KeyboardArrowRightIcon,
+  KeyboardDoubleArrowLeftIcon,
+  KeyboardDoubleArrowRightIcon,
+} from "@kusitms.com/icons"
+import type { HTMLAttributes, ReactNode } from "react"
 
 export type PaginationProps = HTMLAttributes<HTMLDivElement> & {
   currentPage?: number
@@ -14,68 +20,14 @@ function cn(...values: Array<string | undefined>) {
   return values.filter(Boolean).join(" ")
 }
 
-function ChevronIcon({
-  direction,
-  ...props
-}: SVGProps<SVGSVGElement> & { direction: "left" | "right" }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={24}
-      height={24}
-      fill="none"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      {...props}
-    >
-      <path
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1.8}
-        d={direction === "left" ? "M15 18L9 12L15 6" : "M9 6L15 12L9 18"}
-      />
-    </svg>
-  )
-}
-
-function DoubleChevronIcon({
-  direction,
-  ...props
-}: SVGProps<SVGSVGElement> & { direction: "left" | "right" }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={24}
-      height={24}
-      fill="none"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      {...props}
-    >
-      <path
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1.8}
-        d={
-          direction === "left"
-            ? "M18 17L13 12L18 7M11 17L6 12L11 7"
-            : "M6 7L11 12L6 17M13 7L18 12L13 17"
-        }
-      />
-    </svg>
-  )
-}
-
 export function Pagination({
   currentPage = 1,
   totalPages = 5,
   onPageChange,
-  prevIcon = <ChevronIcon direction="left" />,
-  nextIcon = <ChevronIcon direction="right" />,
-  firstIcon = <DoubleChevronIcon direction="left" />,
-  lastIcon = <DoubleChevronIcon direction="right" />,
+  prevIcon = <KeyboardArrowLeftIcon aria-hidden="true" />,
+  nextIcon = <KeyboardArrowRightIcon aria-hidden="true" />,
+  firstIcon = <KeyboardDoubleArrowLeftIcon aria-hidden="true" />,
+  lastIcon = <KeyboardDoubleArrowRightIcon aria-hidden="true" />,
   className,
   ...props
 }: PaginationProps) {
@@ -98,7 +50,7 @@ export function Pagination({
       <div className="flex items-center gap-2">
         <button
           type="button"
-          className="flex size-6 items-center justify-center text-[var(--label-normal)] disabled:text-[var(--label-disable)] disabled:pointer-events-none"
+          className="flex size-6 items-center justify-center text-[var(--label-disable)] disabled:pointer-events-none"
           onClick={() => handlePageChange(1)}
           disabled={safeCurrentPage === 1}
           aria-label="First page"
@@ -107,7 +59,7 @@ export function Pagination({
         </button>
         <button
           type="button"
-          className="flex size-6 items-center justify-center text-[var(--label-normal)] disabled:text-[var(--label-disable)] disabled:pointer-events-none"
+          className="flex size-6 items-center justify-center text-[var(--label-disable)] disabled:pointer-events-none"
           onClick={() => handlePageChange(safeCurrentPage - 1)}
           disabled={safeCurrentPage === 1}
           aria-label="Previous page"
@@ -138,7 +90,7 @@ export function Pagination({
       <div className="flex items-center gap-2">
         <button
           type="button"
-          className="flex size-6 items-center justify-center text-[var(--label-normal)] disabled:text-[var(--label-disable)] disabled:pointer-events-none"
+          className="flex size-6 items-center justify-center text-[var(--label-disable)] disabled:pointer-events-none"
           onClick={() => handlePageChange(safeCurrentPage + 1)}
           disabled={safeCurrentPage === safeTotalPages}
           aria-label="Next page"
@@ -147,7 +99,7 @@ export function Pagination({
         </button>
         <button
           type="button"
-          className="flex size-6 items-center justify-center text-[var(--label-normal)] disabled:text-[var(--label-disable)] disabled:pointer-events-none"
+          className="flex size-6 items-center justify-center text-[var(--label-disable)] disabled:pointer-events-none"
           onClick={() => handlePageChange(safeTotalPages)}
           disabled={safeCurrentPage === safeTotalPages}
           aria-label="Last page"

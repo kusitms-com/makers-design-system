@@ -21,12 +21,13 @@ const menuItems = ["학회소개", "프로젝트", "32기 아카이브", "후기
 
 export const Closed: Story = {
   render: () => (
-    <div className="w-[360px]">
+    <div className="flex w-[360px] justify-center">
       <HeaderMobile
         logo={<HeaderMobileLogo />}
         menuIcon={<HamburgMIcon />}
         closeIcon={<CancelMIcon />}
         isOpen={false}
+        className="w-[320px]"
       />
     </div>
   ),
@@ -34,14 +35,15 @@ export const Closed: Story = {
 
 export const Open: Story = {
   render: () => (
-    <div className="w-[360px]">
+    <div className="flex w-[360px] flex-col items-center">
       <HeaderMobile
         logo={<HeaderMobileLogo />}
         menuIcon={<HamburgMIcon />}
         closeIcon={<CancelMIcon />}
         isOpen
+        className="w-[320px]"
       />
-      <HeaderMobileMenu isOpen>
+      <HeaderMobileMenu className="w-[320px]" isOpen>
         {menuItems.map((item) => (
           <HeaderMobileItem key={item}>{item}</HeaderMobileItem>
         ))}
@@ -54,15 +56,16 @@ export const Interactive: Story = {
   render: () => {
     const [isOpen, setIsOpen] = useState(false)
     return (
-      <div className="w-[360px]">
+      <div className="flex w-[360px] flex-col items-center">
         <HeaderMobile
           logo={<HeaderMobileLogo />}
           menuIcon={<HamburgMIcon />}
           closeIcon={<CancelMIcon />}
           isOpen={isOpen}
           onToggle={() => setIsOpen(!isOpen)}
+          className="w-[320px]"
         />
-        <HeaderMobileMenu isOpen={isOpen}>
+        <HeaderMobileMenu className="w-[320px]" isOpen={isOpen}>
           {menuItems.map((item) => (
             <HeaderMobileItem key={item}>{item}</HeaderMobileItem>
           ))}
