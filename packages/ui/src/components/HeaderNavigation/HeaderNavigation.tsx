@@ -29,7 +29,8 @@ export type HeaderNavigationProps =
   | HeaderNavigationLinkProps
 
 const stateStyles: Record<HeaderNavState, string> = {
-  default: "font-medium text-[var(--label-light)]",
+  default:
+    "font-medium text-[var(--label-light)] hover:font-bold hover:text-[var(--label-normal)] active:font-bold active:text-[var(--brand-primary)]",
   hovered: "font-bold text-[var(--label-normal)]",
   pressed: "font-bold text-[var(--brand-primary)]",
 }
@@ -52,7 +53,7 @@ export function HeaderNavigation({
 }: HeaderNavigationProps) {
   const sharedClassName = cn(
     "flex items-center justify-center px-4 whitespace-nowrap",
-    "font-['Pretendard',sans-serif] text-[16px] leading-[24px] tracking-[-0.04px]",
+    "font-['Pretendard',sans-serif] text-[16px] leading-[24px] tracking-[-0.04px] transition-colors",
     stateStyles[state],
     className,
   )

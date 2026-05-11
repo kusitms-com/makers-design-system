@@ -21,7 +21,7 @@ function cn(...values: Array<string | undefined>) {
 }
 
 const paginationControlClassName =
-  "flex size-6 items-center justify-center disabled:pointer-events-none"
+  "flex size-6 items-center justify-center disabled:pointer-events-none [&_svg]:size-6 [&_svg]:shrink-0"
 
 export function Pagination({
   currentPage = 1,

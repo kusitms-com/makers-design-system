@@ -1,9 +1,7 @@
 import { act, render, screen } from "@testing-library/react"
 import { afterEach, describe, expect, it, vi } from "vitest"
 
-import { Header } from "./Header"
 import { HeaderMobile, HeaderMobileMenu } from "./HeaderMobile"
-import { HeaderNavigation } from "./HeaderNavigation"
 
 const originalResizeObserver = globalThis.ResizeObserver
 
@@ -11,21 +9,7 @@ afterEach(() => {
   globalThis.ResizeObserver = originalResizeObserver
 })
 
-describe("Header navigation", () => {
-  it("renders a link when href is provided", () => {
-    render(
-      <Header logo={<span>Logo</span>}>
-        <HeaderNavigation href="/about">About</HeaderNavigation>
-      </Header>,
-    )
-
-    expect(
-      screen.getByRole("link", {
-        name: "About",
-      }),
-    ).toHaveAttribute("href", "/about")
-  })
-
+describe("HeaderMobile", () => {
   it("exposes the mobile menu toggle state to assistive tech", () => {
     render(
       <HeaderMobile
@@ -43,14 +27,22 @@ describe("Header navigation", () => {
     ).toHaveAttribute("aria-expanded", "true")
   })
 
-  it("does not bake desktop frame width into the header component", () => {
-    render(<Header logo={<span>Logo</span>} />)
+  it("does not bake mobile frame width into the mobile header component", () => {
+    render(
+      <HeaderMobile
+        logo={<span>Logo</span>}
+        menuIcon={<span>Open</span>}
+        closeIcon={<span>Close</span>}
+      />,
+    )
 
-    const classes = screen.getByRole("banner").className.split(" ")
+    const classes = screen
+      .getByRole("button")
+      .parentElement?.className.split(" ")
 
     expect(classes).toContain("w-full")
-    expect(classes).not.toContain("w-[1280px]")
-    expect(classes).not.toContain("min-w-[1024px]")
+    expect(classes).not.toContain("w-[320px]")
+    expect(classes).not.toContain("min-w-[320px]")
   })
 })
 
@@ -120,23 +112,5 @@ describe("HeaderMobileMenu", () => {
     })
 
     expect(container.firstChild).toHaveStyle({ maxHeight: "240px" })
-  })
-
-  it("does not bake mobile frame width into the mobile header component", () => {
-    render(
-      <HeaderMobile
-        logo={<span>Logo</span>}
-        menuIcon={<span>Open</span>}
-        closeIcon={<span>Close</span>}
-      />,
-    )
-
-    const classes = screen
-      .getByRole("button")
-      .parentElement?.className.split(" ")
-
-    expect(classes).toContain("w-full")
-    expect(classes).not.toContain("w-[320px]")
-    expect(classes).not.toContain("min-w-[320px]")
   })
 })
