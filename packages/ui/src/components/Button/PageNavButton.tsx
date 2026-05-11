@@ -1,5 +1,6 @@
 import { RightSIcon } from "@kusitms.com/icons"
 import type { ButtonHTMLAttributes } from "react"
+import { cn } from "../../utils/cn"
 
 type PageNavButtonColor = "light" | "dark"
 type PageNavButtonDirection = "prev" | "next"
@@ -8,10 +9,6 @@ export type PageNavButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   color?: PageNavButtonColor
   direction?: PageNavButtonDirection
   className?: string
-}
-
-function cn(...values: Array<string | undefined>) {
-  return values.filter(Boolean).join(" ")
 }
 
 export function PageNavButton({

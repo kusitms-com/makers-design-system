@@ -9,10 +9,7 @@ import {
   useRef,
   useState,
 } from "react"
-
-function cn(...values: Array<string | undefined | false>) {
-  return values.filter(Boolean).join(" ")
-}
+import { cn } from "../../utils/cn"
 
 type RadixRootProps = ComponentPropsWithoutRef<typeof RadixAccordion.Root>
 

@@ -1,4 +1,5 @@
 import type { HTMLAttributes, PropsWithChildren, ReactNode } from "react"
+import { cn } from "../../utils/cn"
 
 type LabelType = "brand" | "secondary" | "default"
 
@@ -9,10 +10,6 @@ export type LabelProps = PropsWithChildren<
     className?: string
   }
 >
-
-function cn(...values: Array<string | undefined | false>) {
-  return values.filter(Boolean).join(" ")
-}
 
 function getChipClasses(type: "brand" | "secondary") {
   switch (type) {

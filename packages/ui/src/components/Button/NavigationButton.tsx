@@ -1,5 +1,6 @@
 import { RightSIcon } from "@kusitms.com/icons"
 import type { ButtonHTMLAttributes, PropsWithChildren, ReactNode } from "react"
+import { cn } from "../../utils/cn"
 
 export type NavigationButtonProps = PropsWithChildren<
   ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -8,10 +9,6 @@ export type NavigationButtonProps = PropsWithChildren<
     showArrow?: boolean
   }
 >
-
-function cn(...values: Array<string | undefined | false>) {
-  return values.filter(Boolean).join(" ")
-}
 
 export function NavigationButton({
   children,

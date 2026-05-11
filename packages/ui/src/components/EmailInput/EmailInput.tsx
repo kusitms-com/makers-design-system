@@ -4,6 +4,7 @@ import type {
   KeyboardEvent,
 } from "react"
 
+import { cn } from "../../utils/cn"
 import { Button } from "../Button/Button"
 
 export type EmailInputProps = Omit<
@@ -20,10 +21,6 @@ export type EmailInputProps = Omit<
     "onClick" | "disabled" | "type"
   >
   className?: string
-}
-
-function cn(...values: Array<string | undefined | false>) {
-  return values.filter(Boolean).join(" ")
 }
 
 export function EmailInput({

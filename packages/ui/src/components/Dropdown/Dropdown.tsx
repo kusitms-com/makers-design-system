@@ -2,10 +2,7 @@
 
 import { ToggleOpenSIcon } from "@kusitms.com/icons"
 import * as RadixSelect from "@radix-ui/react-select"
-
-function cn(...values: Array<string | undefined | false>) {
-  return values.filter(Boolean).join(" ")
-}
+import { cn } from "../../utils/cn"
 
 export type DropdownOption = {
   value: string

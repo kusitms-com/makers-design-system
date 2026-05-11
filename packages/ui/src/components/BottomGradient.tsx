@@ -16,7 +16,7 @@ export function BottomGradient({
       style={{ height: `${height}px`, ...style }}
       {...props}
     >
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white rounded-b-2xl" />
+      <div className="absolute inset-0 bg-linear-to-b from-transparent to-white rounded-b-2xl" />
     </div>
   )
 }

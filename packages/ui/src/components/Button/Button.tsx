@@ -1,5 +1,6 @@
 import { ArrowRightIcon, ArrowRightMIcon } from "@kusitms.com/icons"
 import type { ButtonHTMLAttributes, PropsWithChildren } from "react"
+import { cn } from "../../utils/cn"
 
 export type ButtonProps = PropsWithChildren<
   ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -7,10 +8,6 @@ export type ButtonProps = PropsWithChildren<
     showIcon?: boolean
   }
 >
-
-function cn(...values: Array<string | undefined>) {
-  return values.filter(Boolean).join(" ")
-}
 
 export function Button({
   children,

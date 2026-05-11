@@ -1,6 +1,9 @@
 import { glob, readdir, readFile, writeFile } from "node:fs/promises"
 import { join } from "node:path"
 
+// Icons with multi-color designs that should not be converted
+const SKIP_COLOR_CONVERSION = ["LinkIcon"]
+
 // Get icon file names to know which generated components to transform
 const iconDir = "src/raw/icon"
 const iconFiles = await readdir(iconDir)
@@ -22,6 +25,7 @@ const files = await readdir(dir)
 for (const file of files.filter((f) => f.endsWith(".tsx"))) {
   const componentName = file.replace(".tsx", "")
   if (!iconComponentNames.includes(componentName)) continue
+  if (SKIP_COLOR_CONVERSION.includes(componentName)) continue
 
   const filePath = join(dir, file)
   let content = await readFile(filePath, "utf8")
