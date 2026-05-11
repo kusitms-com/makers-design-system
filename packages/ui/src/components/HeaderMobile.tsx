@@ -1,6 +1,7 @@
 import {
   type HTMLAttributes,
   type ReactNode,
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -70,11 +71,32 @@ export function HeaderMobileMenu({
   const [height, setHeight] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
 
-  useEffect(() => {
+  const updateHeight = useCallback(() => {
     if (isOpen && contentRef.current) {
       setHeight(contentRef.current.scrollHeight)
     }
   }, [isOpen])
+
+  useEffect(() => {
+    updateHeight()
+  }, [updateHeight])
+
+  useEffect(() => {
+    const content = contentRef.current
+
+    if (!isOpen || !content) {
+      return
+    }
+
+    if (typeof ResizeObserver === "undefined") {
+      return
+    }
+
+    const observer = new ResizeObserver(updateHeight)
+    observer.observe(content)
+
+    return () => observer.disconnect()
+  }, [isOpen, updateHeight])
 
   useEffect(() => {
     if (isOpen) {

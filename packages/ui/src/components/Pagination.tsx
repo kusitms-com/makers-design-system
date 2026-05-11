@@ -20,6 +20,9 @@ function cn(...values: Array<string | undefined>) {
   return values.filter(Boolean).join(" ")
 }
 
+const paginationControlClassName =
+  "flex size-6 items-center justify-center disabled:pointer-events-none"
+
 export function Pagination({
   currentPage = 1,
   totalPages = 5,
@@ -42,6 +45,14 @@ export function Pagination({
     onPageChange?.(Math.min(safeTotalPages, Math.max(1, page)))
   }
 
+  const isFirstPage = safeCurrentPage === 1
+  const isLastPage = safeCurrentPage === safeTotalPages
+  const getControlClassName = (disabled: boolean) =>
+    cn(
+      paginationControlClassName,
+      disabled ? "text-[var(--label-disable)]" : "text-[var(--label-normal)]",
+    )
+
   return (
     <div
       className={cn("inline-flex h-11 items-center gap-5", className)}
@@ -50,18 +61,18 @@ export function Pagination({
       <div className="flex items-center gap-2">
         <button
           type="button"
-          className="flex size-6 items-center justify-center text-[var(--label-disable)] disabled:pointer-events-none"
+          className={getControlClassName(isFirstPage)}
           onClick={() => handlePageChange(1)}
-          disabled={safeCurrentPage === 1}
+          disabled={isFirstPage}
           aria-label="First page"
         >
           {firstIcon}
         </button>
         <button
           type="button"
-          className="flex size-6 items-center justify-center text-[var(--label-disable)] disabled:pointer-events-none"
+          className={getControlClassName(isFirstPage)}
           onClick={() => handlePageChange(safeCurrentPage - 1)}
-          disabled={safeCurrentPage === 1}
+          disabled={isFirstPage}
           aria-label="Previous page"
         >
           {prevIcon}
@@ -90,18 +101,18 @@ export function Pagination({
       <div className="flex items-center gap-2">
         <button
           type="button"
-          className="flex size-6 items-center justify-center text-[var(--label-disable)] disabled:pointer-events-none"
+          className={getControlClassName(isLastPage)}
           onClick={() => handlePageChange(safeCurrentPage + 1)}
-          disabled={safeCurrentPage === safeTotalPages}
+          disabled={isLastPage}
           aria-label="Next page"
         >
           {nextIcon}
         </button>
         <button
           type="button"
-          className="flex size-6 items-center justify-center text-[var(--label-disable)] disabled:pointer-events-none"
+          className={getControlClassName(isLastPage)}
           onClick={() => handlePageChange(safeTotalPages)}
-          disabled={safeCurrentPage === safeTotalPages}
+          disabled={isLastPage}
           aria-label="Last page"
         >
           {lastIcon}

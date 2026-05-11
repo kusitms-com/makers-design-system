@@ -25,7 +25,9 @@
     "react-dom": "^19.2.4"
   },
   "dependencies": {
-    "@kusitms.com/icons": "workspace:*"
+    "@kusitms.com/icons": "workspace:*",
+    "@radix-ui/react-accordion": "^1.2.12",
+    "@radix-ui/react-select": "^2.2.5"
   },
   "devDependencies": {
     "@kusitms.com/tsconfig": "workspace:*",

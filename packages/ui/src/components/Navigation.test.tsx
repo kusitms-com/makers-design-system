@@ -57,4 +57,15 @@ describe("Pagination", () => {
 
     expect(onPageChange).toHaveBeenCalledWith(2)
   })
+
+  it("styles page controls by disabled state", () => {
+    render(<Pagination currentPage={2} totalPages={3} />)
+
+    expect(screen.getByRole("button", { name: "Previous page" })).toHaveClass(
+      "text-[var(--label-normal)]",
+    )
+    expect(screen.getByRole("button", { name: "Next page" })).toHaveClass(
+      "text-[var(--label-normal)]",
+    )
+  })
 })
