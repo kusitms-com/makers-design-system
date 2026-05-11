@@ -21,4 +21,17 @@ describe("NavigationTab", () => {
       }),
     ).toHaveAttribute("aria-selected", "true")
   })
+
+  it("passes container size to tab items by default", () => {
+    render(
+      <NavigationTab size="s">
+        <NavigationTabItem>Small tab</NavigationTabItem>
+      </NavigationTab>,
+    )
+
+    const tab = screen.getByRole("tab", { name: "Small tab" })
+
+    expect(tab).toHaveClass("h-[104px]")
+    expect(screen.getByText("Small tab")).toHaveClass("text-[16px]")
+  })
 })

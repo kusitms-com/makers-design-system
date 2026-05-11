@@ -1,4 +1,11 @@
-import type { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from "react"
+import {
+  type ButtonHTMLAttributes,
+  Children,
+  cloneElement,
+  type HTMLAttributes,
+  isValidElement,
+  type ReactNode,
+} from "react"
 
 type FilterDevice = "desktop" | "mobile"
 
@@ -90,6 +97,15 @@ export function NavigationFilter({
   ...props
 }: NavigationFilterProps) {
   const styles = filterStyles[device]
+  const childrenWithDevice = Children.map(children, (child) => {
+    if (!isValidElement<Partial<FilterItemProps>>(child)) {
+      return child
+    }
+
+    return cloneElement(child, {
+      device: child.props.device ?? device,
+    })
+  })
 
   return (
     <div
@@ -101,7 +117,7 @@ export function NavigationFilter({
       )}
       {...props}
     >
-      {children}
+      {childrenWithDevice}
     </div>
   )
 }

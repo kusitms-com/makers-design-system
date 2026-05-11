@@ -1,4 +1,11 @@
-import type { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from "react"
+import {
+  type ButtonHTMLAttributes,
+  Children,
+  cloneElement,
+  type HTMLAttributes,
+  isValidElement,
+  type ReactNode,
+} from "react"
 
 type TabSize = "m" | "s"
 
@@ -98,6 +105,15 @@ export function NavigationTab({
   ...props
 }: NavigationTabProps) {
   const styles = sizeStyles[size]
+  const childrenWithSize = Children.map(children, (child) => {
+    if (!isValidElement<Partial<NavigationTabItemProps>>(child)) {
+      return child
+    }
+
+    return cloneElement(child, {
+      size: child.props.size ?? size,
+    })
+  })
 
   return (
     <div
@@ -110,7 +126,7 @@ export function NavigationTab({
       aria-orientation="horizontal"
       {...props}
     >
-      {children}
+      {childrenWithSize}
     </div>
   )
 }

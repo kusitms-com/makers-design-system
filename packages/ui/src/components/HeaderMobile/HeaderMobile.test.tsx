@@ -1,7 +1,11 @@
-import { act, render, screen } from "@testing-library/react"
+import { act, fireEvent, render, screen } from "@testing-library/react"
 import { afterEach, describe, expect, it, vi } from "vitest"
 
-import { HeaderMobile, HeaderMobileMenu } from "./HeaderMobile"
+import {
+  HeaderMobile,
+  HeaderMobileItem,
+  HeaderMobileMenu,
+} from "./HeaderMobile"
 
 const originalResizeObserver = globalThis.ResizeObserver
 
@@ -112,5 +116,45 @@ describe("HeaderMobileMenu", () => {
     })
 
     expect(container.firstChild).toHaveStyle({ maxHeight: "240px" })
+  })
+
+  it("preserves internal transition handling when style and onTransitionEnd are provided", () => {
+    const onTransitionEnd = vi.fn()
+    const { container } = render(
+      <HeaderMobileMenu
+        isOpen
+        onTransitionEnd={onTransitionEnd}
+        style={{ color: "red", maxHeight: 999 }}
+      >
+        <div>Menu content</div>
+      </HeaderMobileMenu>,
+    )
+    const menu = container.firstElementChild as HTMLElement
+
+    expect(menu).toHaveStyle({ color: "rgb(255, 0, 0)", maxHeight: "120px" })
+
+    fireEvent.transitionEnd(menu)
+
+    expect(onTransitionEnd).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe("HeaderMobileItem", () => {
+  it("renders a link when href is provided", () => {
+    render(<HeaderMobileItem href="/about">About</HeaderMobileItem>)
+
+    expect(screen.getByRole("link", { name: "About" })).toHaveAttribute(
+      "href",
+      "/about",
+    )
+  })
+
+  it("renders a button by default", () => {
+    render(<HeaderMobileItem>Projects</HeaderMobileItem>)
+
+    expect(screen.getByRole("button", { name: "Projects" })).toHaveAttribute(
+      "type",
+      "button",
+    )
   })
 })

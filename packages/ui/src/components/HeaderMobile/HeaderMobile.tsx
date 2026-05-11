@@ -1,6 +1,9 @@
 import {
+  type AnchorHTMLAttributes,
+  type ButtonHTMLAttributes,
   type HTMLAttributes,
   type ReactNode,
+  type TransitionEvent,
   useCallback,
   useEffect,
   useRef,
@@ -65,6 +68,8 @@ export function HeaderMobileMenu({
   children,
   isOpen = false,
   className,
+  style,
+  onTransitionEnd,
   ...props
 }: HeaderMobileMenuProps) {
   const contentRef = useRef<HTMLDivElement>(null)
@@ -104,10 +109,12 @@ export function HeaderMobileMenu({
     }
   }, [isOpen])
 
-  const handleTransitionEnd = () => {
-    if (!isOpen) {
+  const handleTransitionEnd = (event: TransitionEvent<HTMLDivElement>) => {
+    if (event.target === event.currentTarget && !isOpen) {
       setIsVisible(false)
     }
+
+    onTransitionEnd?.(event)
   }
 
   return (
@@ -116,7 +123,7 @@ export function HeaderMobileMenu({
         "overflow-hidden transition-[max-height] duration-300 ease-in-out",
         className,
       )}
-      style={{ maxHeight: isOpen ? height : 0 }}
+      style={{ ...style, maxHeight: isOpen ? height : 0 }}
       onTransitionEnd={handleTransitionEnd}
       {...props}
     >
@@ -127,8 +134,28 @@ export function HeaderMobileMenu({
   )
 }
 
-export type HeaderMobileItemProps = HTMLAttributes<HTMLDivElement> & {
+type HeaderMobileItemBaseProps = {
   children?: ReactNode
+}
+
+type HeaderMobileItemButtonProps = Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  "type"
+> & {
+  href?: undefined
+}
+
+type HeaderMobileItemLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
+  href: string
+}
+
+export type HeaderMobileItemProps = HeaderMobileItemBaseProps &
+  (HeaderMobileItemButtonProps | HeaderMobileItemLinkProps)
+
+function isHeaderMobileItemLinkProps(
+  props: HeaderMobileItemProps,
+): props is HeaderMobileItemBaseProps & HeaderMobileItemLinkProps {
+  return "href" in props && typeof props.href === "string"
 }
 
 export function HeaderMobileItem({
@@ -136,19 +163,33 @@ export function HeaderMobileItem({
   className,
   ...props
 }: HeaderMobileItemProps) {
-  return (
-    <div
-      className={cn(
-        "flex w-full flex-col items-center gap-3",
-        "bg-[var(--fill-netural)] px-4 py-5",
-        className,
-      )}
-      {...props}
-    >
-      <p className="w-full text-center font-['Pretendard',sans-serif] text-[20px] font-semibold leading-[32px] tracking-[-0.16px] text-[var(--label-normal)] whitespace-nowrap">
+  const sharedClassName = cn(
+    "flex w-full flex-col items-center gap-3",
+    "bg-[var(--fill-netural)] px-4 py-5",
+    className,
+  )
+  const content = (
+    <>
+      <span className="w-full text-center font-['Pretendard',sans-serif] text-[20px] font-semibold leading-[32px] tracking-[-0.16px] text-[var(--label-normal)] whitespace-nowrap">
         {children}
-      </p>
-      <div className="w-full h-px bg-[var(--line-alternative)]" />
-    </div>
+      </span>
+      <span className="w-full h-px bg-[var(--line-alternative)]" />
+    </>
+  )
+
+  if (isHeaderMobileItemLinkProps(props)) {
+    return (
+      <a className={sharedClassName} {...props}>
+        {content}
+      </a>
+    )
+  }
+
+  const buttonProps = props as HeaderMobileItemButtonProps
+
+  return (
+    <button className={sharedClassName} {...buttonProps} type="button">
+      {content}
+    </button>
   )
 }
