@@ -34,4 +34,16 @@ describe("NavigationTab", () => {
     expect(tab).toHaveClass("h-26")
     expect(screen.getByText("Small tab")).toHaveClass("text-body-16m")
   })
+
+  it("constrains long tab labels inside the tab item", () => {
+    render(
+      <NavigationTabItem>Very long navigation tab label</NavigationTabItem>,
+    )
+
+    expect(screen.getByText("Very long navigation tab label")).toHaveClass(
+      "max-w-full",
+      "overflow-hidden",
+      "text-ellipsis",
+    )
+  })
 })

@@ -74,3 +74,20 @@ export const Interactive: Story = {
     )
   },
 }
+
+export const LongMenuItem: Story = {
+  render: () => (
+    <div className="flex w-80 flex-col items-center">
+      <HeaderMobile
+        className="w-full"
+        logo={<HeaderMobileLogo />}
+        menuIcon={<HamburgMIcon />}
+        closeIcon={<CancelMIcon />}
+        isOpen
+      />
+      <HeaderMobileMenu className="w-full" isOpen>
+        <HeaderMobileItem>아주 긴 모바일 내비게이션 메뉴 이름</HeaderMobileItem>
+      </HeaderMobileMenu>
+    </div>
+  ),
+}

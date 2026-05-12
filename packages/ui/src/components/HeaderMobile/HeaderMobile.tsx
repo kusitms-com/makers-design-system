@@ -170,7 +170,7 @@ export function HeaderMobileItem({
   )
   const content = (
     <>
-      <span className="w-full whitespace-nowrap text-center font-sans text-headline-20sb text-label-normal">
+      <span className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-center font-sans text-headline-20sb text-label-normal">
         {children}
       </span>
       <span className="h-px w-full bg-line-alternative" />

@@ -51,4 +51,19 @@ describe("Footer", () => {
     expect(classes).not.toContain("w-[320px]")
     expect(classes).not.toContain("min-w-[320px]")
   })
+
+  it("allows desktop copyright text to wrap inside its column", () => {
+    render(
+      <Footer
+        logo={<span>Logo</span>}
+        copyright="KUSITMS very long copyright text that should wrap in narrow layouts"
+      />,
+    )
+
+    expect(
+      screen.getByText(
+        "KUSITMS very long copyright text that should wrap in narrow layouts",
+      ),
+    ).toHaveClass("whitespace-pre-wrap")
+  })
 })

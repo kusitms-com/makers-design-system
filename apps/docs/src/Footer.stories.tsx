@@ -108,3 +108,21 @@ export const Mobile: Story = {
     </div>
   ),
 }
+
+export const DesktopLongContent: Story = {
+  render: () => (
+    <div className="w-full overflow-x-auto bg-fill-normal">
+      <div className="mx-auto w-256">
+        <Footer
+          device="desktop"
+          logo={<FooterDesktopLogo />}
+          bylawsHref="https://example.com/bylaws"
+          contactIcons={contactIcons}
+          copyright={
+            "KUSITMS (큐시즘, 한국대학생IT경영학회) 긴 저작권 문구 예시\n© 2023.KUSITMS. ALL rights reserved."
+          }
+        />
+      </div>
+    </div>
+  ),
+}

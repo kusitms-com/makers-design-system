@@ -35,3 +35,19 @@ export const NavigationStates: Story = {
     </div>
   ),
 }
+
+export const ConstrainedDesktop: Story = {
+  render: () => (
+    <div className="mx-auto w-256 bg-fill-normal">
+      <Header logo={<HeaderDesktopLogo />}>
+        <HeaderNavigation href="#about">학회소개</HeaderNavigation>
+        <HeaderNavigation href="#projects">
+          아주 긴 프로젝트 메뉴
+        </HeaderNavigation>
+        <HeaderNavigation href="#archive">32기 아카이브</HeaderNavigation>
+        <HeaderNavigation href="#review">후기</HeaderNavigation>
+        <HeaderNavigation href="#recruiting">리크루팅</HeaderNavigation>
+      </Header>
+    </div>
+  ),
+}

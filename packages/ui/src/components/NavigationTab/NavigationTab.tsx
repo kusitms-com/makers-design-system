@@ -79,7 +79,7 @@ export function NavigationTabItem({
     >
       <span
         className={cn(
-          "whitespace-nowrap font-sans",
+          "max-w-full overflow-hidden text-ellipsis whitespace-nowrap font-sans",
           styles.text,
           styles.textOffset,
           active ? styles.activeText : styles.inactiveText,

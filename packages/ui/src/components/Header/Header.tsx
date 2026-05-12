@@ -19,7 +19,9 @@ export function Header({ logo, children, className, ...props }: HeaderProps) {
       {...props}
     >
       <div className="shrink-0">{logo}</div>
-      <nav className="flex items-center gap-6">{children}</nav>
+      <nav className="flex min-w-0 items-center justify-end gap-6 overflow-hidden">
+        {children}
+      </nav>
     </header>
   )
 }

@@ -94,7 +94,7 @@ export function Footer({
           <div className="flex w-full pb-3">
             {links ?? defaultBylawsLink("desktop", bylawsHref, bylawsLabel)}
           </div>
-          <p className="whitespace-pre font-sans text-body-16sb text-label-normal">
+          <p className="whitespace-pre-wrap font-sans text-body-16sb text-label-normal">
             {copyright}
           </p>
         </div>

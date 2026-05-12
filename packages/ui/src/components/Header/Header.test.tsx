@@ -27,4 +27,16 @@ describe("Header", () => {
     expect(classes).not.toContain("w-[1280px]")
     expect(classes).not.toContain("min-w-[1024px]")
   })
+
+  it("constrains the desktop navigation region inside the header", () => {
+    const { container } = render(
+      <Header logo={<span>Logo</span>}>
+        <HeaderNavigation>Long navigation label</HeaderNavigation>
+      </Header>,
+    )
+
+    const nav = container.querySelector("nav")
+
+    expect(nav).toHaveClass("min-w-0", "overflow-hidden")
+  })
 })

@@ -21,6 +21,34 @@ export type PaginationProps = HTMLAttributes<HTMLDivElement> & {
 const paginationControlClassName =
   "flex size-6 items-center justify-center disabled:pointer-events-none [&_svg]:size-6 [&_svg]:shrink-0"
 
+type PageItem = number | "ellipsis-start" | "ellipsis-end"
+
+const getPageItems = (currentPage: number, totalPages: number): PageItem[] => {
+  if (totalPages <= 7) {
+    return Array.from({ length: totalPages }, (_, i) => i + 1)
+  }
+
+  const middleStart = Math.max(2, currentPage - 1)
+  const middleEnd = Math.min(totalPages - 1, currentPage + 1)
+  const items: PageItem[] = [1]
+
+  if (middleStart > 2) {
+    items.push("ellipsis-start")
+  }
+
+  for (let page = middleStart; page <= middleEnd; page += 1) {
+    items.push(page)
+  }
+
+  if (middleEnd < totalPages - 1) {
+    items.push("ellipsis-end")
+  }
+
+  items.push(totalPages)
+
+  return items
+}
+
 export function Pagination({
   currentPage = 1,
   totalPages = 5,
@@ -37,7 +65,7 @@ export function Pagination({
     safeTotalPages,
     Math.max(1, Math.floor(currentPage)),
   )
-  const pages = Array.from({ length: safeTotalPages }, (_, i) => i + 1)
+  const pageItems = getPageItems(safeCurrentPage, safeTotalPages)
 
   const handlePageChange = (page: number) => {
     onPageChange?.(Math.min(safeTotalPages, Math.max(1, page)))
@@ -78,22 +106,36 @@ export function Pagination({
       </div>
 
       <div className="flex items-center gap-3">
-        {pages.map((page) => (
-          <button
-            key={page}
-            type="button"
-            className={cn(
-              "whitespace-nowrap font-sans",
-              page === safeCurrentPage
-                ? "text-body-16b text-label-normal"
-                : "text-body-16m text-label-disable",
-            )}
-            onClick={() => handlePageChange(page)}
-            aria-current={page === safeCurrentPage ? "page" : undefined}
-          >
-            {page}
-          </button>
-        ))}
+        {pageItems.map((pageItem) => {
+          if (typeof pageItem !== "number") {
+            return (
+              <span
+                key={pageItem}
+                aria-hidden="true"
+                className="font-sans text-body-16m text-label-disable"
+              >
+                ...
+              </span>
+            )
+          }
+
+          return (
+            <button
+              key={pageItem}
+              type="button"
+              className={cn(
+                "whitespace-nowrap font-sans",
+                pageItem === safeCurrentPage
+                  ? "text-body-16b text-label-normal"
+                  : "text-body-16m text-label-disable",
+              )}
+              onClick={() => handlePageChange(pageItem)}
+              aria-current={pageItem === safeCurrentPage ? "page" : undefined}
+            >
+              {pageItem}
+            </button>
+          )
+        })}
       </div>
 
       <div className="flex items-center gap-2">

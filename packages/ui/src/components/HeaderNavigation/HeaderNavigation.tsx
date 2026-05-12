@@ -50,7 +50,7 @@ export function HeaderNavigation({
   ...props
 }: HeaderNavigationProps) {
   const sharedClassName = cn(
-    "flex items-center justify-center px-4 whitespace-nowrap",
+    "flex max-w-full items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap px-4",
     "font-sans transition-colors",
     stateStyles[state],
     className,

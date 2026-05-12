@@ -22,4 +22,12 @@ describe("HeaderNavigation", () => {
       "active:text-brand-primary",
     )
   })
+
+  it("constrains long labels in narrow header layouts", () => {
+    render(<HeaderNavigation>Very long navigation label</HeaderNavigation>)
+
+    expect(
+      screen.getByRole("button", { name: "Very long navigation label" }),
+    ).toHaveClass("max-w-full", "overflow-hidden", "text-ellipsis")
+  })
 })

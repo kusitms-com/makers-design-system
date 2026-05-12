@@ -41,4 +41,28 @@ describe("Pagination", () => {
       "[&_svg]:shrink-0",
     )
   })
+
+  it("renders a compact page window when total pages are large", () => {
+    render(<Pagination currentPage={10} totalPages={20} />)
+
+    expect(screen.getByRole("button", { name: "1" })).toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "9" })).toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "10" })).toHaveAttribute(
+      "aria-current",
+      "page",
+    )
+    expect(screen.getByRole("button", { name: "11" })).toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "20" })).toBeInTheDocument()
+    expect(screen.getAllByText("...")).toHaveLength(2)
+  })
+
+  it("does not render every page button for large totals", () => {
+    render(<Pagination currentPage={10} totalPages={20} />)
+
+    const numericButtons = screen
+      .getAllByRole("button")
+      .filter((button) => /^\d+$/.test(button.textContent ?? ""))
+
+    expect(numericButtons).toHaveLength(5)
+  })
 })

@@ -24,3 +24,10 @@ export const MiddlePage: Story = {
     totalPages: 5,
   },
 }
+
+export const ManyPages: Story = {
+  args: {
+    currentPage: 10,
+    totalPages: 20,
+  },
+}

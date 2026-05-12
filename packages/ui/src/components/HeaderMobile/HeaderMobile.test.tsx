@@ -157,4 +157,15 @@ describe("HeaderMobileItem", () => {
       "button",
     )
   })
+
+  it("constrains long mobile menu labels", () => {
+    render(
+      <HeaderMobileItem>Very long mobile navigation label</HeaderMobileItem>,
+    )
+
+    expect(screen.getByText("Very long mobile navigation label")).toHaveClass(
+      "overflow-hidden",
+      "text-ellipsis",
+    )
+  })
 })

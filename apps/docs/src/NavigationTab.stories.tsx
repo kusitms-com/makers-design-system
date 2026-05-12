@@ -55,3 +55,15 @@ export const SizeS: Story = {
     </div>
   ),
 }
+
+export const NarrowLongLabels: Story = {
+  render: () => (
+    <div className="w-80 bg-fill-normal">
+      <NavigationTab size="s">
+        <NavigationTabItem active>아주 긴 탭 이름입니다</NavigationTabItem>
+        <NavigationTabItem>두 번째 긴 탭 이름입니다</NavigationTabItem>
+        <NavigationTabItem>세 번째</NavigationTabItem>
+      </NavigationTab>
+    </div>
+  ),
+}
