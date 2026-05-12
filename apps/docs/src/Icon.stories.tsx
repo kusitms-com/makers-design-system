@@ -77,7 +77,7 @@ export const Gallery: Story = {
       {Object.entries(icons).map(([name, Icon]) => (
         <div key={name} className="flex flex-col items-center gap-2">
           <Icon style={{ color }} {...args} />
-          <span className="text-xs">{name}</span>
+          <span className="text-caption-12r">{name}</span>
         </div>
       ))}
     </div>

@@ -13,7 +13,7 @@ type Story = StoryObj<typeof meta>
 
 export const Overview: Story = {
   render: () => (
-    <div className="flex w-[1240px] flex-col gap-20 bg-white">
+    <div className="flex w-310 flex-col gap-20 bg-fill-normal">
       <NavigationTab size="m">
         <NavigationTabItem active size="m">
           밋업 프로젝트
@@ -32,7 +32,7 @@ export const Overview: Story = {
 
 export const SizeM: Story = {
   render: () => (
-    <div className="w-[1240px] bg-white">
+    <div className="w-310 bg-fill-normal">
       <NavigationTab size="m">
         <NavigationTabItem active size="m">
           밋업 프로젝트
@@ -45,7 +45,7 @@ export const SizeM: Story = {
 
 export const SizeS: Story = {
   render: () => (
-    <div className="w-[1024px] bg-white">
+    <div className="w-256 bg-fill-normal">
       <NavigationTab size="s">
         <NavigationTabItem active size="s">
           라벨명

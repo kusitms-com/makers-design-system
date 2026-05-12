@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>
 
 export const Desktop: Story = {
   render: () => (
-    <div className="mx-auto w-[1280px] min-w-[1024px] max-w-[1440px]">
+    <div className="mx-auto w-320 min-w-256 max-w-360">
       <Header logo={<HeaderDesktopLogo />}>
         <HeaderNavigation href="#about">학회소개</HeaderNavigation>
         <HeaderNavigation href="#projects">프로젝트</HeaderNavigation>
