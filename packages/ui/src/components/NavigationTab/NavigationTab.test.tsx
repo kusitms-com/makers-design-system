@@ -31,7 +31,7 @@ describe("NavigationTab", () => {
 
     const tab = screen.getByRole("tab", { name: "Small tab" })
 
-    expect(tab).toHaveClass("h-[104px]")
-    expect(screen.getByText("Small tab")).toHaveClass("text-[16px]")
+    expect(tab).toHaveClass("h-26")
+    expect(screen.getByText("Small tab")).toHaveClass("text-body-16m")
   })
 })

@@ -18,8 +18,8 @@ describe("HeaderNavigation", () => {
     render(<HeaderNavigation>About</HeaderNavigation>)
 
     expect(screen.getByRole("button", { name: "About" })).toHaveClass(
-      "hover:text-[var(--label-normal)]",
-      "active:text-[var(--brand-primary)]",
+      "hover:text-label-normal",
+      "active:text-brand-primary",
     )
   })
 })

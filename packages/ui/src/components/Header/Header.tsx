@@ -1,12 +1,10 @@
 import type { HTMLAttributes, ReactNode } from "react"
 
+import { cn } from "../../utils/cn"
+
 export type HeaderProps = HTMLAttributes<HTMLElement> & {
   logo?: ReactNode
   children?: ReactNode
-}
-
-function cn(...values: Array<string | undefined>) {
-  return values.filter(Boolean).join(" ")
 }
 
 export function Header({ logo, children, className, ...props }: HeaderProps) {
@@ -15,7 +13,7 @@ export function Header({ logo, children, className, ...props }: HeaderProps) {
       className={cn(
         "flex items-center justify-between",
         "w-full",
-        "bg-[var(--fill-normal)] px-10 py-6",
+        "bg-fill-normal px-10 py-6",
         className,
       )}
       {...props}

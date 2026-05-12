@@ -10,6 +10,8 @@ import {
   useState,
 } from "react"
 
+import { cn } from "../../utils/cn"
+
 export type HeaderMobileProps = HTMLAttributes<HTMLDivElement> & {
   logo?: ReactNode
   menuIcon?: ReactNode
@@ -17,10 +19,6 @@ export type HeaderMobileProps = HTMLAttributes<HTMLDivElement> & {
   isOpen?: boolean
   onToggle?: () => void
   menuId?: string
-}
-
-function cn(...values: Array<string | undefined>) {
-  return values.filter(Boolean).join(" ")
 }
 
 export function HeaderMobile({
@@ -37,8 +35,8 @@ export function HeaderMobile({
     <div
       className={cn(
         "flex items-center justify-between",
-        "bg-[var(--fill-normal)] px-4 py-5",
-        "h-[69px] w-full",
+        "bg-fill-normal px-4 py-5",
+        "h-17.25 w-full",
         className,
       )}
       {...props}
@@ -46,9 +44,11 @@ export function HeaderMobile({
       <div className="shrink-0">{logo}</div>
       <button
         type="button"
-        className="shrink-0 size-6 flex items-center justify-center transition-transform duration-200"
+        className={cn(
+          "flex size-6 shrink-0 items-center justify-center transition-transform duration-200",
+          isOpen && "rotate-90",
+        )}
         onClick={onToggle}
-        style={{ transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }}
         aria-controls={menuId}
         aria-expanded={isOpen}
         aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
@@ -165,15 +165,15 @@ export function HeaderMobileItem({
 }: HeaderMobileItemProps) {
   const sharedClassName = cn(
     "flex w-full flex-col items-center gap-3",
-    "bg-[var(--fill-netural)] px-4 py-5",
+    "bg-fill-netural px-4 py-5",
     className,
   )
   const content = (
     <>
-      <span className="w-full text-center font-['Pretendard',sans-serif] text-[20px] font-semibold leading-[32px] tracking-[-0.16px] text-[var(--label-normal)] whitespace-nowrap">
+      <span className="w-full whitespace-nowrap text-center font-sans text-headline-20sb text-label-normal">
         {children}
       </span>
-      <span className="w-full h-px bg-[var(--line-alternative)]" />
+      <span className="h-px w-full bg-line-alternative" />
     </>
   )
 

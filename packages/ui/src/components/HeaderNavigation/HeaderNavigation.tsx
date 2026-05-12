@@ -4,6 +4,8 @@ import type {
   PropsWithChildren,
 } from "react"
 
+import { cn } from "../../utils/cn"
+
 type HeaderNavState = "default" | "hovered" | "pressed"
 
 type HeaderNavigationBaseProps = {
@@ -30,13 +32,9 @@ export type HeaderNavigationProps =
 
 const stateStyles: Record<HeaderNavState, string> = {
   default:
-    "font-medium text-[var(--label-light)] hover:font-bold hover:text-[var(--label-normal)] active:font-bold active:text-[var(--brand-primary)]",
-  hovered: "font-bold text-[var(--label-normal)]",
-  pressed: "font-bold text-[var(--brand-primary)]",
-}
-
-function cn(...values: Array<string | undefined>) {
-  return values.filter(Boolean).join(" ")
+    "text-body-16m text-label-light hover:text-body-16b hover:text-label-normal active:text-body-16b active:text-brand-primary",
+  hovered: "text-body-16b text-label-normal",
+  pressed: "text-body-16b text-brand-primary",
 }
 
 function isLinkProps(
@@ -53,7 +51,7 @@ export function HeaderNavigation({
 }: HeaderNavigationProps) {
   const sharedClassName = cn(
     "flex items-center justify-center px-4 whitespace-nowrap",
-    "font-['Pretendard',sans-serif] text-[16px] leading-[24px] tracking-[-0.04px] transition-colors",
+    "font-sans transition-colors",
     stateStyles[state],
     className,
   )

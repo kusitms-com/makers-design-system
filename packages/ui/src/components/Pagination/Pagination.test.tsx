@@ -26,10 +26,10 @@ describe("Pagination", () => {
     render(<Pagination currentPage={2} totalPages={3} />)
 
     expect(screen.getByRole("button", { name: "Previous page" })).toHaveClass(
-      "text-[var(--label-normal)]",
+      "text-label-normal",
     )
     expect(screen.getByRole("button", { name: "Next page" })).toHaveClass(
-      "text-[var(--label-normal)]",
+      "text-label-normal",
     )
   })
 

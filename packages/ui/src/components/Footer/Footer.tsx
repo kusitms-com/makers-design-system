@@ -1,5 +1,7 @@
 import type { HTMLAttributes, ReactNode } from "react"
 
+import { cn } from "../../utils/cn"
+
 export type FooterProps = HTMLAttributes<HTMLElement> & {
   logo?: ReactNode
   links?: ReactNode
@@ -11,20 +13,15 @@ export type FooterProps = HTMLAttributes<HTMLElement> & {
   bylawsLabel?: string
 }
 
-function cn(...values: Array<string | undefined>) {
-  return values.filter(Boolean).join(" ")
-}
-
 const defaultBylawsLink = (
   device: "desktop" | "mobile",
   href?: string,
   label = "학회정관",
 ) => {
-  const className = `font-['Pretendard',sans-serif] not-italic text-[#17171a] ${
-    device === "desktop"
-      ? "text-[16px] font-semibold leading-[24px] tracking-[-0.04px]"
-      : "text-[12px] font-normal leading-[18px] tracking-[0.168px]"
-  }`
+  const className = cn(
+    "font-sans not-italic text-label-normal",
+    device === "desktop" ? "text-body-16sb" : "text-caption-12r",
+  )
 
   if (!href) {
     return <span className={className}>{label}</span>
@@ -52,7 +49,7 @@ export function Footer({
   if (device === "mobile") {
     return (
       <footer
-        className={cn("w-full bg-white px-4 pb-[60px] pt-[60px]", className)}
+        className={cn("w-full bg-fill-normal px-4 pb-15 pt-15", className)}
         {...props}
       >
         <div className="mx-auto flex w-full flex-col items-start">
@@ -62,14 +59,14 @@ export function Footer({
               <div className="pb-2">
                 {links ?? defaultBylawsLink("mobile", bylawsHref, bylawsLabel)}
               </div>
-              <p className="w-full font-['Pretendard',sans-serif] text-[12px] font-normal leading-[18px] tracking-[0.168px] whitespace-pre-wrap text-[#17171a]">
+              <p className="w-full whitespace-pre-wrap font-sans text-caption-12r text-label-normal">
                 {copyright}
               </p>
             </div>
             {scrollTopButton}
           </div>
           <div className="flex w-full flex-col items-start gap-2 pt-7">
-            <p className="font-['Pretendard',sans-serif] text-[16px] font-semibold leading-[24px] tracking-[-0.04px] text-[#17171a]">
+            <p className="font-sans text-body-16sb text-label-normal">
               Contact
             </p>
             <div className="flex flex-wrap items-center gap-1.5">
@@ -86,27 +83,23 @@ export function Footer({
       className={cn(
         "flex flex-col items-center justify-center",
         "w-full",
-        "bg-white px-10 pb-[60px]",
+        "bg-fill-normal px-10 pb-15",
         className,
       )}
       {...props}
     >
       <div className="flex w-full items-end justify-between">
-        <div className="flex w-[274px] flex-col items-start">
-          <div className="flex flex-col items-start pb-10 pt-[60px]">
-            {logo}
-          </div>
+        <div className="flex w-68.5 flex-col items-start">
+          <div className="flex flex-col items-start pb-10 pt-15">{logo}</div>
           <div className="flex w-full pb-3">
             {links ?? defaultBylawsLink("desktop", bylawsHref, bylawsLabel)}
           </div>
-          <p className="font-['Pretendard',sans-serif] text-[16px] font-semibold leading-[24px] tracking-[-0.04px] whitespace-pre text-[#17171a]">
+          <p className="whitespace-pre font-sans text-body-16sb text-label-normal">
             {copyright}
           </p>
         </div>
         <div className="flex shrink-0 flex-col items-start gap-5">
-          <p className="font-['Pretendard',sans-serif] text-[16px] font-semibold leading-[24px] tracking-[-0.04px] text-[#17171a]">
-            Contact
-          </p>
+          <p className="font-sans text-body-16sb text-label-normal">Contact</p>
           <div className="flex items-center gap-5">{contactIcons}</div>
         </div>
       </div>

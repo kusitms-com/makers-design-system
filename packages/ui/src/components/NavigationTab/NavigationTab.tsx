@@ -7,6 +7,8 @@ import {
   type ReactNode,
 } from "react"
 
+import { cn } from "../../utils/cn"
+
 type TabSize = "m" | "s"
 
 const sizeStyles: Record<
@@ -15,29 +17,29 @@ const sizeStyles: Record<
     container: string
     item: string
     text: string
-    textOffset: number
+    textOffset: string
     activeText: string
     inactiveText: string
     underline: string
   }
 > = {
   m: {
-    container: "max-w-[1200px]",
-    item: "h-[124px]",
-    text: "text-[24px] leading-[36px] tracking-[-0.192px]",
-    textOffset: 19,
-    activeText: "font-semibold text-[var(--label-normal)]",
-    inactiveText: "font-medium text-[var(--label-netural)]",
-    underline: "after:h-[3px]",
+    container: "max-w-300",
+    item: "h-31",
+    text: "text-headline-24m",
+    textOffset: "translate-y-4.75",
+    activeText: "text-headline-24sb text-label-normal",
+    inactiveText: "text-label-netural",
+    underline: "after:h-0.75",
   },
   s: {
-    container: "max-w-[1024px]",
-    item: "h-[104px]",
-    text: "text-[16px] leading-[24px] tracking-[-0.04px]",
-    textOffset: 28,
-    activeText: "font-bold text-[var(--label-normal)]",
-    inactiveText: "font-medium text-[var(--label-netural)]",
-    underline: "after:h-[2px]",
+    container: "max-w-256",
+    item: "h-26",
+    text: "text-body-16m",
+    textOffset: "translate-y-7",
+    activeText: "text-body-16b text-label-normal",
+    inactiveText: "text-label-netural",
+    underline: "after:h-0.5",
   },
 }
 
@@ -48,10 +50,6 @@ export type NavigationTabItemProps = Omit<
   children?: ReactNode
   active?: boolean
   size?: TabSize
-}
-
-function cn(...values: Array<string | undefined>) {
-  return values.filter(Boolean).join(" ")
 }
 
 export function NavigationTabItem({
@@ -66,10 +64,10 @@ export function NavigationTabItem({
   return (
     <button
       className={cn(
-        "relative flex min-w-0 flex-1 basis-0 items-center justify-center border-b border-[var(--line-alternative)] px-4",
+        "relative flex min-w-0 flex-1 basis-0 items-center justify-center border-b border-line-alternative px-4",
         styles.item,
         active
-          ? "after:absolute after:bottom-0 after:left-0 after:w-full after:bg-[var(--brand-primary)]"
+          ? "after:absolute after:bottom-0 after:left-0 after:w-full after:bg-brand-primary"
           : undefined,
         active ? styles.underline : undefined,
         className,
@@ -81,11 +79,11 @@ export function NavigationTabItem({
     >
       <span
         className={cn(
-          "whitespace-nowrap font-['Pretendard',sans-serif]",
+          "whitespace-nowrap font-sans",
           styles.text,
+          styles.textOffset,
           active ? styles.activeText : styles.inactiveText,
         )}
-        style={{ transform: `translateY(${styles.textOffset}px)` }}
       >
         {children}
       </span>

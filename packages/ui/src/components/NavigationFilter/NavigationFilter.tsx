@@ -6,6 +6,7 @@ import {
   isValidElement,
   type ReactNode,
 } from "react"
+import { cn } from "../../utils/cn"
 
 type FilterDevice = "desktop" | "mobile"
 
@@ -23,21 +24,21 @@ const filterStyles: Record<
 > = {
   desktop: {
     container: "justify-center gap-5",
-    item: "min-w-[120px] px-[10px] py-[10px]",
-    activeItem: "bg-[var(--fill-primary)]",
-    text: "text-[20px] leading-[32px] tracking-[-0.16px]",
-    activeText: "font-bold text-[var(--brand-primary)]",
-    inactiveText: "font-medium text-[var(--label-netural)]",
+    item: "min-w-30 px-2.5 py-2.5",
+    activeItem: "bg-fill-primary",
+    text: "",
+    activeText: "text-headline-20b text-brand-primary",
+    inactiveText: "text-headline-20m text-label-netural",
   },
   mobile: {
     container:
       "justify-start gap-1 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none]",
     item: "py-1",
-    activeItem: "bg-[var(--fill-primary)] px-4",
+    activeItem: "bg-fill-primary px-4",
     inactiveItem: "px-3",
-    text: "text-[16px] leading-[24px] tracking-[-0.04px]",
-    activeText: "font-semibold text-[var(--brand-primary)]",
-    inactiveText: "font-medium text-[var(--label-netural)]",
+    text: "",
+    activeText: "text-body-16sb text-brand-primary",
+    inactiveText: "text-body-16m text-label-netural",
   },
 }
 
@@ -45,10 +46,6 @@ export type FilterItemProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   children?: ReactNode
   active?: boolean
   device?: FilterDevice
-}
-
-function cn(...values: Array<string | undefined>) {
-  return values.filter(Boolean).join(" ")
 }
 
 export function FilterItem({
@@ -74,7 +71,7 @@ export function FilterItem({
     >
       <span
         className={cn(
-          "font-['Pretendard',sans-serif]",
+          "font-sans",
           styles.text,
           active ? styles.activeText : styles.inactiveText,
         )}

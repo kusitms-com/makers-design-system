@@ -6,6 +6,8 @@ import {
 } from "@kusitms.com/icons"
 import type { HTMLAttributes, ReactNode } from "react"
 
+import { cn } from "../../utils/cn"
+
 export type PaginationProps = HTMLAttributes<HTMLDivElement> & {
   currentPage?: number
   totalPages?: number
@@ -14,10 +16,6 @@ export type PaginationProps = HTMLAttributes<HTMLDivElement> & {
   nextIcon?: ReactNode
   firstIcon?: ReactNode
   lastIcon?: ReactNode
-}
-
-function cn(...values: Array<string | undefined>) {
-  return values.filter(Boolean).join(" ")
 }
 
 const paginationControlClassName =
@@ -50,7 +48,7 @@ export function Pagination({
   const getControlClassName = (disabled: boolean) =>
     cn(
       paginationControlClassName,
-      disabled ? "text-[var(--label-disable)]" : "text-[var(--label-normal)]",
+      disabled ? "text-label-disable" : "text-label-normal",
     )
 
   return (
@@ -85,10 +83,10 @@ export function Pagination({
             key={page}
             type="button"
             className={cn(
-              "font-['Pretendard',sans-serif] text-[16px] leading-[24px] tracking-[-0.04px] whitespace-nowrap",
+              "whitespace-nowrap font-sans",
               page === safeCurrentPage
-                ? "font-bold text-[var(--label-normal)]"
-                : "font-medium text-[var(--label-disable)]",
+                ? "text-body-16b text-label-normal"
+                : "text-body-16m text-label-disable",
             )}
             onClick={() => handlePageChange(page)}
             aria-current={page === safeCurrentPage ? "page" : undefined}
