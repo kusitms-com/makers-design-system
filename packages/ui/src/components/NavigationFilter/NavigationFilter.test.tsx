@@ -27,6 +27,6 @@ describe("NavigationFilter", () => {
       "py-1",
       "px-3",
     )
-    expect(screen.getByText("Design")).toHaveClass("text-[16px]")
+    expect(screen.getByText("Design")).toHaveClass("text-body-16m")
   })
 })
