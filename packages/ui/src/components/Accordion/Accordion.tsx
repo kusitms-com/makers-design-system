@@ -73,7 +73,7 @@ function AccordionItem({
       className={cn(
         "w-full bg-fill-netural",
         "rounded-2xl px-5 py-4",
-        "lg:rounded-[20px] lg:px-10 lg:py-8",
+        "lg:rounded-5 lg:px-10 lg:py-8",
         className,
       )}
     >

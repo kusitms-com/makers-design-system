@@ -1,19 +1,27 @@
 import {
   ArrowRightIcon,
   ArrowRightMIcon,
+  BlogIcon,
+  CafeIcon,
   CancelLIcon,
   CancelMIcon,
   CancelSIcon,
   CheckIcon,
+  GithubIcon,
   HamburgMIcon,
   HomeIcon,
+  InstagramIcon,
+  LinkedinIcon,
+  MailIcon,
   RightSIcon,
+  ScrollTopIcon,
   ToggleCloseMIcon,
   ToggleCloseSIcon,
   ToggleCloseXsIcon,
   ToggleOpenMIcon,
   ToggleOpenSIcon,
   ToggleOpenXsIcon,
+  YoutubeIcon,
 } from "@kusitms.com/icons"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import type { SVGProps } from "react"
@@ -23,19 +31,27 @@ type IconProps = SVGProps<SVGSVGElement> & { color?: string }
 const icons = {
   ArrowRightIcon,
   ArrowRightMIcon,
+  BlogIcon,
+  CafeIcon,
   CancelLIcon,
   CancelMIcon,
   CancelSIcon,
   CheckIcon,
+  GithubIcon,
   HamburgMIcon,
   HomeIcon,
+  InstagramIcon,
+  LinkedinIcon,
+  MailIcon,
   RightSIcon,
+  ScrollTopIcon,
   ToggleCloseMIcon,
   ToggleCloseSIcon,
   ToggleCloseXsIcon,
   ToggleOpenMIcon,
   ToggleOpenSIcon,
   ToggleOpenXsIcon,
+  YoutubeIcon,
 }
 
 const meta = {
@@ -61,7 +77,7 @@ export const Gallery: Story = {
       {Object.entries(icons).map(([name, Icon]) => (
         <div key={name} className="flex flex-col items-center gap-2">
           <Icon style={{ color }} {...args} />
-          <span className="text-xs">{name}</span>
+          <span className="text-caption-12r">{name}</span>
         </div>
       ))}
     </div>

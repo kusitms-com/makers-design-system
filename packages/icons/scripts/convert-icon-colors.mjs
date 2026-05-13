@@ -1,4 +1,4 @@
-import { glob, readdir, readFile, writeFile } from "node:fs/promises"
+import { readdir, readFile, writeFile } from "node:fs/promises"
 import { join } from "node:path"
 
 // Icons with multi-color designs that should not be converted

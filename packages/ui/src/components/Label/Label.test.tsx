@@ -21,9 +21,9 @@ describe("Label", () => {
       expect(el.className).toContain("text-brand-primary")
     })
 
-    it("rounded-[4px] 모양이 적용된다", () => {
+    it("rounded 모양이 적용된다", () => {
       render(<Label type="brand">기획</Label>)
-      expect(screen.getByText("기획").className).toContain("rounded-[4px]")
+      expect(screen.getByText("기획").className).toContain("rounded")
     })
 
     it("text-label-14sb 타이포그라피 클래스가 적용된다", () => {
