@@ -42,6 +42,25 @@ describe("Pagination", () => {
     )
   })
 
+  it("uses compact controls on small screens", () => {
+    render(<Pagination currentPage={2} totalPages={10} />)
+
+    expect(screen.getByRole("button", { name: "First page" })).toHaveClass(
+      "hidden",
+      "sm:flex",
+    )
+    expect(screen.getByRole("button", { name: "Last page" })).toHaveClass(
+      "hidden",
+      "sm:flex",
+    )
+    expect(screen.getByRole("button", { name: "Previous page" })).toHaveClass(
+      "flex",
+    )
+    expect(screen.getByRole("button", { name: "Next page" })).toHaveClass(
+      "flex",
+    )
+  })
+
   it("renders a compact page window when total pages are large", () => {
     render(<Pagination currentPage={10} totalPages={20} />)
 

@@ -104,7 +104,7 @@ describe("Accordion", () => {
     it("Item에 desktop padding/radius breakpoint 클래스가 적용된다", () => {
       const { container } = renderBasic()
       const firstItem = container.querySelector("[data-state]")
-      expect(firstItem?.className).toContain("lg:rounded-[20px]")
+      expect(firstItem?.className).toContain("lg:rounded-5")
       expect(firstItem?.className).toContain("lg:px-10")
       expect(firstItem?.className).toContain("lg:py-8")
     })

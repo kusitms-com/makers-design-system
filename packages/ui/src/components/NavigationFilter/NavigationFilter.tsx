@@ -8,7 +8,7 @@ import {
 } from "react"
 import { cn } from "../../utils/cn"
 
-type FilterDevice = "desktop" | "mobile"
+type FilterDevice = "desktop" | "mobile" | "responsive"
 
 const filterStyles: Record<
   FilterDevice,
@@ -40,6 +40,16 @@ const filterStyles: Record<
     activeText: "text-body-16sb text-brand-primary",
     inactiveText: "text-body-16m text-label-netural",
   },
+  responsive: {
+    container:
+      "justify-start gap-1 overflow-x-auto pb-10 [scrollbar-width:none] [-ms-overflow-style:none] lg:justify-center lg:gap-5 lg:overflow-visible lg:px-50 lg:pb-15",
+    item: "py-1 lg:min-w-30 lg:px-2.5 lg:py-2.5",
+    activeItem: "bg-fill-primary px-4 lg:px-2.5",
+    inactiveItem: "px-3 lg:px-2.5",
+    text: "",
+    activeText: "text-body-16sb text-brand-primary lg:text-headline-20b",
+    inactiveText: "text-body-16m text-label-netural lg:text-headline-20m",
+  },
 }
 
 export type FilterItemProps = ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -51,7 +61,7 @@ export type FilterItemProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 export function FilterItem({
   children,
   active = false,
-  device = "desktop",
+  device = "responsive",
   className,
   ...props
 }: FilterItemProps) {
@@ -89,7 +99,7 @@ export type NavigationFilterProps = HTMLAttributes<HTMLDivElement> & {
 
 export function NavigationFilter({
   children,
-  device = "desktop",
+  device = "responsive",
   className,
   ...props
 }: NavigationFilterProps) {
@@ -109,6 +119,7 @@ export function NavigationFilter({
       className={cn(
         "flex w-full items-center",
         device === "desktop" ? "flex-wrap" : undefined,
+        device === "responsive" ? "lg:flex-wrap" : undefined,
         styles.container,
         className,
       )}

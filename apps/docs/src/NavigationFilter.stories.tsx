@@ -3,6 +3,9 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 
 const meta = {
   component: NavigationFilter,
+  parameters: {
+    layout: "fullscreen",
+  },
   tags: ["autodocs"],
   title: "Components/NavigationFilter",
 } satisfies Meta<typeof NavigationFilter>
@@ -11,28 +14,37 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Desktop: Story = {
+export const Overview: Story = {
+  render: () => (
+    <div className="w-full bg-fill-normal">
+      <NavigationFilter>
+        <FilterItem active>전체</FilterItem>
+        <FilterItem>기획</FilterItem>
+        <FilterItem>디자인</FilterItem>
+        <FilterItem>개발</FilterItem>
+      </NavigationFilter>
+    </div>
+  ),
+}
+
+export const DesktopMode: Story = {
   render: () => (
     <NavigationFilter device="desktop">
-      <FilterItem active device="desktop">
-        전체
-      </FilterItem>
-      <FilterItem device="desktop">기획</FilterItem>
-      <FilterItem device="desktop">디자인</FilterItem>
-      <FilterItem device="desktop">개발</FilterItem>
+      <FilterItem active>전체</FilterItem>
+      <FilterItem>기획</FilterItem>
+      <FilterItem>디자인</FilterItem>
+      <FilterItem>개발</FilterItem>
     </NavigationFilter>
   ),
 }
 
-export const Mobile: Story = {
+export const MobileMode: Story = {
   render: () => (
     <NavigationFilter device="mobile">
-      <FilterItem active device="mobile">
-        전체
-      </FilterItem>
-      <FilterItem device="mobile">기획</FilterItem>
-      <FilterItem device="mobile">디자인</FilterItem>
-      <FilterItem device="mobile">개발</FilterItem>
+      <FilterItem active>전체</FilterItem>
+      <FilterItem>기획</FilterItem>
+      <FilterItem>디자인</FilterItem>
+      <FilterItem>개발</FilterItem>
     </NavigationFilter>
   ),
 }

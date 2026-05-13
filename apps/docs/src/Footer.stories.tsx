@@ -72,27 +72,13 @@ const contactIcons = (
   </>
 )
 
-export const Desktop: Story = {
+export const Responsive: Story = {
   render: () => (
-    <div className="w-full overflow-x-auto bg-fill-normal">
-      <div className="mx-auto w-320">
-        <Footer
-          device="desktop"
-          logo={<FooterDesktopLogo />}
-          bylawsHref="https://example.com/bylaws"
-          contactIcons={contactIcons}
-        />
-      </div>
-    </div>
-  ),
-}
-
-export const Mobile: Story = {
-  render: () => (
-    <div className="w-80">
+    <div className="w-full bg-fill-normal">
       <Footer
-        device="mobile"
-        logo={<FooterMobileLogo />}
+        className="mx-auto max-w-360"
+        logo={<FooterDesktopLogo />}
+        mobileLogo={<FooterMobileLogo />}
         bylawsHref="https://example.com/bylaws"
         contactIcons={contactIcons}
         scrollTopButton={
@@ -114,8 +100,8 @@ export const DesktopLongContent: Story = {
     <div className="w-full overflow-x-auto bg-fill-normal">
       <div className="mx-auto w-256">
         <Footer
-          device="desktop"
           logo={<FooterDesktopLogo />}
+          mobileLogo={<FooterMobileLogo />}
           bylawsHref="https://example.com/bylaws"
           contactIcons={contactIcons}
           copyright={

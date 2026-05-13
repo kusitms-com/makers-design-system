@@ -35,6 +35,23 @@ describe("NavigationTab", () => {
     expect(screen.getByText("Small tab")).toHaveClass("text-body-16m")
   })
 
+  it("uses responsive sizing by default", () => {
+    render(
+      <NavigationTab>
+        <NavigationTabItem active>Responsive tab</NavigationTabItem>
+      </NavigationTab>,
+    )
+
+    const tab = screen.getByRole("tab", { name: "Responsive tab" })
+
+    expect(screen.getByRole("tablist")).toHaveClass("max-w-256", "lg:max-w-300")
+    expect(tab).toHaveClass("h-26", "lg:h-31")
+    expect(screen.getByText("Responsive tab")).toHaveClass(
+      "text-body-16m",
+      "lg:text-headline-24m",
+    )
+  })
+
   it("constrains long tab labels inside the tab item", () => {
     render(
       <NavigationTabItem>Very long navigation tab label</NavigationTabItem>,

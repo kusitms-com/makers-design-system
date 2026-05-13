@@ -39,4 +39,25 @@ describe("Header", () => {
 
     expect(nav).toHaveClass("min-w-0", "overflow-hidden")
   })
+
+  it("can render desktop and mobile header layouts from one component", () => {
+    render(
+      <Header
+        logo={<span>Desktop Logo</span>}
+        mobileLogo={<span>Mobile Logo</span>}
+        menuIcon={<span>Menu</span>}
+        closeIcon={<span>Close</span>}
+        defaultOpen
+      >
+        <HeaderNavigation href="/about">About</HeaderNavigation>
+      </Header>,
+    )
+
+    expect(screen.getByText("Desktop Logo")).toBeInTheDocument()
+    expect(screen.getByText("Mobile Logo")).toBeInTheDocument()
+    expect(
+      screen.getByRole("button", { name: "Close navigation menu" }),
+    ).toHaveAttribute("aria-expanded", "true")
+    expect(screen.getAllByRole("link", { name: "About" })).toHaveLength(2)
+  })
 })

@@ -51,7 +51,7 @@ export const Default: Story = {
   render: (args) => {
     const [isOpen, setIsOpen] = useState(true)
     return (
-      <div className="relative flex min-h-screen items-center justify-center bg-[#4a4a55]">
+      <div className="relative flex min-h-screen items-center justify-center bg-effect-dimmer">
         <Modal
           {...args}
           isOpen={isOpen}

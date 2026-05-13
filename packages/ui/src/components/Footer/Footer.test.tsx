@@ -7,11 +7,13 @@ describe("Footer", () => {
   it("renders the default bylaws content as a link when href is provided", () => {
     render(<Footer bylawsHref="/bylaws" logo={<span>Logo</span>} />)
 
-    expect(
-      screen.getByRole("link", {
-        name: "학회정관",
-      }),
-    ).toHaveAttribute("href", "/bylaws")
+    const links = screen.getAllByRole("link", {
+      name: "학회정관",
+    })
+
+    expect(links).toHaveLength(2)
+    expect(links[0]).toHaveAttribute("href", "/bylaws")
+    expect(links[1]).toHaveAttribute("href", "/bylaws")
   })
 
   it("does not bake frame widths into the desktop footer component", () => {
@@ -27,7 +29,7 @@ describe("Footer", () => {
   it("aligns the desktop footer columns to the bottom edge", () => {
     const { container } = render(<Footer logo={<span>Logo</span>} />)
 
-    const row = container.querySelector("footer > div")
+    const row = container.querySelector("footer > div > div")
 
     expect(row?.className.split(" ")).toContain("items-end")
   })
@@ -35,7 +37,7 @@ describe("Footer", () => {
   it("pushes the desktop contact column to the far edge", () => {
     const { container } = render(<Footer logo={<span>Logo</span>} />)
 
-    const row = container.querySelector("footer > div")
+    const row = container.querySelector("footer > div > div")
     const classes = row?.className.split(" ") ?? []
 
     expect(classes).toContain("justify-between")
@@ -43,7 +45,7 @@ describe("Footer", () => {
   })
 
   it("does not bake mobile frame widths into the footer component", () => {
-    render(<Footer device="mobile" logo={<span>Logo</span>} />)
+    render(<Footer logo={<span>Logo</span>} />)
 
     const classes = screen.getByRole("contentinfo").className.split(" ")
 
@@ -60,10 +62,27 @@ describe("Footer", () => {
       />,
     )
 
+    const copyrightTexts = screen.getAllByText(
+      "KUSITMS very long copyright text that should wrap in narrow layouts",
+    )
+
+    expect(copyrightTexts[0]).toHaveClass("whitespace-pre-wrap")
+    expect(copyrightTexts[1]).toHaveClass("whitespace-pre-wrap")
+  })
+
+  it("renders desktop and mobile logo variants from one component", () => {
+    render(
+      <Footer
+        logo={<span>Desktop Logo</span>}
+        mobileLogo={<span>Mobile Logo</span>}
+        scrollTopButton={<button type="button">Scroll top</button>}
+      />,
+    )
+
+    expect(screen.getByText("Desktop Logo")).toBeInTheDocument()
+    expect(screen.getByText("Mobile Logo")).toBeInTheDocument()
     expect(
-      screen.getByText(
-        "KUSITMS very long copyright text that should wrap in narrow layouts",
-      ),
-    ).toHaveClass("whitespace-pre-wrap")
+      screen.getByRole("button", { name: "Scroll top" }),
+    ).toBeInTheDocument()
   })
 })
