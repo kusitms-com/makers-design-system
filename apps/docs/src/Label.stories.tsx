@@ -2,7 +2,7 @@ import { Label } from "@kusitms.com/ui"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 
 const meta = {
-  title: "Label/Default",
+  title: "Components/Label",
   component: Label,
   tags: ["autodocs"],
   args: {

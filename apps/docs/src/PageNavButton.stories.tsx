@@ -2,7 +2,7 @@ import { PageNavButton } from "@kusitms.com/ui"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 
 const meta = {
-  title: "Button/PageNav",
+  title: "Components/Button/PageNav",
   component: PageNavButton,
   tags: ["autodocs"],
   args: {

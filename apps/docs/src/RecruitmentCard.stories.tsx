@@ -42,7 +42,7 @@ const meta = {
   },
   component: RecruitmentCard,
   tags: ["autodocs"],
-  title: "Card/RecruitmentCard",
+  title: "Components/Card/RecruitmentCard",
 } satisfies Meta<typeof RecruitmentCard>
 
 export default meta

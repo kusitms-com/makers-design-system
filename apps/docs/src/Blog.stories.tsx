@@ -11,7 +11,7 @@ const meta = {
   },
   component: Blog,
   tags: ["autodocs"],
-  title: "Blog/Blog",
+  title: "Components/Blog",
 } satisfies Meta<typeof Blog>
 
 export default meta
