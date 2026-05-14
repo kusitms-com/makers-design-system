@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import { useState } from "react"
 
 const meta = {
-  title: "Modal/Default",
+  title: "Components/Modal",
   component: Modal,
   tags: ["autodocs"],
   args: {

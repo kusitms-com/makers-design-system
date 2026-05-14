@@ -10,7 +10,7 @@ const OPTIONS = [
 ]
 
 const meta = {
-  title: "Dropdown/Default",
+  title: "Components/Dropdown",
   component: Dropdown,
   tags: ["autodocs"],
   args: {

@@ -10,7 +10,7 @@ function BehanceBadge() {
 }
 
 const meta = {
-  title: "Button/Navigation",
+  title: "Components/Button/Navigation",
   component: NavigationButton,
   tags: ["autodocs"],
   args: {
