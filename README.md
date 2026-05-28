@@ -29,7 +29,7 @@ pnpm release
 
 ### @kusitms.com/ui
 
-컴포넌트 라이브러리입니다. 설치 시 토큰 CSS 변수와 Tailwind 유틸리티 클래스가 포함된 `styles.css`가 함께 제공됩니다.
+컴포넌트 라이브러리입니다. 완성된 Tailwind 결과물 대신 `source.css`를 제공하므로, 소비자 앱의 Tailwind가 UI 컴포넌트에 필요한 유틸리티 클래스를 직접 생성합니다.
 
 ```bash
 npm install @kusitms.com/ui
@@ -37,7 +37,8 @@ npm install @kusitms.com/ui
 
 ```css
 /* globals.css */
-@import "@kusitms.com/ui/styles.css";
+@import "tailwindcss";
+@import "@kusitms.com/ui/source.css";
 ```
 
 ```tsx
@@ -58,6 +59,7 @@ npm install @kusitms.com/tokens
 /* globals.css */
 @import "tailwindcss";
 @import "@kusitms.com/tokens/index.css";
+@import "@kusitms.com/tokens/responsive.css";
 @import "@kusitms.com/tokens/themes.css";
 @import "@kusitms.com/tokens/typography.css";
 ```
@@ -87,10 +89,7 @@ npm install @kusitms.com/ui @kusitms.com/tokens @kusitms.com/icons
 ```css
 /* globals.css */
 @import "tailwindcss";
-@import "@kusitms.com/tokens/index.css";
-@import "@kusitms.com/tokens/themes.css";
-@import "@kusitms.com/tokens/typography.css";
-@import "@kusitms.com/ui/styles.css";
+@import "@kusitms.com/ui/source.css";
 ```
 
 ## Docs
