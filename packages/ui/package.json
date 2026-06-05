@@ -11,7 +11,8 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
-    }
+    },
+    "./source.css": "./dist/source.css"
   },
   "files": [
     "dist"
@@ -21,11 +22,12 @@
     "provenance": true
   },
   "peerDependencies": {
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "dependencies": {
-    "@kusitms.com/icons": "workspace:*",
+    "@kusitms.com/icons": "0.1.0",
+    "@kusitms.com/tokens": "0.2.0",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-select": "^2.2.5"
   },
@@ -42,7 +44,7 @@
     "typescript": "6.0.2"
   },
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && cp src/source.css dist/source.css",
     "check": "pnpm lint && pnpm typecheck",
     "lint": "biome check src tsup.config.ts vitest.config.ts",
     "test": "vitest run --coverage",

@@ -24,15 +24,27 @@ describe("Footer", () => {
     expect(classes).not.toContain("min-w-[1024px]")
   })
 
-  it("aligns the desktop footer columns to the bottom edge", () => {
+  it("aligns the responsive footer columns like the production website", () => {
     const { container } = render(<Footer logo={<span>Logo</span>} />)
 
     const row = container.querySelector("footer > div")
 
-    expect(row?.className.split(" ")).toContain("items-end")
+    expect(row).toHaveClass("desktop:flex-row")
+    expect(row).toHaveClass("flex-col")
+    expect(row).toHaveClass("justify-between")
   })
 
-  it("pushes the desktop contact column to the far edge", () => {
+  it("does not bake frame widths into the responsive footer component", () => {
+    render(<Footer logo={<span>Logo</span>} />)
+
+    const classes = screen.getByRole("contentinfo").className.split(" ")
+
+    expect(classes).toContain("w-full")
+    expect(classes).not.toContain("w-[320px]")
+    expect(classes).not.toContain("min-w-[1024px]")
+  })
+
+  it("pushes the contact column to the far edge on desktop", () => {
     const { container } = render(<Footer logo={<span>Logo</span>} />)
 
     const row = container.querySelector("footer > div")
@@ -42,17 +54,7 @@ describe("Footer", () => {
     expect(classes).not.toContain("gap-[496px]")
   })
 
-  it("does not bake mobile frame widths into the footer component", () => {
-    render(<Footer device="mobile" logo={<span>Logo</span>} />)
-
-    const classes = screen.getByRole("contentinfo").className.split(" ")
-
-    expect(classes).toContain("w-full")
-    expect(classes).not.toContain("w-[320px]")
-    expect(classes).not.toContain("min-w-[320px]")
-  })
-
-  it("allows desktop copyright text to wrap inside its column", () => {
+  it("allows copyright text to preserve intended line breaks", () => {
     render(
       <Footer
         logo={<span>Logo</span>}
@@ -64,6 +66,46 @@ describe("Footer", () => {
       screen.getByText(
         "KUSITMS very long copyright text that should wrap in narrow layouts",
       ),
-    ).toHaveClass("whitespace-pre-wrap")
+    ).toHaveClass("whitespace-pre-line")
+  })
+
+  it("renders production copy and spacing hooks by default", () => {
+    render(
+      <Footer
+        logo={<span>Logo</span>}
+        contactIcons={<a href="mailto:kusitms@gmail.com">mail</a>}
+        scrollTopButton={
+          <button aria-label="맨 위로 이동" type="button">
+            top
+          </button>
+        }
+        bylawsHref="/bylaws"
+      />,
+    )
+
+    expect(screen.getByRole("contentinfo")).toHaveClass("py-[60px]")
+    expect(
+      screen.getByText(/KUSITMS \(큐시즘, 한국대학생IT경영학회\)/),
+    ).toBeInTheDocument()
+    expect(
+      screen.getByText(/ⓒ 2023\. KUSITMS\. All rights reserved\./),
+    ).toBeInTheDocument()
+    expect(screen.getByLabelText("맨 위로 이동")).toBeInTheDocument()
+  })
+
+  it("lets the footer omit the scroll top slot", () => {
+    render(
+      <Footer
+        logo={<span>Logo</span>}
+        scrollTopButton={
+          <button aria-label="맨 위로 이동" type="button">
+            top
+          </button>
+        }
+        scrollTopPlacement="none"
+      />,
+    )
+
+    expect(screen.queryByLabelText("맨 위로 이동")).not.toBeInTheDocument()
   })
 })

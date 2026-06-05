@@ -9,7 +9,7 @@ import {
 
 import { cn } from "../../utils/cn"
 
-type TabSize = "m" | "s"
+type TabSize = "m" | "s" | "website"
 
 const sizeStyles: Record<
   TabSize,
@@ -21,6 +21,8 @@ const sizeStyles: Record<
     activeText: string
     inactiveText: string
     underline: string
+    activeBorder?: string
+    inactiveBorder?: string
   }
 > = {
   m: {
@@ -41,6 +43,17 @@ const sizeStyles: Record<
     inactiveText: "text-label-netural",
     underline: "after:h-0.5",
   },
+  website: {
+    container: "w-full h-[104px] tablet:h-[158px] tablet:px-10 pt-5",
+    item: "h-12 tablet:h-[78px]",
+    text: "text-body-6 tablet:text-body-2",
+    textOffset: "",
+    activeText: "text-body-5 tablet:text-body-1 text-gray-700",
+    inactiveText: "text-body-6 tablet:text-body-2 text-gray-700",
+    underline: "",
+    activeBorder: "border-dark-blue-500 border-b-[3px]",
+    inactiveBorder: "border-gray-100 border-b-[2px]",
+  },
 }
 
 export type NavigationTabItemProps = Omit<
@@ -60,16 +73,22 @@ export function NavigationTabItem({
   ...props
 }: NavigationTabItemProps) {
   const styles = sizeStyles[size]
+  const isWebsite = size === "website"
 
   return (
     <button
       className={cn(
-        "relative flex min-w-0 flex-1 basis-0 items-center justify-center border-b border-line-alternative px-4",
+        "relative flex min-w-0 flex-1 basis-0 items-center justify-center px-4",
+        isWebsite
+          ? active
+            ? styles.activeBorder
+            : styles.inactiveBorder
+          : "border-b border-line-alternative",
         styles.item,
-        active
+        active && !isWebsite
           ? "after:absolute after:bottom-0 after:left-0 after:w-full after:bg-brand-primary"
           : undefined,
-        active ? styles.underline : undefined,
+        active && !isWebsite ? styles.underline : undefined,
         className,
       )}
       role="tab"
