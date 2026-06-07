@@ -1,11 +1,13 @@
 import { ArrowRightIcon, ArrowRightMIcon } from "@kusitms.com/icons"
-import type { ButtonHTMLAttributes, PropsWithChildren } from "react"
+import type { ButtonHTMLAttributes, PropsWithChildren, ReactNode } from "react"
 import { cn } from "../../utils/cn"
 
 export type ButtonProps = PropsWithChildren<
   ButtonHTMLAttributes<HTMLButtonElement> & {
     className?: string
     showIcon?: boolean
+    variant?: "default" | "websiteCta"
+    icon?: ReactNode
   }
 >
 
@@ -14,8 +16,32 @@ export function Button({
   className,
   disabled,
   showIcon = true,
+  variant = "default",
+  icon,
   ...props
 }: ButtonProps) {
+  if (variant === "websiteCta") {
+    return (
+      <button
+        type="button"
+        disabled={disabled}
+        className={cn(
+          "text-gray-0 rounded-full cursor-pointer w-fit text-body-8 desktop:text-body-4 flex gap-[12px] justify-center items-center pl-[32px] pr-[24px] py-[10px] bg-dark-blue-500 hover:bg-dark-blue-400 active:bg-dark-blue-600",
+          disabled && "cursor-not-allowed bg-fill-alternative text-label-light",
+          className,
+        )}
+        {...props}
+      >
+        <span>{children}</span>
+        {showIcon
+          ? (icon ?? (
+              <ArrowRightIcon className="w-[20px] h-[20px] desktop:w-[24px] desktop:h-[24px]" />
+            ))
+          : null}
+      </button>
+    )
+  }
+
   return (
     <button
       type="button"

@@ -4,15 +4,14 @@ import {
   isValidElement,
   type ReactElement,
   type ReactNode,
-  type TransitionEvent,
-  useCallback,
   useEffect,
   useId,
-  useRef,
   useState,
 } from "react"
 
 import { cn } from "../../utils/cn"
+import { HeaderMobileItem } from "../HeaderMobile/HeaderMobile"
+import type { HeaderNavigationProps } from "../HeaderNavigation/HeaderNavigation"
 
 export type HeaderProps = HTMLAttributes<HTMLElement> & {
   logo?: ReactNode
@@ -24,153 +23,33 @@ export type HeaderProps = HTMLAttributes<HTMLElement> & {
   defaultOpen?: boolean
   onOpenChange?: (isOpen: boolean) => void
   menuId?: string
+  mobileIconClassName?: string
+  mobileMenuClassName?: string
+  innerClassName?: string
 }
 
-type NavigationChildProps = {
-  children?: ReactNode
-  href?: string
-  onClick?: () => void
-}
-
-function HeaderMobileBar({
-  logo,
-  menuIcon,
-  closeIcon,
-  isOpen,
-  onToggle,
-  menuId,
-}: {
-  logo?: ReactNode
-  menuIcon?: ReactNode
-  closeIcon?: ReactNode
-  isOpen: boolean
-  onToggle: () => void
-  menuId: string
-}) {
-  return (
-    <div className="flex h-17.25 w-full items-center justify-between bg-fill-normal px-4 py-5">
-      <div className="shrink-0">{logo}</div>
-      <button
-        type="button"
-        className={cn(
-          "flex size-6 shrink-0 items-center justify-center transition-transform duration-200",
-          isOpen && "rotate-90",
-        )}
-        onClick={onToggle}
-        aria-controls={menuId}
-        aria-expanded={isOpen}
-        aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
-      >
-        {isOpen ? closeIcon : menuIcon}
-      </button>
-    </div>
-  )
-}
-
-function HeaderMobileMenu({
-  children,
-  isOpen,
-  menuId,
-}: {
-  children?: ReactNode
-  isOpen: boolean
-  menuId: string
-}) {
-  const contentRef = useRef<HTMLDivElement>(null)
-  const [height, setHeight] = useState(0)
-  const [isVisible, setIsVisible] = useState(false)
-
-  const updateHeight = useCallback(() => {
-    if (isOpen && contentRef.current) {
-      setHeight(contentRef.current.scrollHeight)
-    }
-  }, [isOpen])
-
-  useEffect(() => {
-    updateHeight()
-  }, [updateHeight])
-
-  useEffect(() => {
-    const content = contentRef.current
-
-    if (!isOpen || !content || typeof ResizeObserver === "undefined") {
-      return
-    }
-
-    const observer = new ResizeObserver(updateHeight)
-    observer.observe(content)
-
-    return () => observer.disconnect()
-  }, [isOpen, updateHeight])
-
-  useEffect(() => {
-    if (isOpen) {
-      setIsVisible(true)
-    }
-  }, [isOpen])
-
-  const handleTransitionEnd = (event: TransitionEvent<HTMLDivElement>) => {
-    if (event.target === event.currentTarget && !isOpen) {
-      setIsVisible(false)
-    }
-  }
-
-  return (
-    <div
-      id={menuId}
-      className="overflow-hidden transition-[max-height] duration-300 ease-in-out"
-      style={{ maxHeight: isOpen ? height : 0 }}
-      onTransitionEnd={handleTransitionEnd}
-    >
-      <nav
-        ref={contentRef}
-        className={isVisible || isOpen ? "bg-fill-netural" : "hidden"}
-      >
-        {children}
-      </nav>
-    </div>
-  )
-}
-
-function HeaderMobileNavigationItem({
-  child,
-}: {
-  child: ReactElement<NavigationChildProps>
-}) {
-  const className = cn(
-    "flex w-full flex-col items-center gap-3 bg-fill-netural px-4 py-5",
-  )
-  const content = (
-    <>
-      <span className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-center font-sans text-headline-20sb text-label-normal">
-        {child.props.children}
-      </span>
-      <span className="h-px w-full bg-line-alternative" />
-    </>
-  )
-
-  if (child.props.href) {
-    return (
-      <a className={className} href={child.props.href}>
-        {content}
-      </a>
-    )
-  }
-
-  return (
-    <button className={className} type="button" onClick={child.props.onClick}>
-      {content}
-    </button>
-  )
-}
-
-function HeaderMobileNavigation({ children }: { children?: ReactNode }) {
+function getMobileItems(children?: ReactNode) {
   return Children.map(children, (child) => {
-    if (!isValidElement<NavigationChildProps>(child)) {
+    if (!isValidElement<HeaderNavigationProps>(child)) {
       return child
     }
 
-    return <HeaderMobileNavigationItem child={child} />
+    const element = child as ReactElement<HeaderNavigationProps>
+    const childProps = element.props
+
+    if ("href" in childProps && typeof childProps.href === "string") {
+      return (
+        <HeaderMobileItem href={childProps.href}>
+          {childProps.children}
+        </HeaderMobileItem>
+      )
+    }
+
+    return (
+      <HeaderMobileItem onClick={childProps.onClick}>
+        {childProps.children}
+      </HeaderMobileItem>
+    )
   })
 }
 
@@ -184,66 +63,100 @@ export function Header({
   defaultOpen = false,
   onOpenChange,
   menuId,
+  mobileIconClassName,
+  mobileMenuClassName,
+  innerClassName,
   className,
   ...props
 }: HeaderProps) {
   const generatedMenuId = useId()
-  const [uncontrolledOpen, setUncontrolledOpen] = useState(defaultOpen)
-  const hasResponsiveHeader = Boolean(mobileLogo || menuIcon || closeIcon)
-  const isMenuOpen = isOpen ?? uncontrolledOpen
   const resolvedMenuId = menuId ?? generatedMenuId
+  const [internalOpen, setInternalOpen] = useState(defaultOpen)
+  const isMenuOpen = isOpen ?? internalOpen
+  const hasMobileControls = Boolean(mobileLogo || menuIcon || closeIcon)
 
-  const handleToggle = () => {
-    const nextOpen = !isMenuOpen
-
+  const setMenuOpen = (nextOpen: boolean) => {
     if (isOpen === undefined) {
-      setUncontrolledOpen(nextOpen)
+      setInternalOpen(nextOpen)
     }
 
     onOpenChange?.(nextOpen)
   }
 
-  if (hasResponsiveHeader) {
-    return (
-      <header className={cn("w-full bg-fill-normal", className)} {...props}>
-        <div className="hidden items-center justify-between px-10 py-6 lg:flex">
-          <div className="shrink-0">{logo}</div>
-          <nav className="flex min-w-0 items-center justify-end gap-6 overflow-hidden">
-            {children}
-          </nav>
-        </div>
+  useEffect(() => {
+    if (!hasMobileControls || !isMenuOpen) {
+      return
+    }
 
-        <div className="lg:hidden">
-          <HeaderMobileBar
-            logo={mobileLogo ?? logo}
-            menuIcon={menuIcon}
-            closeIcon={closeIcon}
-            isOpen={isMenuOpen}
-            onToggle={handleToggle}
-            menuId={resolvedMenuId}
-          />
-          <HeaderMobileMenu menuId={resolvedMenuId} isOpen={isMenuOpen}>
-            <HeaderMobileNavigation>{children}</HeaderMobileNavigation>
-          </HeaderMobileMenu>
-        </div>
-      </header>
-    )
-  }
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [hasMobileControls, isMenuOpen])
 
   return (
     <header
       className={cn(
-        "flex items-center justify-between",
-        "w-full",
-        "bg-fill-normal px-10 py-6",
+        "w-full desktop:px-12 px-4 py-6 desktop:fixed top-0 left-0 z-50 bg-white",
         className,
       )}
       {...props}
     >
-      <div className="shrink-0">{logo}</div>
-      <nav className="flex min-w-0 items-center justify-end gap-6 overflow-hidden">
-        {children}
-      </nav>
+      <div
+        className={cn(
+          "max-w-[2000px] w-full mx-auto flex items-center justify-between",
+          innerClassName,
+        )}
+      >
+        {hasMobileControls && mobileLogo ? (
+          <>
+            <div className="hidden shrink-0 desktop:block">{logo}</div>
+            <div className="shrink-0 desktop:hidden">{mobileLogo}</div>
+          </>
+        ) : (
+          <div className="shrink-0">{logo}</div>
+        )}
+        <nav className="desktop:flex hidden min-w-0 items-center justify-end overflow-hidden text-center">
+          {children}
+        </nav>
+
+        {hasMobileControls ? (
+          <div className="desktop:hidden flex items-center">
+            <button
+              type="button"
+              className={cn(
+                "flex size-6 shrink-0 items-center justify-center transition-transform duration-200",
+                "text-label-normal",
+                isMenuOpen && "rotate-90",
+                mobileIconClassName,
+              )}
+              onClick={() => setMenuOpen(!isMenuOpen)}
+              aria-controls={resolvedMenuId}
+              aria-expanded={isMenuOpen}
+              aria-label={
+                isMenuOpen ? "Close navigation menu" : "Open navigation menu"
+              }
+            >
+              {isMenuOpen ? closeIcon : menuIcon}
+            </button>
+
+            <div
+              id={resolvedMenuId}
+              className={cn(
+                "fixed top-[69px] left-0 right-0 bottom-0 z-40 bg-white",
+                isMenuOpen ? "flex flex-col" : "hidden",
+                mobileMenuClassName,
+              )}
+            >
+              <nav className="flex flex-col justify-center items-center">
+                {getMobileItems(children)}
+              </nav>
+            </div>
+          </div>
+        ) : null}
+      </div>
     </header>
   )
 }

@@ -63,4 +63,26 @@ describe("NavigationTab", () => {
       "text-ellipsis",
     )
   })
+
+  it("supports website sizing that matches the production app tabs", () => {
+    render(
+      <NavigationTab size="website">
+        <NavigationTabItem active>밋업 프로젝트</NavigationTabItem>
+        <NavigationTabItem>기업 연계 프로젝트</NavigationTabItem>
+      </NavigationTab>,
+    )
+
+    const activeTab = screen.getByRole("tab", { name: "밋업 프로젝트" })
+    const inactiveTab = screen.getByRole("tab", {
+      name: "기업 연계 프로젝트",
+    })
+    const tablist = screen.getByRole("tablist")
+
+    expect(tablist).toHaveClass("h-[104px]")
+    expect(tablist).toHaveClass("tablet:h-[158px]")
+    expect(activeTab).toHaveClass("h-12")
+    expect(activeTab).toHaveClass("tablet:h-[78px]")
+    expect(activeTab).toHaveClass("border-dark-blue-500")
+    expect(inactiveTab).toHaveClass("border-gray-100")
+  })
 })

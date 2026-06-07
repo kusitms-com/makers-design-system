@@ -31,10 +31,9 @@ export type HeaderNavigationProps =
   | HeaderNavigationLinkProps
 
 const stateStyles: Record<HeaderNavState, string> = {
-  default:
-    "text-body-16m text-label-light hover:text-body-16b hover:text-label-normal active:text-body-16b active:text-brand-primary",
-  hovered: "text-body-16b text-label-normal",
-  pressed: "text-body-16b text-brand-primary",
+  default: "text-body-6 text-gray-700 hover:text-body-5",
+  hovered: "text-body-5 text-gray-700",
+  pressed: "text-body-5 text-dark-blue-600",
 }
 
 function isLinkProps(
@@ -50,7 +49,7 @@ export function HeaderNavigation({
   ...props
 }: HeaderNavigationProps) {
   const sharedClassName = cn(
-    "flex max-w-full items-center justify-center overflow-hidden text-ellipsis whitespace-nowrap px-4",
+    "block max-w-full overflow-hidden text-ellipsis whitespace-nowrap px-7 text-center",
     "font-sans transition-colors",
     stateStyles[state],
     className,

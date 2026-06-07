@@ -1,4 +1,10 @@
-import { cleanup, fireEvent, render, screen } from "@testing-library/react"
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react"
 import { afterEach, describe, expect, it, vi } from "vitest"
 
 import { Button } from "./Button"
@@ -93,6 +99,17 @@ describe("Button", () => {
     fireEvent.click(screen.getByRole("button"))
     expect(onClick).toHaveBeenCalledTimes(1)
   })
+
+  it("websiteCta variant matches the production website CTA shape", () => {
+    render(<Button variant="websiteCta">프로젝트 더보기</Button>)
+
+    const button = screen.getByRole("button", { name: /프로젝트 더보기/ })
+
+    expect(button).toHaveClass("pl-[32px]")
+    expect(button).toHaveClass("pr-[24px]")
+    expect(button).toHaveClass("py-[10px]")
+    expect(button).toHaveClass("bg-dark-blue-500")
+  })
 })
 
 describe("ScrollTopButton", () => {
@@ -137,6 +154,64 @@ describe("ScrollTopButton", () => {
     render(<ScrollTopButton onClick={onClick} />)
     fireEvent.click(screen.getByRole("button"))
     expect(onClick).toHaveBeenCalledTimes(1)
+  })
+
+  it("scrolls the window to the top by default", () => {
+    const scrollTo = vi.fn()
+    vi.stubGlobal("scrollTo", scrollTo)
+
+    render(<ScrollTopButton />)
+    fireEvent.click(screen.getByRole("button", { name: "맨 위로 이동" }))
+
+    expect(scrollTo).toHaveBeenCalledWith({ top: 0, behavior: "smooth" })
+  })
+
+  it("does not run default scrolling when a custom click handler is provided", () => {
+    const onClick = vi.fn()
+    const scrollTo = vi.fn()
+    vi.stubGlobal("scrollTo", scrollTo)
+
+    render(<ScrollTopButton onClick={onClick} />)
+    fireEvent.click(screen.getByRole("button", { name: "맨 위로 이동" }))
+
+    expect(onClick).toHaveBeenCalledTimes(1)
+    expect(scrollTo).not.toHaveBeenCalled()
+  })
+
+  it("supports fixed positioning for website usage", () => {
+    render(<ScrollTopButton fixed />)
+
+    expect(screen.getByRole("button")).toHaveClass("fixed")
+    expect(screen.getByRole("button")).not.toHaveClass("relative")
+  })
+
+  it("raises the fixed button above the footer on mobile page bottom", async () => {
+    Object.defineProperty(window, "innerWidth", {
+      configurable: true,
+      value: 393,
+    })
+    Object.defineProperty(window, "innerHeight", {
+      configurable: true,
+      value: 852,
+    })
+    Object.defineProperty(window, "scrollY", {
+      configurable: true,
+      value: 4794,
+    })
+    Object.defineProperty(document.documentElement, "scrollHeight", {
+      configurable: true,
+      value: 5646,
+    })
+
+    render(<ScrollTopButton fixed />)
+    window.dispatchEvent(new Event("scroll"))
+
+    await waitFor(() => {
+      expect(screen.getByRole("button")).toHaveStyle({
+        bottom: "226px",
+        right: "16px",
+      })
+    })
   })
 })
 

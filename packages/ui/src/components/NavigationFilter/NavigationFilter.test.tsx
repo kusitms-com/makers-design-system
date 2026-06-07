@@ -27,6 +27,18 @@ describe("NavigationFilter", () => {
     )
   })
 
+  it("allows horizontal scrolling on mobile", () => {
+    render(
+      <NavigationFilter device="mobile">
+        <FilterItem>One</FilterItem>
+      </NavigationFilter>,
+    )
+
+    expect(
+      screen.getByText("One").parentElement?.parentElement?.className,
+    ).toContain("overflow-x-auto")
+  })
+
   it("passes container device to filter items by default", () => {
     render(
       <NavigationFilter device="mobile">
@@ -39,5 +51,29 @@ describe("NavigationFilter", () => {
       "px-3",
     )
     expect(screen.getByText("Design")).toHaveClass("text-body-16m")
+  })
+
+  it("supports the production website filter style", () => {
+    render(
+      <NavigationFilter device="website">
+        <FilterItem active>기획</FilterItem>
+        <FilterItem>디자인</FilterItem>
+      </NavigationFilter>,
+    )
+
+    expect(screen.getByRole("button", { name: "기획" })).toHaveClass(
+      "desktop:w-[120px]",
+      "bg-dark-blue-50",
+    )
+    expect(screen.getByText("기획")).toHaveClass(
+      "text-body-5",
+      "desktop:text-body-1",
+      "text-dark-blue-600",
+    )
+    expect(screen.getByText("디자인")).toHaveClass(
+      "text-body-6",
+      "desktop:text-body-2",
+      "text-gray-700",
+    )
   })
 })

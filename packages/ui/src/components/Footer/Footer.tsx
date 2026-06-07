@@ -2,6 +2,9 @@ import type { HTMLAttributes, ReactNode } from "react"
 
 import { cn } from "../../utils/cn"
 
+const WEBSITE_COPYRIGHT =
+  "KUSITMS (큐시즘, 한국대학생IT경영학회)\nⓒ 2023. KUSITMS. All rights reserved."
+
 export type FooterProps = HTMLAttributes<HTMLElement> & {
   logo?: ReactNode
   mobileLogo?: ReactNode
@@ -9,18 +12,20 @@ export type FooterProps = HTMLAttributes<HTMLElement> & {
   contactIcons?: ReactNode
   copyright?: string
   scrollTopButton?: ReactNode
+  scrollTopPlacement?: "inline" | "none"
   bylawsHref?: string
   bylawsLabel?: string
+  innerClassName?: string
+  leftColumnClassName?: string
+  copyrightClassName?: string
+  contactClassName?: string
+  contactIconsClassName?: string
 }
 
-const defaultBylawsLink = (
-  device: "desktop" | "mobile",
-  href?: string,
-  label = "학회정관",
-) => {
+const defaultBylawsLink = (href?: string, label = "학회정관") => {
   const className = cn(
     "font-sans not-italic text-label-normal",
-    device === "desktop" ? "text-body-16sb" : "text-caption-12r",
+    "desktop:text-body-6 text-body-8 text-gray-800",
   )
 
   if (!href) {
@@ -39,61 +44,65 @@ export function Footer({
   mobileLogo,
   links,
   contactIcons,
-  copyright = "KUSITMS (큐시즘, 한국대학생IT경영학회)\n© 2023.KUSITMS. ALL rights reserved.",
+  copyright,
   scrollTopButton,
+  scrollTopPlacement = "inline",
   bylawsHref,
   bylawsLabel = "학회정관",
+  innerClassName,
+  leftColumnClassName,
+  copyrightClassName,
+  contactClassName,
+  contactIconsClassName,
   className,
   ...props
 }: FooterProps) {
+  const resolvedCopyright = copyright ?? WEBSITE_COPYRIGHT
+
   return (
-    <footer className={cn("w-full", "bg-fill-normal", className)} {...props}>
-      <div className="hidden w-full flex-col items-center justify-center px-10 pb-15 lg:flex">
-        <div className="flex w-full items-end justify-between">
-          <div className="flex w-68.5 flex-col items-start">
-            <div className="flex flex-col items-start pb-10 pt-15">{logo}</div>
-            <div className="flex w-full pb-3">
-              {links ?? defaultBylawsLink("desktop", bylawsHref, bylawsLabel)}
-            </div>
-            <p className="whitespace-pre-wrap font-sans text-body-16sb text-label-normal">
-              {copyright}
-            </p>
+    <footer className={cn("w-full py-[60px]", className)} {...props}>
+      <div
+        className={cn(
+          "max-w-[1180px] w-full mx-auto flex desktop:flex-row flex-col justify-between px-10",
+          innerClassName,
+        )}
+      >
+        <div className={cn("flex flex-col mt-1", leftColumnClassName)}>
+          <div className="flex items-center justify-between">
+            {mobileLogo ?? logo}
           </div>
-          <div className="flex shrink-0 flex-col items-start gap-5">
-            <p className="w-full font-sans text-body-16sb text-label-normal">
-              Contact
-            </p>
-            <div className="flex items-center gap-5">{contactIcons}</div>
+          <div className="desktop:mt-10 mt-4">
+            {links ?? defaultBylawsLink(bylawsHref, bylawsLabel)}
+          </div>
+          <p
+            className={cn(
+              "desktop:text-body-6 text-body-8 text-gray-800 mt-3 whitespace-pre-line",
+              copyrightClassName,
+            )}
+          >
+            {resolvedCopyright}
+          </p>
+        </div>
+        <div
+          className={cn(
+            "flex-col desktop:pt-0 pt-7 desktop:self-end",
+            contactClassName,
+          )}
+        >
+          <h4 className="text-body-5 text-gray-800 desktop:mb-5 mb-2">
+            Contact
+          </h4>
+          <div
+            className={cn(
+              "flex desktop:gap-5 gap-[14px]",
+              contactIconsClassName,
+            )}
+          >
+            {contactIcons}
           </div>
         </div>
       </div>
-      <div className="flex w-full flex-col items-center justify-center px-4 pb-15 lg:hidden">
-        <div className="flex w-full flex-col items-start">
-          <div className="flex w-full flex-col items-start">
-            <div className="flex w-full items-start justify-between gap-4">
-              <div className="flex min-w-0 flex-1 flex-col items-start">
-                <div className="pb-4 pt-15">{mobileLogo ?? logo}</div>
-                <div className="pb-2">
-                  {links ??
-                    defaultBylawsLink("mobile", bylawsHref, bylawsLabel)}
-                </div>
-                <p className="w-full whitespace-pre-wrap font-sans text-caption-12r text-label-normal">
-                  {copyright}
-                </p>
-              </div>
-              <div className="shrink-0 pt-13">{scrollTopButton}</div>
-            </div>
-          </div>
-          <div className="flex w-full flex-col items-start gap-2 pt-7">
-            <p className="w-full font-sans text-body-16sb text-label-normal">
-              Contact
-            </p>
-            <div className="flex w-full flex-wrap items-center gap-1.5">
-              {contactIcons}
-            </div>
-          </div>
-        </div>
-      </div>
+      {scrollTopPlacement !== "none" ? scrollTopButton : null}
     </footer>
   )
 }

@@ -8,7 +8,7 @@ import {
 } from "react"
 import { cn } from "../../utils/cn"
 
-type FilterDevice = "desktop" | "mobile" | "responsive"
+type FilterDevice = "desktop" | "mobile" | "responsive" | "website"
 
 const filterStyles: Record<
   FilterDevice,
@@ -49,6 +49,16 @@ const filterStyles: Record<
     text: "",
     activeText: "text-body-16sb text-brand-primary lg:text-headline-20b",
     inactiveText: "text-body-16m text-label-netural lg:text-headline-20m",
+  },
+  website: {
+    container: "justify-center gap-1 desktop:gap-[20px]",
+    item: "py-[4px] desktop:w-[120px] transition-colors duration-300",
+    activeItem: "bg-dark-blue-50 px-[16px] desktop:py-[10px]",
+    inactiveItem:
+      "px-[12px] hover:bg-gray-50 hover:px-[16px] hover:desktop:py-[10px]",
+    text: "",
+    activeText: "text-body-5 desktop:text-body-1 text-dark-blue-600",
+    inactiveText: "text-body-6 desktop:text-body-2 text-gray-700",
   },
 }
 
