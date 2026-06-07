@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import { useState } from "react"
 
 const meta = {
-  title: "Modal/Default",
+  title: "Components/Modal",
   component: Modal,
   tags: ["autodocs"],
   args: {
@@ -51,7 +51,7 @@ export const Default: Story = {
   render: (args) => {
     const [isOpen, setIsOpen] = useState(true)
     return (
-      <div className="relative flex min-h-screen items-center justify-center bg-[#4a4a55]">
+      <div className="relative flex min-h-screen items-center justify-center bg-effect-dimmer">
         <Modal
           {...args}
           isOpen={isOpen}

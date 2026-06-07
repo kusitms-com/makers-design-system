@@ -2,7 +2,7 @@ import { Button } from "@kusitms.com/ui"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 
 const meta = {
-  title: "Button/Default",
+  title: "Components/Button/Default",
   component: Button,
   tags: ["autodocs"],
   args: {

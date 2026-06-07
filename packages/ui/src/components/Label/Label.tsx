@@ -15,7 +15,7 @@ function getChipClasses(type: "brand" | "secondary") {
   switch (type) {
     case "brand":
       return cn(
-        "inline-flex items-center justify-center rounded-[4px] px-4 py-1",
+        "inline-flex items-center justify-center rounded px-4 py-1",
         "bg-fill-primary text-brand-primary text-label-14sb whitespace-nowrap lg:w-16 lg:h-8",
       )
     case "secondary":

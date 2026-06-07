@@ -9,7 +9,7 @@ import {
 
 import { cn } from "../../utils/cn"
 
-type TabSize = "m" | "s" | "website"
+type TabSize = "m" | "s" | "responsive" | "website"
 
 const sizeStyles: Record<
   TabSize,
@@ -43,6 +43,16 @@ const sizeStyles: Record<
     inactiveText: "text-label-netural",
     underline: "after:h-0.5",
   },
+  responsive: {
+    container: "max-w-256 lg:max-w-300",
+    item: "h-26 lg:h-31",
+    text: "text-body-16m lg:text-headline-24m",
+    textOffset: "translate-y-7 lg:translate-y-4.75",
+    activeText:
+      "text-body-16b text-label-normal lg:text-headline-24sb lg:text-label-normal",
+    inactiveText: "text-label-netural",
+    underline: "after:h-0.5 lg:after:h-0.75",
+  },
   website: {
     container: "w-full h-[104px] tablet:h-[158px] tablet:px-10 pt-5",
     item: "h-12 tablet:h-[78px]",
@@ -68,7 +78,7 @@ export type NavigationTabItemProps = Omit<
 export function NavigationTabItem({
   children,
   active = false,
-  size = "m",
+  size = "responsive",
   className,
   ...props
 }: NavigationTabItemProps) {
@@ -117,7 +127,7 @@ export type NavigationTabProps = HTMLAttributes<HTMLDivElement> & {
 
 export function NavigationTab({
   children,
-  size = "m",
+  size = "responsive",
   className,
   ...props
 }: NavigationTabProps) {

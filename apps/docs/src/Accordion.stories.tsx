@@ -22,7 +22,7 @@ const FAQ_ITEMS = [
 ]
 
 const meta = {
-  title: "Accordion/AccordionFaq",
+  title: "Components/Accordion",
   component: Accordion,
   tags: ["autodocs"],
   args: {

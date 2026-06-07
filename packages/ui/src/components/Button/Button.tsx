@@ -47,7 +47,7 @@ export function Button({
       type="button"
       disabled={disabled}
       className={cn(
-        "group relative overflow-hidden inline-flex items-center justify-center rounded-[48px] transition-colors",
+        "group relative overflow-hidden inline-flex items-center justify-center rounded-full transition-colors",
         "py-2 px-3 gap-1 lg:px-6 lg:gap-2",
         disabled
           ? "text-label-14r lg:text-body-18m bg-fill-alternative text-label-light cursor-not-allowed"

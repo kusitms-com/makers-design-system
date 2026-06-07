@@ -127,8 +127,8 @@ export function Modal({
                 className={cn(
                   "flex-1 min-h-0 overflow-y-auto pt-3 pb-4 lg:pt-5 lg:pb-8",
                   "[&::-webkit-scrollbar]:w-0.75",
-                  "[&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-track]:rounded-[100px]",
-                  "[&::-webkit-scrollbar-thumb]:rounded-[100px] [&::-webkit-scrollbar-thumb]:bg-[rgba(23,23,26,0.75)] [&::-webkit-scrollbar-thumb]:h-16",
+                  "[&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-track]:rounded-full",
+                  "[&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-label-normal/75 [&::-webkit-scrollbar-thumb]:h-16",
                 )}
               >
                 <div className="px-5 lg:px-8">

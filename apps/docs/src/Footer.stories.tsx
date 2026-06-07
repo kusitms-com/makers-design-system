@@ -27,7 +27,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 const SocialIcon = ({ children }: { children: React.ReactNode }) => (
-  <span className="flex size-9 items-center justify-center rounded-full bg-fill-primary p-1.5">
+  <span className="flex size-9 items-center justify-center rounded-full bg-dark-blue-50 p-1.5">
     {children}
   </span>
 )
@@ -77,7 +77,6 @@ export const Desktop: Story = {
     <div className="w-full overflow-x-auto bg-fill-normal">
       <div className="mx-auto w-320">
         <Footer
-          device="desktop"
           logo={<FooterDesktopLogo />}
           bylawsHref="https://example.com/bylaws"
           contactIcons={contactIcons}
@@ -91,7 +90,6 @@ export const Mobile: Story = {
   render: () => (
     <div className="w-80">
       <Footer
-        device="mobile"
         logo={<FooterMobileLogo />}
         bylawsHref="https://example.com/bylaws"
         contactIcons={contactIcons}
@@ -114,7 +112,6 @@ export const DesktopLongContent: Story = {
     <div className="w-full overflow-x-auto bg-fill-normal">
       <div className="mx-auto w-256">
         <Footer
-          device="desktop"
           logo={<FooterDesktopLogo />}
           bylawsHref="https://example.com/bylaws"
           contactIcons={contactIcons}

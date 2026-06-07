@@ -40,6 +40,26 @@ describe("Header", () => {
     expect(nav).toHaveClass("min-w-0", "overflow-hidden")
   })
 
+  it("matches the production website header shell", () => {
+    render(
+      <Header logo={<span>Logo</span>}>
+        <HeaderNavigation href="/about">About</HeaderNavigation>
+      </Header>,
+    )
+
+    expect(screen.getByRole("banner")).toHaveClass(
+      "desktop:px-12",
+      "px-4",
+      "desktop:fixed",
+      "z-50",
+    )
+    expect(screen.getByRole("navigation")).toHaveClass(
+      "desktop:flex",
+      "hidden",
+      "text-center",
+    )
+  })
+
   it("renders mobile controls with a visible icon color", () => {
     render(
       <Header
@@ -76,6 +96,7 @@ describe("Header", () => {
       "true",
     )
     expect(screen.getAllByRole("link", { name: "About" })).toHaveLength(2)
+    expect(document.body.style.overflow).toBe("hidden")
   })
 
   it("matches website mobile menu item width and divider", () => {

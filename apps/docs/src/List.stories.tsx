@@ -17,7 +17,7 @@ function ListStory({ title, item1, item2, item3 }: ListStoryProps) {
 const meta = {
   component: ListStory,
   tags: ["autodocs"],
-  title: "List/List",
+  title: "Components/List",
   args: {
     title: "제목을 입력하세요",
     item1: placeholder,

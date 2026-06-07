@@ -1,6 +1,6 @@
 {
   "name": "@kusitms.com/icons",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": false,
   "type": "module",
   "main": "./dist/index.cjs",
@@ -21,7 +21,7 @@
     "provenance": true
   },
   "peerDependencies": {
-    "react": "^19.2.4"
+    "react": "^19.0.0"
   },
   "devDependencies": {
     "@kusitms.com/tsconfig": "workspace:*",

@@ -164,16 +164,16 @@ export function HeaderMobileItem({
   ...props
 }: HeaderMobileItemProps) {
   const sharedClassName = cn(
-    "flex flex-col items-center gap-3",
-    "w-[328px] bg-white px-5 py-4",
+    "flex flex-col items-center gap-[12px]",
+    "w-[328px] bg-white px-[20px] py-[16px]",
     className,
   )
   const content = (
     <>
       <span
         className={cn(
-          "overflow-hidden text-ellipsis whitespace-nowrap text-center font-sans text-label-normal",
-          "w-full text-body-2",
+          "overflow-hidden text-ellipsis whitespace-nowrap text-center font-sans",
+          "w-full text-body-2 text-gray-800",
         )}
       >
         {children}

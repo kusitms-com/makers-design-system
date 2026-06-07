@@ -4,6 +4,7 @@ import {
   isValidElement,
   type ReactElement,
   type ReactNode,
+  useEffect,
   useId,
   useState,
 } from "react"
@@ -24,6 +25,7 @@ export type HeaderProps = HTMLAttributes<HTMLElement> & {
   menuId?: string
   mobileIconClassName?: string
   mobileMenuClassName?: string
+  innerClassName?: string
 }
 
 function getMobileItems(children?: ReactNode) {
@@ -63,6 +65,7 @@ export function Header({
   menuId,
   mobileIconClassName,
   mobileMenuClassName,
+  innerClassName,
   className,
   ...props
 }: HeaderProps) {
@@ -80,19 +83,47 @@ export function Header({
     onOpenChange?.(nextOpen)
   }
 
+  useEffect(() => {
+    if (!hasMobileControls || !isMenuOpen) {
+      return
+    }
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [hasMobileControls, isMenuOpen])
+
   return (
-    <header className={cn("w-full bg-fill-normal", className)} {...props}>
-      <div className="hidden items-center justify-between px-10 py-6 lg:flex">
-        <div className="shrink-0">{logo}</div>
-        <nav className="flex min-w-0 items-center justify-end gap-6 overflow-hidden">
+    <header
+      className={cn(
+        "w-full desktop:px-12 px-4 py-6 desktop:fixed top-0 left-0 z-50 bg-white",
+        className,
+      )}
+      {...props}
+    >
+      <div
+        className={cn(
+          "max-w-[2000px] w-full mx-auto flex items-center justify-between",
+          innerClassName,
+        )}
+      >
+        {hasMobileControls && mobileLogo ? (
+          <>
+            <div className="hidden shrink-0 desktop:block">{logo}</div>
+            <div className="shrink-0 desktop:hidden">{mobileLogo}</div>
+          </>
+        ) : (
+          <div className="shrink-0">{logo}</div>
+        )}
+        <nav className="desktop:flex hidden min-w-0 items-center justify-end overflow-hidden text-center">
           {children}
         </nav>
-      </div>
 
-      {hasMobileControls ? (
-        <div className="lg:hidden">
-          <div className="flex h-17.25 w-full items-center justify-between bg-fill-normal px-4 py-5">
-            <div className="shrink-0">{mobileLogo ?? logo}</div>
+        {hasMobileControls ? (
+          <div className="desktop:hidden flex items-center">
             <button
               type="button"
               className={cn(
@@ -110,26 +141,22 @@ export function Header({
             >
               {isMenuOpen ? closeIcon : menuIcon}
             </button>
-          </div>
 
-          <div
-            id={resolvedMenuId}
-            className={cn(
-              "fixed top-[69px] left-0 right-0 bottom-0 z-40 bg-white",
-              !isMenuOpen && "hidden",
-              mobileMenuClassName,
-            )}
-          >
-            <nav
-              className={
-                isMenuOpen ? "flex flex-col items-center bg-white" : "hidden"
-              }
+            <div
+              id={resolvedMenuId}
+              className={cn(
+                "fixed top-[69px] left-0 right-0 bottom-0 z-40 bg-white",
+                isMenuOpen ? "flex flex-col" : "hidden",
+                mobileMenuClassName,
+              )}
             >
-              {getMobileItems(children)}
-            </nav>
+              <nav className="flex flex-col justify-center items-center">
+                {getMobileItems(children)}
+              </nav>
+            </div>
           </div>
-        </div>
-      ) : null}
+        ) : null}
+      </div>
     </header>
   )
 }

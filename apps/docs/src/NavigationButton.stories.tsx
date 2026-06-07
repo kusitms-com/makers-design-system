@@ -3,14 +3,14 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 
 function BehanceBadge() {
   return (
-    <div className="inline-flex size-5 items-center justify-center rounded-sm bg-[#2F6FED] text-[9px] font-semibold leading-none text-white">
+    <div className="inline-flex size-5 items-center justify-center rounded-sm bg-brand-primary text-caption-12sb leading-none text-static-white">
       Be
     </div>
   )
 }
 
 const meta = {
-  title: "Button/Navigation",
+  title: "Components/Button/Navigation",
   component: NavigationButton,
   tags: ["autodocs"],
   args: {
@@ -35,15 +35,19 @@ export const AllStates: Story = {
   render: () => (
     <div className="flex flex-col gap-3 items-start">
       <div className="flex flex-col gap-1">
-        <span className="text-xs text-gray-400">With Icon</span>
+        <span className="text-caption-12r text-label-disable">With Icon</span>
         <NavigationButton icon={<BehanceBadge />}>Behance</NavigationButton>
       </div>
       <div className="flex flex-col gap-1">
-        <span className="text-xs text-gray-400">Without Icon</span>
+        <span className="text-caption-12r text-label-disable">
+          Without Icon
+        </span>
         <NavigationButton>Behance</NavigationButton>
       </div>
       <div className="flex flex-col gap-1">
-        <span className="text-xs text-gray-400">Without Arrow</span>
+        <span className="text-caption-12r text-label-disable">
+          Without Arrow
+        </span>
         <NavigationButton icon={<BehanceBadge />} showArrow={false}>
           Behance
         </NavigationButton>

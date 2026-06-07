@@ -81,13 +81,13 @@ export function Pagination({
 
   return (
     <div
-      className={cn("inline-flex h-11 items-center gap-5", className)}
+      className={cn("inline-flex h-11 items-center gap-3 sm:gap-5", className)}
       {...props}
     >
       <div className="flex items-center gap-2">
         <button
           type="button"
-          className={getControlClassName(isFirstPage)}
+          className={cn(getControlClassName(isFirstPage), "hidden sm:flex")}
           onClick={() => handlePageChange(1)}
           disabled={isFirstPage}
           aria-label="First page"
@@ -105,7 +105,7 @@ export function Pagination({
         </button>
       </div>
 
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 sm:gap-3">
         {pageItems.map((pageItem) => {
           if (typeof pageItem !== "number") {
             return (
@@ -150,7 +150,7 @@ export function Pagination({
         </button>
         <button
           type="button"
-          className={getControlClassName(isLastPage)}
+          className={cn(getControlClassName(isLastPage), "hidden sm:flex")}
           onClick={() => handlePageChange(safeTotalPages)}
           disabled={isLastPage}
           aria-label="Last page"

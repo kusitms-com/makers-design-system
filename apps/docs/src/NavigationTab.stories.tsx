@@ -14,6 +14,10 @@ type Story = StoryObj<typeof meta>
 export const Overview: Story = {
   render: () => (
     <div className="flex w-310 flex-col gap-20 bg-fill-normal">
+      <NavigationTab>
+        <NavigationTabItem active>반응형 탭</NavigationTabItem>
+        <NavigationTabItem>두 번째 탭</NavigationTabItem>
+      </NavigationTab>
       <NavigationTab size="m">
         <NavigationTabItem active size="m">
           밋업 프로젝트
@@ -51,6 +55,17 @@ export const SizeS: Story = {
           라벨명
         </NavigationTabItem>
         <NavigationTabItem size="s">라벨명</NavigationTabItem>
+      </NavigationTab>
+    </div>
+  ),
+}
+
+export const Website: Story = {
+  render: () => (
+    <div className="w-full max-w-[1024px] bg-fill-normal">
+      <NavigationTab size="website">
+        <NavigationTabItem active>밋업 프로젝트</NavigationTabItem>
+        <NavigationTabItem>기업 연계 프로젝트</NavigationTabItem>
       </NavigationTab>
     </div>
   ),

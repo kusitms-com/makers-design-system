@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import { useState } from "react"
 
 const meta = {
-  title: "EmailInput/Default",
+  title: "Components/EmailInput",
   component: EmailInput,
   tags: ["autodocs"],
   args: {

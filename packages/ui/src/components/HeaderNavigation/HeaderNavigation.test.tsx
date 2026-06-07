@@ -18,8 +18,18 @@ describe("HeaderNavigation", () => {
     render(<HeaderNavigation>About</HeaderNavigation>)
 
     expect(screen.getByRole("button", { name: "About" })).toHaveClass(
-      "hover:text-label-normal",
-      "active:text-brand-primary",
+      "px-7",
+      "text-body-6",
+      "hover:text-body-5",
+    )
+  })
+
+  it("uses the production active navigation style for pressed state", () => {
+    render(<HeaderNavigation state="pressed">About</HeaderNavigation>)
+
+    expect(screen.getByRole("button", { name: "About" })).toHaveClass(
+      "text-body-5",
+      "text-dark-blue-600",
     )
   })
 
