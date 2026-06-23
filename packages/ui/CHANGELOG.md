@@ -1,5 +1,11 @@
 # @kusitms.com/ui
 
+## 0.2.1
+
+### Patch Changes
+
+- Add responsive website header, footer, navigation, and scroll top component support.
+
 ## 0.2.0
 
 ### Minor Changes
