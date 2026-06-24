@@ -119,11 +119,11 @@ importers:
   packages/ui:
     dependencies:
       '@kusitms.com/icons':
-        specifier: workspace:*
-        version: link:../icons
+        specifier: 0.1.0
+        version: 0.1.0(react@19.2.4)
       '@kusitms.com/tokens':
-        specifier: workspace:*
-        version: link:../tokens
+        specifier: 0.2.0
+        version: 0.2.0
       '@radix-ui/react-accordion':
         specifier: ^1.2.12
         version: 1.2.12(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -623,6 +623,14 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+
+  '@kusitms.com/icons@0.1.0':
+    resolution: {integrity: sha512-LtCA6YpvVH/i98Bw1UwkyR256n1fk5XdDr/V79gtK0G1aG9flH+ab7QX3Cd6IJyEcrUULs9BXytQBRfxyf3kyQ==}
+    peerDependencies:
+      react: ^19.0.0
+
+  '@kusitms.com/tokens@0.2.0':
+    resolution: {integrity: sha512-9I8Gw8FXdK5I49UMg7GakOFIqLRt50XabY5L8TGcwqywdCPivk1b0x1e2OrowLj8wGKS0ktGN8KDxUoLOe5RAg==}
 
   '@manypkg/find-root@1.1.0':
     resolution: {integrity: sha512-mki5uBvhHzO8kYYix/WRy2WX8S3B5wdVSc9D6KcU5lQNglP2yt58/VfLuAK49glRXChosY8ap2oJ1qgma3GUVA==}
@@ -3607,6 +3615,12 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
+
+  '@kusitms.com/icons@0.1.0(react@19.2.4)':
+    dependencies:
+      react: 19.2.4
+
+  '@kusitms.com/tokens@0.2.0': {}
 
   '@manypkg/find-root@1.1.0':
     dependencies:
