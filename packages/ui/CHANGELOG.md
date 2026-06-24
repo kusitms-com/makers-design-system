@@ -1,5 +1,11 @@
 # @kusitms.com/ui
 
+## 0.2.2
+
+### Patch Changes
+
+- 6977042: Replace workspace protocol dependencies with published package versions for npm consumers.
+
 ## 0.2.1
 
 ### Patch Changes
