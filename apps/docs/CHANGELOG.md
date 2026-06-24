@@ -1,5 +1,12 @@
 # @kusitms.com/design-system-docs
 
+## 0.0.4
+
+### Patch Changes
+
+- Updated dependencies [6977042]
+  - @kusitms.com/ui@0.2.2
+
 ## 0.0.3
 
 ### Patch Changes
