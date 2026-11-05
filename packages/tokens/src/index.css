@@ -143,5 +143,6 @@
   --s: 8px;
   --spread-m: 4px 4px 44px 0px rgba(0, 0, 0, 0.05);
   --spread-s: 4px 4px 36px 0px rgba(0, 0, 0, 0.03);
-  --normal-dropshadow-10-25: 0px 1px 10px 0px #b3b3bc;
+  --normal-strong: 0px 1px 10px 0px #b3b3bc;
+  --normal-light: 0px 1px 20px 0px rgba(179, 179, 188, 0.4);
 }

@@ -1159,9 +1159,13 @@
       }
     },
     "normal": {
-      "dropshadow-10-25": {
+      "strong": {
         "$type": "shadow",
         "$value": "0px 1px 10px 0px #b3b3bc"
+      },
+      "light": {
+        "$type": "shadow",
+        "$value": "0px 1px 20px 0px rgba(179, 179, 188, 0.4)"
       }
     }
   },

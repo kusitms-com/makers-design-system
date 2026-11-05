@@ -143,5 +143,6 @@
   --radius-s: var(--s);
   --shadow-spread-m: var(--spread-m);
   --shadow-spread-s: var(--spread-s);
-  --shadow-normal-dropshadow-10-25: var(--normal-dropshadow-10-25);
+  --shadow-normal-strong: var(--normal-strong);
+  --shadow-normal-light: var(--normal-light);
 }
