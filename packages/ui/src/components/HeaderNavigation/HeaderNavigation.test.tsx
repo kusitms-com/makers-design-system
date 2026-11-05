@@ -18,19 +18,32 @@ describe("HeaderNavigation", () => {
     render(<HeaderNavigation>About</HeaderNavigation>)
 
     expect(screen.getByRole("button", { name: "About" })).toHaveClass(
-      "px-7",
-      "text-body-6",
-      "hover:text-body-5",
+      "p-3",
+      "text-body-16m",
+      "text-label-light",
+      "hover:text-label-normal",
     )
   })
 
-  it("uses the production active navigation style for pressed state", () => {
+  it("uses the active style for pressed state", () => {
     render(<HeaderNavigation state="pressed">About</HeaderNavigation>)
 
     expect(screen.getByRole("button", { name: "About" })).toHaveClass(
-      "text-body-5",
-      "text-dark-blue-600",
+      "text-body-16sb",
+      "text-label-normal",
     )
+  })
+
+  it("isActive marks the link as the current page", () => {
+    render(
+      <HeaderNavigation href="/about" isActive>
+        About
+      </HeaderNavigation>,
+    )
+
+    const link = screen.getByRole("link", { name: "About" })
+    expect(link).toHaveClass("text-body-16sb", "text-label-normal")
+    expect(link).toHaveAttribute("aria-current", "page")
   })
 
   it("constrains long labels in narrow header layouts", () => {

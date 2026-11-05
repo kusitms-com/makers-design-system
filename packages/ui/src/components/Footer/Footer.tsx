@@ -25,7 +25,7 @@ export type FooterProps = HTMLAttributes<HTMLElement> & {
 const defaultBylawsLink = (href?: string, label = "학회정관") => {
   const className = cn(
     "font-sans not-italic text-label-normal",
-    "desktop:text-body-6 text-body-8 text-gray-800",
+    "desktop:text-body-6 text-body-10 text-gray-800",
   )
 
   if (!href) {
@@ -63,7 +63,7 @@ export function Footer({
     <footer className={cn("w-full py-[60px]", className)} {...props}>
       <div
         className={cn(
-          "max-w-[1180px] w-full mx-auto flex desktop:flex-row flex-col justify-between px-10",
+          "max-w-[1180px] w-full mx-auto flex desktop:flex-row flex-col justify-between px-4 desktop:px-10",
           innerClassName,
         )}
       >
@@ -76,7 +76,7 @@ export function Footer({
           </div>
           <p
             className={cn(
-              "desktop:text-body-6 text-body-8 text-gray-800 mt-3 whitespace-pre-line",
+              "desktop:text-body-6 text-body-10 text-gray-800 desktop:mt-3 mt-2 whitespace-pre-line",
               copyrightClassName,
             )}
           >
@@ -94,7 +94,7 @@ export function Footer({
           </h4>
           <div
             className={cn(
-              "flex desktop:gap-5 gap-[14px]",
+              "flex desktop:gap-5 gap-[6px]",
               contactIconsClassName,
             )}
           >

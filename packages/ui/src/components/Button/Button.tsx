@@ -6,7 +6,9 @@ export type ButtonProps = PropsWithChildren<
   ButtonHTMLAttributes<HTMLButtonElement> & {
     className?: string
     showIcon?: boolean
-    variant?: "default" | "websiteCta"
+    variant?: "default" | "glass" | "websiteCta"
+    /** Button/Rounded size. desktop에서만 차이가 있고 mobile은 동일하다. */
+    size?: "l" | "m"
     icon?: ReactNode
   }
 >
@@ -17,6 +19,7 @@ export function Button({
   disabled,
   showIcon = true,
   variant = "default",
+  size = "l",
   icon,
   ...props
 }: ButtonProps) {
@@ -42,16 +45,42 @@ export function Button({
     )
   }
 
+  if (variant === "glass") {
+    return (
+      <button
+        type="button"
+        disabled={disabled}
+        className={cn(
+          "inline-flex items-center justify-center rounded-full border border-label-contrast bg-fill-transparent-white px-5 py-2",
+          "text-body-16b text-brand-primary cursor-pointer disabled:cursor-not-allowed",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </button>
+    )
+  }
+
+  const isM = size === "m"
+
   return (
     <button
       type="button"
       disabled={disabled}
       className={cn(
         "group relative overflow-hidden inline-flex items-center justify-center rounded-full transition-colors",
-        "py-2 px-3 gap-1 lg:px-6 lg:gap-2",
+        "py-2 px-3 gap-1 lg:gap-2",
+        isM ? "lg:px-5" : "lg:px-6",
         disabled
-          ? "text-label-14r lg:text-body-18m bg-fill-alternative text-label-light cursor-not-allowed"
-          : "text-label-14m lg:text-body-18sb bg-brand-primary text-label-contrast cursor-pointer",
+          ? cn(
+              "text-label-14r bg-fill-alternative text-label-light cursor-not-allowed",
+              isM ? "lg:text-body-16m" : "lg:text-body-18m",
+            )
+          : cn(
+              "text-label-14m bg-brand-primary text-label-contrast cursor-pointer",
+              isM ? "lg:text-body-16sb" : "lg:text-body-18sb",
+            ),
         className,
       )}
       {...props}

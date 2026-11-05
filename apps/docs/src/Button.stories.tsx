@@ -2,7 +2,7 @@ import { Button } from "@kusitms.com/ui"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 
 const meta = {
-  title: "Components/Button/Default",
+  title: "Components/Button/Rounded",
   component: Button,
   tags: ["autodocs"],
   args: {
@@ -35,6 +35,20 @@ export const AllStates: Story = {
       <div className="flex flex-col gap-1">
         <span className="text-xs text-gray-400">Disabled</span>
         <Button disabled>텍스트</Button>
+      </div>
+      <div className="flex flex-col gap-1">
+        <span className="text-xs text-gray-400">Size M</span>
+        <Button size="m">텍스트</Button>
+      </div>
+      <div className="flex flex-col gap-1">
+        <span className="text-xs text-gray-400">Size M Disabled</span>
+        <Button size="m" disabled>
+          텍스트
+        </Button>
+      </div>
+      <div className="flex flex-col gap-1 bg-gray-300 p-4">
+        <span className="text-xs text-gray-600">Glass</span>
+        <Button variant="glass">텍스트</Button>
       </div>
     </div>
   ),

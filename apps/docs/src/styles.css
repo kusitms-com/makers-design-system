@@ -26,6 +26,8 @@
   --font-sans:
     "Pretendard Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --font-brand: "PP Neue Montreal", "Pretendard Variable", sans-serif;
+  /* ui 컴포넌트의 desktop: 변형. kusitms.com globals.css와 같은 값 */
+  --breakpoint-desktop: 1024px;
 }
 
 body {
