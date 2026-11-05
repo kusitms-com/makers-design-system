@@ -8,6 +8,7 @@ import {
 import { afterEach, describe, expect, it, vi } from "vitest"
 
 import { Button } from "./Button"
+import { DefaultButton } from "./DefaultButton"
 import { NavigationButton } from "./NavigationButton"
 import { PageNavButton } from "./PageNavButton"
 import { ScrollTopButton } from "./ScrollTopButton"
@@ -109,6 +110,86 @@ describe("Button", () => {
     expect(button).toHaveClass("pr-[24px]")
     expect(button).toHaveClass("py-[10px]")
     expect(button).toHaveClass("bg-dark-blue-500")
+  })
+})
+
+describe("Button size·glass", () => {
+  it("size=m은 desktop에서 16px 타이포와 px-5를 쓴다", () => {
+    render(<Button size="m">텍스트</Button>)
+    expect(screen.getByRole("button")).toHaveClass(
+      "lg:px-5",
+      "lg:text-body-16sb",
+      "text-label-14m",
+    )
+  })
+
+  it("size=m disabled는 desktop에서 16m 타이포를 쓴다", () => {
+    render(
+      <Button size="m" disabled>
+        텍스트
+      </Button>,
+    )
+    expect(screen.getByRole("button")).toHaveClass("lg:text-body-16m")
+  })
+
+  it("glass variant는 반투명 배경과 brand 텍스트를 쓰고 아이콘이 없다", () => {
+    render(<Button variant="glass">텍스트</Button>)
+    const button = screen.getByRole("button")
+    expect(button).toHaveClass(
+      "bg-fill-transparent-white",
+      "border-label-contrast",
+      "text-brand-primary",
+      "text-body-16b",
+    )
+    expect(button.querySelector("svg")).not.toBeInTheDocument()
+  })
+})
+
+describe("DefaultButton", () => {
+  it("기본값은 size m, strong이다", () => {
+    render(<DefaultButton>저장하기</DefaultButton>)
+    const button = screen.getByRole("button", { name: "저장하기" })
+    expect(button).toHaveAttribute("type", "button")
+    expect(button).toHaveClass(
+      "h-10",
+      "rounded-[8px]",
+      "text-label-14sb",
+      "bg-brand-primary",
+    )
+  })
+
+  it("size s는 6px radius를 쓴다", () => {
+    render(<DefaultButton size="s">저장하기</DefaultButton>)
+    expect(screen.getByRole("button")).toHaveClass("h-9", "rounded-[6px]")
+  })
+
+  it("disabled 속성이면 variant와 무관하게 disabled 스타일을 쓴다", () => {
+    const onClick = vi.fn()
+    render(
+      <DefaultButton variant="error" disabled onClick={onClick}>
+        삭제하기
+      </DefaultButton>,
+    )
+    const button = screen.getByRole("button")
+    expect(button).toHaveClass("bg-fill-alternative", "text-label-light")
+    expect(button).not.toHaveClass("bg-fill-destructive")
+    fireEvent.click(button)
+    expect(onClick).not.toHaveBeenCalled()
+  })
+
+  it("좌우 아이콘 슬롯을 렌더링한다", () => {
+    render(
+      <DefaultButton
+        variant="outlined"
+        leftIcon={<svg data-testid="left" />}
+        rightIcon={<svg data-testid="right" />}
+      >
+        추가하기
+      </DefaultButton>,
+    )
+    expect(screen.getByTestId("left")).toBeInTheDocument()
+    expect(screen.getByTestId("right")).toBeInTheDocument()
+    expect(screen.getByRole("button")).toHaveClass("border-line-normal")
   })
 })
 

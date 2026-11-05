@@ -35,8 +35,10 @@ export function HeaderMobile({
     <div
       className={cn(
         "flex items-center justify-between",
-        "bg-fill-normal px-4 py-5",
-        "h-17.25 w-full",
+        "h-16 w-full px-6 py-5",
+        isOpen
+          ? "bg-label-contrast"
+          : "bg-fill-netural/10 backdrop-blur-[30px]",
         className,
       )}
       {...props}
@@ -136,6 +138,8 @@ export function HeaderMobileMenu({
 
 type HeaderMobileItemBaseProps = {
   children?: ReactNode
+  /** 현재 페이지 메뉴 */
+  isActive?: boolean
 }
 
 type HeaderMobileItemButtonProps = Omit<
@@ -160,31 +164,30 @@ function isHeaderMobileItemLinkProps(
 
 export function HeaderMobileItem({
   children,
+  isActive = false,
   className,
   ...props
 }: HeaderMobileItemProps) {
   const sharedClassName = cn(
-    "flex flex-col items-center gap-[12px]",
-    "w-[328px] bg-white px-[20px] py-[16px]",
+    "flex w-full items-center py-3 text-left font-sans",
+    isActive
+      ? "text-body-16sb text-label-normal"
+      : "text-body-16m text-label-light",
     className,
   )
   const content = (
-    <>
-      <span
-        className={cn(
-          "overflow-hidden text-ellipsis whitespace-nowrap text-center font-sans",
-          "w-full text-body-2 text-gray-800",
-        )}
-      >
-        {children}
-      </span>
-      <span className="h-[2px] w-[288px] bg-gray-100" />
-    </>
+    <span className="overflow-hidden text-ellipsis whitespace-nowrap">
+      {children}
+    </span>
   )
 
   if (isHeaderMobileItemLinkProps(props)) {
     return (
-      <a className={sharedClassName} {...props}>
+      <a
+        className={sharedClassName}
+        aria-current={isActive ? "page" : undefined}
+        {...props}
+      >
         {content}
       </a>
     )

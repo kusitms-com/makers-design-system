@@ -4,7 +4,12 @@ import {
   HeaderDesktopLogo,
   HeaderMobileLogo,
 } from "@kusitms.com/icons"
-import { Header, HeaderNavigation } from "@kusitms.com/ui"
+import {
+  Button,
+  DefaultButton,
+  Header,
+  HeaderNavigation,
+} from "@kusitms.com/ui"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 
 const meta = {
@@ -28,9 +33,20 @@ const navigationItems = [
 export const Desktop: Story = {
   render: () => (
     <div className="mx-auto w-320 max-w-360 bg-fill-normal">
-      <Header logo={<HeaderDesktopLogo />}>
-        {navigationItems.map((item) => (
-          <HeaderNavigation key={item.href} href={item.href}>
+      <Header
+        logo={<HeaderDesktopLogo />}
+        cta={
+          <Button size="m" showIcon={false}>
+            모집 알림 받기
+          </Button>
+        }
+      >
+        {navigationItems.map((item, index) => (
+          <HeaderNavigation
+            key={item.href}
+            href={item.href}
+            isActive={index === 0}
+          >
             {item.label}
           </HeaderNavigation>
         ))}
@@ -51,9 +67,23 @@ export const Responsive: Story = {
         mobileLogo={<HeaderMobileLogo />}
         menuIcon={<HamburgMIcon />}
         closeIcon={<CancelMIcon />}
+        cta={
+          <Button size="m" showIcon={false}>
+            지원하기
+          </Button>
+        }
+        mobileCta={
+          <DefaultButton size="m" className="min-w-0">
+            지원하기
+          </DefaultButton>
+        }
       >
-        {navigationItems.map((item) => (
-          <HeaderNavigation key={item.href} href={item.href}>
+        {navigationItems.map((item, index) => (
+          <HeaderNavigation
+            key={item.href}
+            href={item.href}
+            isActive={index === 0}
+          >
             {item.label}
           </HeaderNavigation>
         ))}
@@ -68,6 +98,7 @@ export const NavigationStates: Story = {
       <HeaderNavigation state="default">텍스트</HeaderNavigation>
       <HeaderNavigation state="hovered">텍스트</HeaderNavigation>
       <HeaderNavigation state="pressed">텍스트</HeaderNavigation>
+      <HeaderNavigation isActive>isActive</HeaderNavigation>
     </div>
   ),
 }

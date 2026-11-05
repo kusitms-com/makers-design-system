@@ -9,6 +9,8 @@ import { cn } from "../../utils/cn"
 type HeaderNavState = "default" | "hovered" | "pressed"
 
 type HeaderNavigationBaseProps = {
+  /** 현재 페이지 메뉴. `state="pressed"`와 같다. */
+  isActive?: boolean
   state?: HeaderNavState
 }
 
@@ -31,9 +33,9 @@ export type HeaderNavigationProps =
   | HeaderNavigationLinkProps
 
 const stateStyles: Record<HeaderNavState, string> = {
-  default: "text-body-6 text-gray-700 hover:text-body-5",
-  hovered: "text-body-5 text-gray-700",
-  pressed: "text-body-5 text-dark-blue-600",
+  default: "text-body-16m text-label-light hover:text-label-normal",
+  hovered: "text-body-16m text-label-normal",
+  pressed: "text-body-16sb text-label-normal",
 }
 
 function isLinkProps(
@@ -45,13 +47,14 @@ function isLinkProps(
 export function HeaderNavigation({
   children,
   className,
+  isActive = false,
   state = "default",
   ...props
 }: HeaderNavigationProps) {
   const sharedClassName = cn(
-    "block max-w-full overflow-hidden text-ellipsis whitespace-nowrap px-7 text-center",
+    "block max-w-full overflow-hidden text-ellipsis whitespace-nowrap p-3 text-center",
     "font-sans transition-colors",
-    stateStyles[state],
+    stateStyles[isActive ? "pressed" : state],
     className,
   )
 
@@ -59,7 +62,11 @@ export function HeaderNavigation({
     const linkProps = props
 
     return (
-      <a className={sharedClassName} {...linkProps}>
+      <a
+        className={sharedClassName}
+        aria-current={isActive || state === "pressed" ? "page" : undefined}
+        {...linkProps}
+      >
         {children}
       </a>
     )
