@@ -1,6 +1,6 @@
 {
   "name": "@kusitms.com/ui",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "private": false,
   "type": "module",
   "main": "./dist/index.cjs",
@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@kusitms.com/icons": "0.1.0",
-    "@kusitms.com/tokens": "0.2.0",
+    "@kusitms.com/tokens": "0.3.0",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-select": "^2.2.5"
   },

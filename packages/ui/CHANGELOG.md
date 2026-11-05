@@ -1,5 +1,12 @@
 # @kusitms.com/ui
 
+## 0.2.3
+
+### Patch Changes
+
+- Updated dependencies [e385b26]
+  - @kusitms.com/tokens@0.3.0
+
 ## 0.2.2
 
 ### Patch Changes
