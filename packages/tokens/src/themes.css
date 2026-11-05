@@ -90,6 +90,15 @@
   --color-indigo-95: var(--indigo-95);
   --color-common-0: var(--common-0);
   --color-common-100: var(--common-100);
+  --color-brand-10: var(--brand-10);
+  --color-brand-20: var(--brand-20);
+  --color-brand-30: var(--brand-30);
+  --color-brand-40: var(--brand-40);
+  --color-brand-50: var(--brand-50);
+  --color-brand-60: var(--brand-60);
+  --color-brand-70: var(--brand-70);
+  --color-brand-80: var(--brand-80);
+  --color-brand-90: var(--brand-90);
   --color-brand-logo: var(--brand-logo);
   --color-status-positive: var(--status-positive);
   --color-status-negative: var(--status-negative);
@@ -129,4 +138,10 @@
   --color-interaction-pressed: var(--interaction-pressed);
   --color-interaction-hover-inverse: var(--interaction-hover-inverse);
   --color-interaction-dim: var(--interaction-dim);
+  --radius-xl: var(--xl);
+  --radius-m: var(--m);
+  --radius-s: var(--s);
+  --shadow-spread-m: var(--spread-m);
+  --shadow-spread-s: var(--spread-s);
+  --shadow-normal-dropshadow-10-25: var(--normal-dropshadow-10-25);
 }
