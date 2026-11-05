@@ -1,5 +1,13 @@
 # @kusitms.com/design-system-docs
 
+## 0.0.5
+
+### Patch Changes
+
+- Updated dependencies [e385b26]
+  - @kusitms.com/tokens@0.3.0
+  - @kusitms.com/ui@0.2.3
+
 ## 0.0.4
 
 ### Patch Changes
