@@ -14,9 +14,18 @@
   src: url("/PretendardVariable.woff2") format("woff2");
 }
 
+@font-face {
+  font-family: "PP Neue Montreal";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/ppneuemontreal-bold.otf") format("opentype");
+}
+
 @theme {
   --font-sans:
     "Pretendard Variable", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-brand: "PP Neue Montreal", "Pretendard Variable", sans-serif;
 }
 
 body {

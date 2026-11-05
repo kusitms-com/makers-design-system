@@ -474,7 +474,7 @@
           "com.figma.hiddenFromPublishing": false
         },
         "$type": "color",
-        "$value": "#feecec"
+        "$value": "#fdf2f2"
       },
       "20": {
         "$extensions": {
@@ -755,6 +755,51 @@
         },
         "$type": "color",
         "$value": "#18181b"
+      },
+      "10": {
+        "$extensions": { "com.figma.scopes": ["ALL_SCOPES"] },
+        "$type": "color",
+        "$value": "#e6edff"
+      },
+      "20": {
+        "$extensions": { "com.figma.scopes": ["ALL_SCOPES"] },
+        "$type": "color",
+        "$value": "#acc5ff"
+      },
+      "30": {
+        "$extensions": { "com.figma.scopes": ["ALL_SCOPES"] },
+        "$type": "color",
+        "$value": "#5e8dfe"
+      },
+      "40": {
+        "$extensions": { "com.figma.scopes": ["ALL_SCOPES"] },
+        "$type": "color",
+        "$value": "#004bfe"
+      },
+      "50": {
+        "$extensions": { "com.figma.scopes": ["ALL_SCOPES"] },
+        "$type": "color",
+        "$value": "#0044e5"
+      },
+      "60": {
+        "$extensions": { "com.figma.scopes": ["ALL_SCOPES"] },
+        "$type": "color",
+        "$value": "#003ccb"
+      },
+      "70": {
+        "$extensions": { "com.figma.scopes": ["ALL_SCOPES"] },
+        "$type": "color",
+        "$value": "#052c87"
+      },
+      "80": {
+        "$extensions": { "com.figma.scopes": ["ALL_SCOPES"] },
+        "$type": "color",
+        "$value": "#001e63"
+      },
+      "90": {
+        "$extensions": { "com.figma.scopes": ["ALL_SCOPES"] },
+        "$type": "color",
+        "$value": "#071b4a"
       }
     }
   },
@@ -774,7 +819,7 @@
           "com.figma.hiddenFromPublishing": false
         },
         "$type": "color",
-        "$value": "{red.60}"
+        "$value": "{red.70}"
       },
       "cautionary": {
         "$extensions": {
@@ -792,7 +837,7 @@
           "com.figma.hiddenFromPublishing": false
         },
         "$type": "color",
-        "$value": "{blue.60}"
+        "$value": "{brand.40}"
       },
       "secondary": {
         "$extensions": {
@@ -800,7 +845,7 @@
           "com.figma.hiddenFromPublishing": false
         },
         "$type": "color",
-        "$value": "{blue.40}"
+        "$value": "{brand.30}"
       },
       "assisitve": {
         "$extensions": {
@@ -808,7 +853,7 @@
           "com.figma.hiddenFromPublishing": false
         },
         "$type": "color",
-        "$value": "{indigo.10}"
+        "$value": "{brand.10}"
       },
       "tertiary": {
         "$extensions": {
@@ -816,7 +861,7 @@
           "com.figma.hiddenFromPublishing": false
         },
         "$type": "color",
-        "$value": "{blue.20}"
+        "$value": "{brand.20}"
       },
       "strong": {
         "$extensions": {
@@ -824,7 +869,7 @@
           "com.figma.hiddenFromPublishing": false
         },
         "$type": "color",
-        "$value": "{blue.70}"
+        "$value": "{brand.60}"
       },
       "logo": {
         "$extensions": {
@@ -998,7 +1043,7 @@
           "com.figma.hiddenFromPublishing": false
         },
         "$type": "color",
-        "$value": "{red.5}"
+        "$value": "{red.10}"
       },
       "netural": {
         "$extensions": {
@@ -1088,8 +1133,50 @@
       }
     }
   },
+  "Radius/Mode 1": {
+    "xl": {
+      "$type": "borderRadius",
+      "$value": "999px"
+    },
+    "m": {
+      "$type": "borderRadius",
+      "$value": "12px"
+    },
+    "s": {
+      "$type": "borderRadius",
+      "$value": "8px"
+    }
+  },
+  "Shadow/Mode 1": {
+    "spread": {
+      "m": {
+        "$type": "shadow",
+        "$value": "4px 4px 44px 0px rgba(0, 0, 0, 0.05)"
+      },
+      "s": {
+        "$type": "shadow",
+        "$value": "4px 4px 36px 0px rgba(0, 0, 0, 0.03)"
+      }
+    },
+    "normal": {
+      "strong": {
+        "$type": "shadow",
+        "$value": "0px 1px 10px 0px #b3b3bc"
+      },
+      "light": {
+        "$type": "shadow",
+        "$value": "0px 1px 20px 0px rgba(179, 179, 188, 0.4)"
+      }
+    }
+  },
   "$themes": [],
   "$metadata": {
-    "tokenSetOrder": ["global", "Atomic/Mode 1", "Semantic/Mode 1"]
+    "tokenSetOrder": [
+      "global",
+      "Atomic/Mode 1",
+      "Semantic/Mode 1",
+      "Radius/Mode 1",
+      "Shadow/Mode 1"
+    ]
   }
 }
