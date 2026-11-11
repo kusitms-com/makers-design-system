@@ -7,11 +7,10 @@ describe("Footer", () => {
   it("renders the default bylaws content as a link when href is provided", () => {
     render(<Footer bylawsHref="/bylaws" logo={<span>Logo</span>} />)
 
-    expect(
-      screen.getByRole("link", {
-        name: "학회정관",
-      }),
-    ).toHaveAttribute("href", "/bylaws")
+    expect(screen.getByRole("link", { name: /학회정관/ })).toHaveAttribute(
+      "href",
+      "/bylaws",
+    )
   })
 
   it("does not bake frame widths into the desktop footer component", () => {
@@ -83,14 +82,52 @@ describe("Footer", () => {
       />,
     )
 
-    expect(screen.getByRole("contentinfo")).toHaveClass("py-[60px]")
+    expect(screen.getByRole("contentinfo")).toHaveClass("pb-[60px]")
     expect(
       screen.getByText(/KUSITMS \(큐시즘, 한국대학생IT경영학회\)/),
     ).toBeInTheDocument()
     expect(
-      screen.getByText(/ⓒ 2023\. KUSITMS\. All rights reserved\./),
+      screen.getByText(/© 2026\.KUSITMS\. ALL rights reserved\./),
     ).toBeInTheDocument()
     expect(screen.getByLabelText("맨 위로 이동")).toBeInTheDocument()
+  })
+
+  it("shows the desktop logo on desktop and the mobile logo below it", () => {
+    render(
+      <Footer
+        logo={<span>Desktop logo</span>}
+        mobileLogo={<span>Mobile logo</span>}
+      />,
+    )
+
+    expect(screen.getByText("Desktop logo").parentElement).toHaveClass(
+      "hidden",
+      "desktop:flex",
+    )
+    expect(screen.getByText("Mobile logo").parentElement).toHaveClass(
+      "desktop:hidden",
+    )
+  })
+
+  it("adds the PDF hint to the default bylaws label only on desktop", () => {
+    render(<Footer bylawsHref="/bylaws" logo={<span>Logo</span>} />)
+
+    expect(screen.getByText("(PDF)", { exact: false })).toHaveClass(
+      "hidden",
+      "desktop:inline",
+    )
+  })
+
+  it("renders a custom bylaws label as given", () => {
+    render(
+      <Footer
+        bylawsHref="/bylaws"
+        bylawsLabel="정관 보기"
+        logo={<span>Logo</span>}
+      />,
+    )
+
+    expect(screen.getByRole("link", { name: "정관 보기" })).toBeInTheDocument()
   })
 
   it("lets the footer omit the scroll top slot", () => {
