@@ -3,7 +3,7 @@ import type { HTMLAttributes, ReactNode } from "react"
 import { cn } from "../../utils/cn"
 
 const WEBSITE_COPYRIGHT =
-  "KUSITMS (큐시즘, 한국대학생IT경영학회)\nⓒ 2023. KUSITMS. All rights reserved."
+  "KUSITMS (큐시즘, 한국대학생IT경영학회)\n© 2026.KUSITMS. ALL rights reserved."
 
 export type FooterProps = HTMLAttributes<HTMLElement> & {
   logo?: ReactNode
@@ -22,19 +22,21 @@ export type FooterProps = HTMLAttributes<HTMLElement> & {
   contactIconsClassName?: string
 }
 
-const defaultBylawsLink = (href?: string, label = "학회정관") => {
-  const className = cn(
-    "font-sans not-italic text-label-normal",
-    "desktop:text-body-6 text-body-10 text-gray-800",
+const defaultBylawsLink = (href?: string, label?: string) => {
+  const className = "text-caption-12sb text-label-normal desktop:text-body-16sb"
+  const content = label ?? (
+    <>
+      학회정관<span className="hidden desktop:inline"> (PDF)</span>
+    </>
   )
 
   if (!href) {
-    return <span className={className}>{label}</span>
+    return <span className={className}>{content}</span>
   }
 
   return (
-    <a className={`${className} underline decoration-solid`} href={href}>
-      {label}
+    <a className={cn(className, "underline decoration-solid")} href={href}>
+      {content}
     </a>
   )
 }
@@ -48,7 +50,7 @@ export function Footer({
   scrollTopButton,
   scrollTopPlacement = "inline",
   bylawsHref,
-  bylawsLabel = "학회정관",
+  bylawsLabel,
   innerClassName,
   leftColumnClassName,
   copyrightClassName,
@@ -60,23 +62,30 @@ export function Footer({
   const resolvedCopyright = copyright ?? WEBSITE_COPYRIGHT
 
   return (
-    <footer className={cn("w-full py-[60px]", className)} {...props}>
+    <footer className={cn("w-full pb-[60px]", className)} {...props}>
       <div
         className={cn(
-          "max-w-[1180px] w-full mx-auto flex desktop:flex-row flex-col justify-between px-4 desktop:px-10",
+          "mx-auto flex w-full max-w-[1440px] flex-col gap-7 px-4 justify-between desktop:flex-row desktop:items-end desktop:gap-0 desktop:px-10",
           innerClassName,
         )}
       >
-        <div className={cn("flex flex-col mt-1", leftColumnClassName)}>
-          <div className="flex items-center justify-between">
-            {mobileLogo ?? logo}
-          </div>
-          <div className="desktop:mt-10 mt-4">
+        <div className={cn("flex flex-col", leftColumnClassName)}>
+          {mobileLogo ? (
+            <>
+              <div className="hidden pt-[60px] pb-10 desktop:flex">{logo}</div>
+              <div className="flex pt-[60px] pb-4 desktop:hidden">
+                {mobileLogo}
+              </div>
+            </>
+          ) : (
+            <div className="flex pt-[60px] pb-4 desktop:pb-10">{logo}</div>
+          )}
+          <div className="flex pb-2 desktop:pb-3">
             {links ?? defaultBylawsLink(bylawsHref, bylawsLabel)}
           </div>
           <p
             className={cn(
-              "desktop:text-body-6 text-body-10 text-gray-800 desktop:mt-3 mt-2 whitespace-pre-line",
+              "whitespace-pre-line text-caption-12r text-label-normal desktop:text-body-16r",
               copyrightClassName,
             )}
           >
@@ -84,17 +93,14 @@ export function Footer({
           </p>
         </div>
         <div
-          className={cn(
-            "flex-col desktop:pt-0 pt-7 desktop:self-end",
-            contactClassName,
-          )}
+          className={cn("flex flex-col gap-2 desktop:gap-5", contactClassName)}
         >
-          <h4 className="text-body-5 text-gray-800 desktop:mb-5 mb-2">
+          <h4 className="text-label-14sb text-label-normal desktop:text-body-16sb">
             Contact
           </h4>
           <div
             className={cn(
-              "flex desktop:gap-5 gap-[6px]",
+              "flex gap-[6px] desktop:gap-5",
               contactIconsClassName,
             )}
           >
